@@ -11,4 +11,13 @@
       <ProjectReference Include="..\GeneticAlgorithm\GeneticAlgorithm.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Data\personel.csv">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Data\machines.csv">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

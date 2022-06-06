@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+
 namespace GeneticAlgorithm.Models;
 
 public class Chromosome
@@ -21,12 +23,27 @@ public class Chromosome
         {
             for (var machineNumber = 0; machineNumber < machines.Length; machineNumber++)
             {
-                if (Value[day][machineNumber].Qualifications.Contains(machines[machineNumber].RequiredQualification))
-                    Fitness--;
-                else
+                if (!Value[day][machineNumber].Qualifications.Contains(machines[machineNumber].RequiredQualification))
                     Fitness++;
-                //TODO:Add additional conditions for personel
+                
             }
+        }
+
+
+        var workers = Value.SelectMany(x => x).Select(x => x).ToList();
+        var dic = workers.Select(x => new {Person = x, Count = workers.Count(z => z.Id == x.Id)});
+        var distinctBy = dic.DistinctBy(x=>x.Person.Id);
+        foreach (var worker in distinctBy)
+        {
+            if (worker.Count is >= 14 or <= 10)
+                Fitness += 1;
+        }
+
+        foreach (var day in Value)
+        {
+            var count = day.DistinctBy(x => x.Id).Count();
+            if(count != day.Count())
+                Fitness += 1;
         }
 
     }

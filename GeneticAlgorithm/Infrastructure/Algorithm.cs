@@ -32,7 +32,7 @@ public class Algorithm
         for (int i = 0; i < _parameters.EpochsCount; i++)
         {
             //calculate fitness
-            Console.WriteLine(_population.GetAll().Average(x=>x.Fitness).ToString(CultureInfo.InvariantCulture));
+            Console.WriteLine($"EPOCH {i,3} AVG: {_population.GetAll().Average(x=>x.Fitness).ToString(CultureInfo.InvariantCulture)}");
 
             _population.RecalculateAll();
             //selection
