@@ -29,7 +29,7 @@ jobs:
       - image: mcr.microsoft.com/dotnet/sdk
     steps:
       - checkout
-      - sonarcloud-dotnet/setup-sonar
+      - dotnet-sonarscanner/sonar-install
       - sonarcloud-dotnet/run-scan:
           project_key: TomaszSteblik_job-scheduling-ga
           organization: tomaszsteblik
@@ -40,6 +40,8 @@ jobs:
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.3
   sonarcloud-dotnet: bestsellerit/sonarcloud-dotnet@0.0.1
+  dotnet-sonarscanner: storytel/dotnet-sonarscanner@1.4.3
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
