@@ -30,16 +30,14 @@ jobs:
     steps:
       - checkout
       - run: |
-          echo $SONAR_TOKEN
-      - dotnet-sonarscanner/sonar-install
-      - sonarcloud/scan
-
-
-orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.3
-  sonarcloud-dotnet: bestsellerit/sonarcloud-dotnet@0.0.1
-  dotnet-sonarscanner: storytel/dotnet-sonarscanner@1.4.3
-
+          dotnet tool install --global dotnet-sonarscanner
+      - run: |
+          dotnet sonarscanner begin /k:"TomaszSteblik_job-scheduling-ga" /o:"tomaszsteblik" /d:sonar.login="$SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io"
+      - run: |
+          dotnet build ~/project/Scheduling.sln
+      - run: |
+          dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
+          
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
