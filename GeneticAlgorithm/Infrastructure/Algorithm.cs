@@ -32,7 +32,8 @@ public class Algorithm
         for (int i = 0; i < _parameters.EpochsCount; i++)
         {
             //calculate fitness
-            Console.WriteLine($"EPOCH {i,3} AVG: {_population.GetAll().Average(x=>x.Fitness).ToString(CultureInfo.InvariantCulture)}");
+            Console.WriteLine($"EPOCH {i,3} AVG: {_population.GetAll().Average(x=>x.Fitness).ToString(CultureInfo.InvariantCulture)} MACHINES_REPEAT:{_population.GetAll().Max(x=>x.AnalyzeMultipleMachines())}" +
+                              $" POS_WRNG: {_population.GetAll().Max(x=>x.AnalyzeWrongPosition(_population.GetMachines()))}");
 
             _population.RecalculateAll();
             //selection

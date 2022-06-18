@@ -1,14 +1,14 @@
 {
   "PopulationSize": 100,
-  "EpochsCount": 100,
+  "EpochsCount": 200,
   "InstancesToRun": 1,
-  "MutationProbability": 0.05,
+  "MutationProbability": 0.0,
   "ParentsPerChild" : 2,
-  "ChildrenCount": 40,
-  "Selection": "ElitismSelection",
-  "Elimination": "ElitismElimination",
-  "Mutation": "RSM",
-  "Crossover": "HProX",
+  "ChildrenCount": 20,
+  "Selection": "Elitism",
+  "Elimination": "Elitism",
+  "Mutation": "Random",
+  "Crossover": "CrossPointDay",
   "DataPathMachines": "Data/machines.csv",
   "DataPathPersonel": "Data/personel.csv"
 }

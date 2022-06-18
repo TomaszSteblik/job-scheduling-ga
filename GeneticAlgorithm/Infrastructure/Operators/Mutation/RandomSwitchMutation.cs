@@ -16,7 +16,7 @@ public class RandomSwitchMutation : IMutation
     {
         foreach (var chromosome in _population.GetAll())
         {
-            if (probability <= Random.Shared.NextDouble())
+            if (probability > 0 && probability <= Random.Shared.NextDouble())
                 Mutate(chromosome);
         }
     }

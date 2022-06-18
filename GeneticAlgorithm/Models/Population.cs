@@ -51,16 +51,19 @@ public class Population : IPopulation
         Chromosomes = new Chromosome[parameters.PopulationSize];
         for (int i = 0; i < parameters.PopulationSize; i++)
         {
-            Chromosomes[i] = new Chromosome(30,Machines.Length);
-            for (int j = 0; j < 30; j++)
+            Chromosomes[i] = new Chromosome(20, Machines.Length);
+            for (int j = 0; j < 20; j++)
             {
                 for (int k = 0; k < Machines.Length; k++)
                 {
-                    Chromosomes[i].Value[j][k] = people[Random.Shared.Next(people.Count)];
+
+                    var s = people.Where(x =>
+                        x.Qualifications.Contains(Machines[k].RequiredQualification) &&
+                        !Chromosomes[i].Value[j].Contains(x)).ToArray();
+                    Chromosomes[i].Value[j][k] = s[Random.Shared.Next(s.Length)];
                 }
             }
         }
-        
     }
     
     public Chromosome[] GetAll()

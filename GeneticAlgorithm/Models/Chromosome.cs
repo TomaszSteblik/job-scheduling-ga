@@ -36,15 +36,44 @@ public class Chromosome
         foreach (var worker in distinctBy)
         {
             if (worker.Count is >= 14 or <= 10)
-                Fitness += 1;
+                Fitness += 10;
         }
 
         foreach (var day in Value)
         {
             var count = day.DistinctBy(x => x.Id).Count();
             if(count != day.Count())
-                Fitness += 1;
+                Fitness += 100;
         }
 
+    }
+    
+    public int AnalyzeMultipleMachines()
+    {
+        var fitness = 0;
+        foreach (var day in Value)
+        {
+            var count = day.DistinctBy(x => x.Id).Count();
+            if(count != day.Count())
+                fitness += 1;
+        }
+
+        return fitness;
+    }
+    
+    public int AnalyzeWrongPosition(Machine[] machines)
+    {
+        var fitness = 0;
+        for (var day = 0; day < Value.Length; day++)
+        {
+            for (var machineNumber = 0; machineNumber < machines.Length; machineNumber++)
+            {
+                if (!Value[day][machineNumber].Qualifications.Contains(machines[machineNumber].RequiredQualification))
+                    fitness++;
+                
+            }
+        }
+
+        return fitness;
     }
 }
