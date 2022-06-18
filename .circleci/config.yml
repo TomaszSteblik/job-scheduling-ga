@@ -29,6 +29,8 @@ jobs:
       - image: mcr.microsoft.com/dotnet/sdk
     steps:
       - checkout
+      - run: |
+          echo $SONAR_TOKEN
       - dotnet-sonarscanner/sonar-install
       - sonarcloud/scan
 
