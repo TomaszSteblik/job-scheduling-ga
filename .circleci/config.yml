@@ -31,7 +31,6 @@ jobs:
       - checkout
       - run: |
           dotnet tool install --global dotnet-sonarscanner
-      - run: |
           export PATH="$PATH:/root/.dotnet/tools"
       - run: |
           dotnet sonarscanner begin /k:"TomaszSteblik_job-scheduling-ga" /o:"tomaszsteblik" /d:sonar.login="$SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io"
