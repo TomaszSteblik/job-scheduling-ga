@@ -32,12 +32,17 @@ jobs:
       - run: |
           dotnet tool install --global dotnet-sonarscanner
       - run: |
-          dotnet-sonarscanner begin /k:"TomaszSteblik_job-scheduling-ga" /o:"tomaszsteblik" /d:sonar.login="$SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io"
+          cat \<< \EOF >> ~/.bash_profile
+          # Add .NET Core SDK tools
+          export PATH="$PATH:/root/.dotnet/tools"
+          EOF
+      - run: |
+          dotnet sonarscanner begin /k:"TomaszSteblik_job-scheduling-ga" /o:"tomaszsteblik" /d:sonar.login="$SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io"
       - run: |
           dotnet build ~/project/Scheduling.sln
       - run: |
-          dotnet-sonarscanner end /d:sonar.login="$SONAR_TOKEN"
-
+          dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
+          
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
