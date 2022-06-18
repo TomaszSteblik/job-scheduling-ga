@@ -89,7 +89,7 @@ jobs:
   publish-github-release:
     docker:
       - image: cibuilds/github:0.10
-    working_directory: /projects
+    working_directory: ~/projects
     steps:
       - attach_workspace:
           at: ~/projects/Scheduling
