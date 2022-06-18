@@ -29,11 +29,17 @@ jobs:
       - image: cimg/openjdk:18.0.1
     steps:
       - checkout
-      - sonarcloud/scan
+      - sonarcloud-dotnet/setup-sonar
+      - sonarcloud-dotnet/run-scan:
+          project_key: TomaszSteblik_job-scheduling-ga
+          organization: tomaszsteblik
+          build_path: ~/project/GeneticAlgorithm
+          test_path: ~/project/GeneticAlgorithm_Tests
 
 
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.3
+  sonarcloud-dotnet: bestsellerit/sonarcloud-dotnet@0.0.1
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
