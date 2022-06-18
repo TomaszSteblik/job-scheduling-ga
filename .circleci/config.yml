@@ -122,17 +122,6 @@ workflows:
       - tests
       - analyse-code:
           context: SonarCloud
-
-  weekly:
-    triggers: #use the triggers key to indicate a scheduled build
-      - schedule:
-          cron: "0 12 * * 1" # use cron syntax to set the schedule
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - tests
       - build-mac:
           requires:
             - tests
