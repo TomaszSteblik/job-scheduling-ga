@@ -32,8 +32,8 @@ jobs:
       - run: |
           dotnet tool install --global dotnet-sonarscanner
           export PATH="$PATH:/root/.dotnet/tools"
-          apt update
-          apt install openjdk-17-jdk
+          apt update -y
+          apt install openjdk-17-jdk -y
           dotnet sonarscanner begin /k:"TomaszSteblik_job-scheduling-ga" /o:"tomaszsteblik" /d:sonar.login="$SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build ~/project/Scheduling.sln
           dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
