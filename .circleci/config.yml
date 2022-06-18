@@ -30,11 +30,7 @@ jobs:
     steps:
       - checkout
       - dotnet-sonarscanner/sonar-install
-      - sonarcloud-dotnet/run-scan:
-          project_key: TomaszSteblik_job-scheduling-ga
-          organization: tomaszsteblik
-          build_path: ~/project/GeneticAlgorithm
-          test_path: ~/project/GeneticAlgorithm_Tests
+      - sonarcloud/scan
 
 
 orbs:
