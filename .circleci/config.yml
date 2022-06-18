@@ -4,11 +4,6 @@ executors:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk
 
-  net-executor3:
-    docker:
-      - image : mcr.microsoft.com/dotnet/sdk
-    working_directory: /projects/Scheduling
-
 jobs:
   tests:
 
@@ -63,8 +58,9 @@ jobs:
           paths:
             - linux-output
 
-  zip-publish:
-    executor: net-executor3
+  zip:
+    executor: net-executor6
+    working_directory: /projects/Scheduling
     steps:
       - attach_workspace:
           at: /projects/Scheduling
@@ -84,7 +80,7 @@ jobs:
       - run: |
           rm -r win-output
       - persist_to_workspace:
-          root: /projects/rpg-v2
+          root: /projects/Scheduling
           paths:
             - win.zip
             - mac.zip
@@ -131,7 +127,7 @@ workflows:
       - build-win:
           requires:
             - tests
-      - zip-publish:
+      - zip:
           requires:
             - build-mac
             - build-win
@@ -139,6 +135,6 @@ workflows:
       - publish-github-release:
           context: GITHUB_CREDS
           requires:
-              - zip-publish
+              - zip
 
       
