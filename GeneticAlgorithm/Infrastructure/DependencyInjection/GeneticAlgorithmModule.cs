@@ -24,28 +24,28 @@ public class GeneticAlgorithmModule : Module
             { 
                 Crossover.CrossPointMachine => new CrossPointMachineCrossover(x.Resolve<Random>()),
                 Crossover.CrossPointDay =>  new CrossPointDayCrossover(x.Resolve<Random>()),
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentException("Unknown parameter: ", nameof(Crossover))
             });
         
         builder.Register<IElimination>(x => x.Resolve<Parameters>().Elimination
             switch
             {
                 Elimination.Elitism => new ElitismElimination(x.Resolve<IPopulation>()),
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentException("Unknown parameter: ", nameof(Elimination))
             });
         
         builder.Register<ISelection>(x => x.Resolve<Parameters>().Selection
             switch
             {
                 Selection.Elitism => new ElitismSelection(),
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentException("Unknown parameter: ", nameof(Selection))
             });
         
         builder.Register<IMutation>(x => x.Resolve<Parameters>().Mutation
             switch
             {
                 Mutation.Random => new RandomSwitchMutation(x.Resolve<IPopulation>(), x.Resolve<Random>()),
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentException("Unknown parameter: ", nameof(Mutation))
             });
 
         builder.RegisterType<Algorithm>();

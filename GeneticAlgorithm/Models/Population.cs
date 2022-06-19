@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text.Json.Serialization;
 using CsvHelper;
 using GeneticAlgorithm.Abstraction;
 
@@ -11,13 +12,15 @@ public class Population : IPopulation
 
     class PersonelHelper
     {
+        [JsonInclude]
         public string name { get; set; }
+        
+        [JsonInclude]
         public string qualifications { get; set; }
     }
 
     public Population(Parameters parameters = null)
     {
-        //TODO:Read from files and populate
         using (var reader = new StreamReader(parameters.DataPathMachines))
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
         {

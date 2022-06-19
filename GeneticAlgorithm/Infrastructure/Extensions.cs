@@ -1,8 +1,8 @@
 namespace GeneticAlgorithm.Infrastructure;
 
-public static class Extensions
+internal static class Extensions
 {
-    public static T[][] Transpose<T>(this T[][] arr1)
+    internal static T[][] Transpose<T>(this T[][] arr1)
     {
         var arr2 = new T[arr1.First().Length][];
         for (int i = 0; i < arr2.Length; i++)
