@@ -9,5 +9,5 @@ public class Machine
     [Name("personelCount")]
     public int PersonelCount { get; set; }
     [Name("name")]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 }

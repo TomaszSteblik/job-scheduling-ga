@@ -15,6 +15,6 @@ public class Parameters
     public Elimination Elimination { get; set; }
     public Mutation Mutation { get; set; }
     public Crossover Crossover { get; set; }
-    public string DataPathMachines { get; set; }
-    public string DataPathPersonel { get; set; }
+    public string? DataPathMachines { get; set; }
+    public string? DataPathPersonel { get; set; }
 }

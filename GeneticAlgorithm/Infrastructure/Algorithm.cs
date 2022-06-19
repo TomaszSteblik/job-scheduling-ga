@@ -15,8 +15,8 @@ public class Algorithm
     
     
 
-    public Algorithm(Parameters parameters, IPopulation population = null, ISelection selection = null, 
-        ICrossover crossover = null,  IElimination elimination = null, IMutation mutation = null)
+    public Algorithm(Parameters parameters, IPopulation population, ISelection selection, 
+        ICrossover crossover,  IElimination elimination, IMutation mutation)
     {
         _population = population;
         _selection = selection;

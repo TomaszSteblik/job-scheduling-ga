@@ -1,13 +1,13 @@
 using GeneticAlgorithm.Abstraction;
 using GeneticAlgorithm.Models;
 
-namespace GeneticAlgorithm.Operators.Elimination;
+namespace GeneticAlgorithm.Infrastructure.Operators.Elimination;
 
 public class ElitismElimination : IElimination
 {
     private readonly IPopulation _population;
 
-    public ElitismElimination(IPopulation population = null)
+    public ElitismElimination(IPopulation population)
     {
         _population = population;
     }

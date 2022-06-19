@@ -2,10 +2,10 @@ using Autofac;
 using Autofac.Core;
 using GeneticAlgorithm.Abstraction;
 using GeneticAlgorithm.Infrastructure.Operators.Crossover;
+using GeneticAlgorithm.Infrastructure.Operators.Elimination;
 using GeneticAlgorithm.Models;
 using GeneticAlgorithm.Models.Enums;
 using GeneticAlgorithm.Operators.Crossover;
-using GeneticAlgorithm.Operators.Elimination;
 using GeneticAlgorithm.Operators.Mutation;
 using GeneticAlgorithm.Operators.Selection;
 

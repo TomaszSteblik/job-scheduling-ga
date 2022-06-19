@@ -1,26 +1,34 @@
+using System.Data;
 using System.Globalization;
 using System.Text.Json.Serialization;
 using CsvHelper;
+using CsvHelper.Configuration.Attributes;
 using GeneticAlgorithm.Abstraction;
 
 namespace GeneticAlgorithm.Models;
 
 public class Population : IPopulation
 {
-    public Chromosome[] Chromosomes { get; set; }
-    public Machine[] Machines { get; set; }
+    private Chromosome[] Chromosomes { get; set; }
+    private Machine[] Machines { get; set; }
 
     class PersonelHelper
     {
         [JsonInclude]
-        public string name { get; set; }
+        [Name("name")]
+        public string? Name { get; set; }
         
         [JsonInclude]
-        public string qualifications { get; set; }
+        [Name("qualifications")]
+        public string? Qualifications { get; set; }
     }
 
-    public Population(Parameters parameters = null)
+    public Population(Parameters parameters)
     {
+        if (parameters.DataPathMachines is null)
+            throw new ArgumentNullException(nameof(parameters) ,nameof(parameters.DataPathMachines));
+        if (parameters.DataPathPersonel is null)
+            throw new ArgumentNullException(nameof(parameters) ,nameof(parameters.DataPathPersonel));
         using (var reader = new StreamReader(parameters.DataPathMachines))
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
         {
@@ -37,12 +45,16 @@ public class Population : IPopulation
             for (var index = 0; index < enumerable.Count; index++)
             {
                 var record = enumerable[index];
-                var person = new Person();
-                person.Id = index;
-                person.Name =  record.name;
-                person.Qualifications = new List<Qualification>();
+                if (record.Qualifications is null)
+                    throw new DataException(nameof(record));
+                var person = new Person
+                {
+                    Id = index,
+                    Name = record.Name,
+                    Qualifications = new List<Qualification>()
+                };
 
-                var qualifications = record.qualifications.Split('-');
+                var qualifications = record.Qualifications.Split('-');
                 foreach (var qualification in qualifications)
                 {
                     person.Qualifications.Add(Enum.Parse<Qualification>(qualification));
