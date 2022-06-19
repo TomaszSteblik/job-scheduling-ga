@@ -1,5 +1,6 @@
 using Autofac;
 using GeneticAlgorithm.Abstraction;
+using GeneticAlgorithm.Infrastructure.Operators.Crossover;
 using GeneticAlgorithm.Models.Enums;
 using GeneticAlgorithm.Operators.Crossover;
 

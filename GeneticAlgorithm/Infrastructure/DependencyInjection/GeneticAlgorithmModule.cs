@@ -1,6 +1,7 @@
 using Autofac;
 using Autofac.Core;
 using GeneticAlgorithm.Abstraction;
+using GeneticAlgorithm.Infrastructure.Operators.Crossover;
 using GeneticAlgorithm.Models;
 using GeneticAlgorithm.Models.Enums;
 using GeneticAlgorithm.Operators.Crossover;
@@ -16,12 +17,13 @@ public class GeneticAlgorithmModule : Module
     protected override void Load(ContainerBuilder builder)
     {
         builder.RegisterType<Population>().AsImplementedInterfaces().SingleInstance();
+        builder.RegisterInstance(Random.Shared);
         
         builder.Register<ICrossover>(x => x.Resolve<Parameters>().Crossover
             switch
             { 
-                Crossover.CrossPointMachine => new CrossPointMachineCrossover(),
-                Crossover.CrossPointDay =>  new CrossPointDayCrossover(),
+                Crossover.CrossPointMachine => new CrossPointMachineCrossover(x.Resolve<Random>()),
+                Crossover.CrossPointDay =>  new CrossPointDayCrossover(x.Resolve<Random>()),
                 _ => throw new ArgumentOutOfRangeException()
             });
         
@@ -42,7 +44,7 @@ public class GeneticAlgorithmModule : Module
         builder.Register<IMutation>(x => x.Resolve<Parameters>().Mutation
             switch
             {
-                Mutation.Random => new RandomSwitchMutation(x.Resolve<IPopulation>()),
+                Mutation.Random => new RandomSwitchMutation(x.Resolve<IPopulation>(), x.Resolve<Random>()),
                 _ => throw new ArgumentOutOfRangeException()
             });
 

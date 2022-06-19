@@ -6,27 +6,29 @@ namespace GeneticAlgorithm.Operators.Mutation;
 public class RandomSwitchMutation : IMutation
 {
     private readonly IPopulation _population;
+    private readonly Random _random;
 
-    public RandomSwitchMutation(IPopulation population)
+    public RandomSwitchMutation(IPopulation population, Random random)
     {
         _population = population;
+        _random = random;
     }
 
     public void MutatePopulation(double probability)
     {
         foreach (var chromosome in _population.GetAll())
         {
-            if (probability > 0 && probability <= Random.Shared.NextDouble())
+            if (probability > 0 && probability <= _random.NextDouble())
                 Mutate(chromosome);
         }
     }
 
     private void Mutate(Chromosome chromosome)
     {
-        var dayIndexOne = Random.Shared.Next(0, chromosome.Value.Length);
-        var dayIndexTwo = Random.Shared.Next(0, chromosome.Value.Length);
-        var personIndexOne = Random.Shared.Next(0, chromosome.Value.First().Length);
-        var personIndexTwo = Random.Shared.Next(0, chromosome.Value.First().Length);
+        var dayIndexOne = _random.Next(0, chromosome.Value.Length);
+        var dayIndexTwo = _random.Next(0, chromosome.Value.Length);
+        var personIndexOne = _random.Next(0, chromosome.Value.First().Length);
+        var personIndexTwo = _random.Next(0, chromosome.Value.First().Length);
         //swap here through deconstruction
         (chromosome.Value[dayIndexOne][personIndexOne], chromosome.Value[dayIndexTwo][personIndexTwo]) = (chromosome.Value[dayIndexTwo][personIndexTwo], chromosome.Value[dayIndexOne][personIndexOne]);
     }

@@ -1,12 +1,16 @@
 using GeneticAlgorithm.Abstraction;
-using GeneticAlgorithm.Infrastructure;
 using GeneticAlgorithm.Models;
-using Xunit.Abstractions;
 
-namespace GeneticAlgorithm.Operators.Crossover;
+namespace GeneticAlgorithm.Infrastructure.Operators.Crossover;
 
 public class CrossPointMachineCrossover : ICrossover
 {
+    private readonly Random _random;
+
+    public CrossPointMachineCrossover(Random random)
+    {
+        _random = random;
+    }
     public Chromosome[] GenerateOffsprings(ICollection<Chromosome> selected)
     {
         var innerLength = selected.First().Value.First().Length;
@@ -14,7 +18,7 @@ public class CrossPointMachineCrossover : ICrossover
         var offsprings = new List<Chromosome>();
         for (var parentNumber = 0; parentNumber < selected.Count; parentNumber+=2)
         {
-            var crossPoint = Random.Shared.Next(1, innerLength);
+            var crossPoint = _random.Next(1, innerLength);
             var offspringOne = new Chromosome(outerLength,innerLength);
             var offspringTwo = new Chromosome(outerLength,innerLength);
             for (var i = 0; i < outerLength; i++)
