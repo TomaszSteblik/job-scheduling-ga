@@ -50,6 +50,6 @@ public class Algorithm
         //calculate fitness
         _population.RecalculateAll();
         //return best 
-        return _population.GetAll().MinBy(x=>x.Fitness);  
+        return _population.GetAll().MinBy(x=>x.Fitness) ?? throw new InvalidOperationException("Empty population");  
     }
 }

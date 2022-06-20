@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+using System.Data;
 
 namespace GeneticAlgorithm.Models;
 
@@ -23,7 +23,11 @@ public class Chromosome
         {
             for (var machineNumber = 0; machineNumber < machines.Length; machineNumber++)
             {
-                if (!Value[day][machineNumber].Qualifications.Contains(machines[machineNumber].RequiredQualification))
+                var qualifications = Value[day][machineNumber].Qualifications;
+                if (qualifications is null)
+                    throw new DataException(
+                        $"Worker doesn't have any qualifications. day: {day}, machine: {machineNumber}");
+                if (!qualifications.Contains(machines[machineNumber].RequiredQualification))
                     Fitness++;
                 
             }
@@ -42,7 +46,7 @@ public class Chromosome
         foreach (var day in Value)
         {
             var count = day.DistinctBy(x => x.Id).Count();
-            if(count != day.Count())
+            if(count != day.Length)
                 Fitness += 100;
         }
 
@@ -54,7 +58,7 @@ public class Chromosome
         foreach (var day in Value)
         {
             var count = day.DistinctBy(x => x.Id).Count();
-            if(count != day.Count())
+            if(count != day.Length)
                 fitness += 1;
         }
 
@@ -68,9 +72,12 @@ public class Chromosome
         {
             for (var machineNumber = 0; machineNumber < machines.Length; machineNumber++)
             {
-                if (!Value[day][machineNumber].Qualifications.Contains(machines[machineNumber].RequiredQualification))
+                var qualifications = Value[day][machineNumber].Qualifications;
+                if (qualifications is null)
+                    throw new DataException(
+                        $"Worker doesn't have any qualifications. day: {day}, machine: {machineNumber}");
+                if (!qualifications.Contains(machines[machineNumber].RequiredQualification))
                     fitness++;
-                
             }
         }
 

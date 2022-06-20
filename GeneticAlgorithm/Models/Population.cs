@@ -73,8 +73,7 @@ public class Population : IPopulation
                 {
 
                     var s = people.Where(x =>
-                        x.Qualifications.Contains(Machines[k].RequiredQualification) &&
-                        !Chromosomes[i].Value[j].Contains(x)).ToArray();
+                        x.Qualifications != null && x.Qualifications.Contains(Machines[k].RequiredQualification) && !Chromosomes[i].Value[j].Contains(x)).ToArray();
                     Chromosomes[i].Value[j][k] = s[Random.Shared.Next(s.Length)];
                 }
             }
