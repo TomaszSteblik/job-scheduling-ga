@@ -1,5 +1,5 @@
+using System.Data;
 using Autofac;
-using Autofac.Core;
 using GeneticAlgorithm.Abstraction;
 using GeneticAlgorithm.Infrastructure.Operators.Crossover;
 using GeneticAlgorithm.Infrastructure.Operators.Elimination;
@@ -24,28 +24,28 @@ public class GeneticAlgorithmModule : Module
             { 
                 Crossover.CrossPointMachine => new CrossPointMachineCrossover(x.Resolve<Random>()),
                 Crossover.CrossPointDay =>  new CrossPointDayCrossover(x.Resolve<Random>()),
-                _ => throw new ArgumentException("Unknown parameter: ", nameof(Crossover))
+                _ => throw new DataException($"Unknown parameter: {nameof(Crossover)}")
             });
         
         builder.Register<IElimination>(x => x.Resolve<Parameters>().Elimination
             switch
             {
                 Elimination.Elitism => new ElitismElimination(x.Resolve<IPopulation>()),
-                _ => throw new ArgumentException("Unknown parameter: ", nameof(Elimination))
+                _ => throw new DataException($"Unknown parameter: {nameof(Elimination)}")
             });
         
         builder.Register<ISelection>(x => x.Resolve<Parameters>().Selection
             switch
             {
                 Selection.Elitism => new ElitismSelection(),
-                _ => throw new ArgumentException("Unknown parameter: ", nameof(Selection))
+                _ => throw new DataException($"Unknown parameter: {nameof(Selection)}")
             });
         
         builder.Register<IMutation>(x => x.Resolve<Parameters>().Mutation
             switch
             {
                 Mutation.Random => new RandomSwitchMutation(x.Resolve<IPopulation>(), x.Resolve<Random>()),
-                _ => throw new ArgumentException("Unknown parameter: ", nameof(Mutation))
+                _ => throw new DataException($"Unknown parameter: {nameof(Mutation)}")
             });
 
         builder.RegisterType<Algorithm>();
