@@ -19,6 +19,35 @@ public class Chromosome
     public void RecalculateFitness(Machine[] machines)
     {
         Fitness = 0;
+        RecalculateFitnessByQualifications(machines);
+        RecalculateFitnessByDaysWorking();
+        RecalculateFitnessByOnePersonOnSameMachine();
+    }
+
+    private void RecalculateFitnessByOnePersonOnSameMachine()
+    {
+        foreach (var day in Value)
+        {
+            var count = day.DistinctBy(x => x.Id).Count();
+            if (count != day.Length)
+                Fitness += 100;
+        }
+    }
+
+    private void RecalculateFitnessByDaysWorking()
+    {
+        var workers = Value.SelectMany(x => x).Select(x => x).ToList();
+        var dic = workers.Select(x => new {Person = x, Count = workers.Count(z => z.Id == x.Id)});
+        var distinctBy = dic.DistinctBy(x => x.Person.Id);
+        foreach (var worker in distinctBy)
+        {
+            if (worker.Count is >= 14 or <= 10)
+                Fitness += 10;
+        }
+    }
+
+    private void RecalculateFitnessByQualifications(Machine[] machines)
+    {
         for (var day = 0; day < Value.Length; day++)
         {
             for (var machineNumber = 0; machineNumber < machines.Length; machineNumber++)
@@ -29,29 +58,10 @@ public class Chromosome
                         $"Worker doesn't have any qualifications. day: {day}, machine: {machineNumber}");
                 if (!qualifications.Contains(machines[machineNumber].RequiredQualification))
                     Fitness++;
-                
             }
         }
-
-
-        var workers = Value.SelectMany(x => x).Select(x => x).ToList();
-        var dic = workers.Select(x => new {Person = x, Count = workers.Count(z => z.Id == x.Id)});
-        var distinctBy = dic.DistinctBy(x=>x.Person.Id);
-        foreach (var worker in distinctBy)
-        {
-            if (worker.Count is >= 14 or <= 10)
-                Fitness += 10;
-        }
-
-        foreach (var day in Value)
-        {
-            var count = day.DistinctBy(x => x.Id).Count();
-            if(count != day.Length)
-                Fitness += 100;
-        }
-
     }
-    
+
     public int AnalyzeMultipleMachines()
     {
         var fitness = 0;
