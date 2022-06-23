@@ -5,7 +5,7 @@ using GeneticAlgorithm.Models;
 
 namespace ConsoleRunner;
 
-public static class DataReaderHelper
+public static class DataReaderCsvHelper
 {
     internal static Person[] GetPeopleFromCsv(string? parametersDataPathPersonel)
     {
