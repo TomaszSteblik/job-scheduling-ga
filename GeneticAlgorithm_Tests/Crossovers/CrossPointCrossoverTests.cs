@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using GeneticAlgorithm.Infrastructure.Operators.Crossover;
 using GeneticAlgorithm.Models;
-using GeneticAlgorithm.Operators.Crossover;
 using Moq;
+using Serilog;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -15,17 +15,19 @@ namespace GeneticAlgorithm_Tests.Crossovers;
 public class CrossPointCrossoverTests
 {
     private readonly ITestOutputHelper _testOutputHelper;
+    private readonly Mock<ILogger> _loggerMock;
 
     public CrossPointCrossoverTests(ITestOutputHelper testOutputHelper)
     {
         _testOutputHelper = testOutputHelper;
+        _loggerMock = new Mock<ILogger>();
     }
     
     [Fact]
     public void CrossPointDayCrossover_Test()
     {
         //Arrange
-        var crossover = new CrossPointDayCrossover(new Random(1));
+        var crossover = new CrossPointDayCrossover(new Random(1), _loggerMock.Object);
         var parents = new List<Chromosome>();
         var parentOne = new Chromosome(10, 4);
         for (var i = 0; i < parentOne.Value.Length; i++)

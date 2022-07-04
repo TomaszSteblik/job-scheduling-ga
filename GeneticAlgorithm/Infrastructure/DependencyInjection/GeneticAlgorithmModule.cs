@@ -6,9 +6,9 @@ using GeneticAlgorithm.Infrastructure.Operators.Crossover;
 using GeneticAlgorithm.Infrastructure.Operators.Elimination;
 using GeneticAlgorithm.Models;
 using GeneticAlgorithm.Models.Enums;
-using GeneticAlgorithm.Operators.Crossover;
 using GeneticAlgorithm.Operators.Mutation;
 using GeneticAlgorithm.Operators.Selection;
+using Serilog;
 
 namespace GeneticAlgorithm.Infrastructure.DependencyInjection;
 
@@ -40,7 +40,7 @@ public class GeneticAlgorithmModule : Module
             switch
             { 
                 Crossover.CrossPointMachine => new CrossPointMachineCrossover(x.Resolve<Random>()),
-                Crossover.CrossPointDay =>  new CrossPointDayCrossover(x.Resolve<Random>()),
+                Crossover.CrossPointDay =>  new CrossPointDayCrossover(x.Resolve<Random>(), x.Resolve<ILogger>()),
                 _ => throw new DataException($"Unknown parameter: {nameof(Crossover)}")
             });
         

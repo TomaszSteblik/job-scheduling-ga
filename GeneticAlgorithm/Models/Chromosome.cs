@@ -93,4 +93,9 @@ public class Chromosome
 
         return fitness;
     }
+
+    public bool IsValid(Machine[] machines)
+    {
+        return AnalyzeWrongPosition(machines) == 0 && AnalyzeMultipleMachines() == 0;
+    }
 }
