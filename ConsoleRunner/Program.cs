@@ -22,6 +22,14 @@ class PersonelHelper
     [JsonInclude]
     [Name("qualifications")]
     public string? Qualifications { get; set; }
+    
+    [JsonInclude]
+    [Name("preference_days")]
+    public int DaysPreference { get; set; }
+
+    [JsonInclude]
+    [Name("preference_machines")]
+    public int PreferredMachineId { get; set; }
 }
 static class Program
 {
@@ -29,10 +37,11 @@ static class Program
     
     public static async Task Main()
     {
-         var log = new LoggerConfiguration()
+        var log = new LoggerConfiguration()
             .WriteTo.Console()
             .MinimumLevel.Debug()
             .CreateLogger();
+        Log.Logger = log;
         var stream = new FileStream("/Users/tsteblik/RiderProjects/Scheduling/ConsoleRunner/Data/parameters.json", FileMode.Open);
         var parameters = await JsonSerializer.DeserializeAsync<Parameters>(stream);
         if (parameters is null)
@@ -46,8 +55,7 @@ static class Program
         Container = builder.Build();
         var z = Container.Resolve<Algorithm>();
         var result = z.Run();
-        result.RecalculateFitness(Container.Resolve<IPopulation>().GetMachines());
         
-        Console.Write($"\n\n\nResult fitness: {result.Fitness}");
+
     }
 }

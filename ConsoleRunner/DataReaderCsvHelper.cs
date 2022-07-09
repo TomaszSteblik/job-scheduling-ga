@@ -26,6 +26,8 @@ public static class DataReaderCsvHelper
                 {
                     Id = index,
                     Name = record.Name,
+                    PreferenceDays = record.DaysPreference,
+                    PreferredMachineId = record.PreferredMachineId,
                     Qualifications = new List<Qualification>()
                 };
 

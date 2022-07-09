@@ -15,6 +15,7 @@ public class ElitismElimination : IElimination
     {
         _population.OrderByFitnessDesc();
         var lowestFitnessCurrent = _population.GetAll().Max(x=>x.Fitness);
+        offsprings = offsprings.Where(x => x.IsValid(_population.GetMachines())).ToArray();
         for (var i = 0; i < offsprings.Length; i++)
         {
             offsprings[i].RecalculateFitness(_population.GetMachines());
