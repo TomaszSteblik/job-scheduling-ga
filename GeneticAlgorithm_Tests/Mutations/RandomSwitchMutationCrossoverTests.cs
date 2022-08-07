@@ -62,7 +62,7 @@ public class RandomSwitchMutationCrossoverTests
         Assert.Equal(2,population.GetAll().First().Value[9][1].Id);
     }
 
-    private Population GenerateMockPopulation(int size, Random random)
+    private static Population GenerateMockPopulation(int size, Random random)
     {
         return new Population(
             new []{
