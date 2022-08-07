@@ -29,7 +29,7 @@ class PersonelHelper
 
     [JsonInclude]
     [Name("preference_machines")]
-    public int PreferredMachineId { get; set; }
+    public int? PreferredMachineId { get; set; }
 }
 static class Program
 {
@@ -51,11 +51,8 @@ static class Program
         var machines = GetMachinesFromCsv(parameters.DataPathMachines);
         var people = GetPeopleFromCsv(parameters.DataPathPersonel);
         builder.RegisterModule(new GeneticAlgorithmModule(people, machines, parameters.PopulationSize));
-        builder.RegisterInstance<ILogger>(log);
         Container = builder.Build();
         var z = Container.Resolve<Algorithm>();
-        var result = z.Run();
-        
-
+        z.Run();
     }
 }

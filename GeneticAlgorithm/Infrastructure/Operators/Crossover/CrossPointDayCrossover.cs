@@ -7,12 +7,10 @@ namespace GeneticAlgorithm.Infrastructure.Operators.Crossover;
 public class CrossPointDayCrossover : ICrossover
 {
     private readonly Random _random;
-    private readonly ILogger _logger;
 
-    public CrossPointDayCrossover(Random random, ILogger logger)
+    public CrossPointDayCrossover(Random random)
     {
         _random = random;
-        _logger = logger;
     }
     public Chromosome[] GenerateOffsprings(ICollection<Chromosome> selected)
     {

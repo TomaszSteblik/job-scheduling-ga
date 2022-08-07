@@ -56,6 +56,14 @@ public class Algorithm
         var result = _population.GetAll().MinBy(x=>x.Fitness) ?? throw new InvalidOperationException("Empty population");
         Log.Information("Result fitness: {Fitness}, {PreferredMachine}",result.Fitness, result.AnalyzePreferredMachines());
 
+        var workers = result.Value.SelectMany(x => x).Select(x => x).ToList();
+        var dic = workers.Select(x => new {Person = x, Count = workers.Count(z => z.Id == x.Id)});
+        var distinctBy = dic.DistinctBy(x => x.Person.Id);
+        foreach (var worker in distinctBy)
+        {
+            Log.Information("worker: {Worker}",worker);
+        }
+
         //return best 
         return result;
     }

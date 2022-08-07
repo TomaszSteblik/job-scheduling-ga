@@ -6,7 +6,7 @@ public class Person
     public string? Name { get; set; }
     public string? Surname { get; set; }
     public int PreferenceDays { get; set; }
-    public int PreferredMachineId { get; set; }
+    public int? PreferredMachineId { get; set; }
     public ICollection<Qualification>? Qualifications { get; set; }
     public override string ToString()
     {

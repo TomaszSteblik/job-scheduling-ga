@@ -30,12 +30,13 @@ public class Chromosome
 
     public int AnalyzePreferredMachines()
     {
-        int result = 0;
-        for (int i = 0; i < Value.Length; i++)
+        var result = 0;
+        for (var i = 0; i < Value.Length; i++)
         {
-            for (int j = 0; j < Value[i].Length; j++)
+            for (var j = 0; j < Value[i].Length; j++)
             {
-                if (Value[i][j].PreferredMachineId == j)
+                if (Value[i][j].PreferredMachineId is null) continue;
+                if (Value[i][j].PreferredMachineId != j)
                     result++;
             }
         }

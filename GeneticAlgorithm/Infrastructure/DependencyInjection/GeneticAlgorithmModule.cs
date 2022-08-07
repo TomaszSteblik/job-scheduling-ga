@@ -4,9 +4,9 @@ using Autofac.Core.Activators.Reflection;
 using GeneticAlgorithm.Abstraction;
 using GeneticAlgorithm.Infrastructure.Operators.Crossover;
 using GeneticAlgorithm.Infrastructure.Operators.Elimination;
+using GeneticAlgorithm.Infrastructure.Operators.Mutation;
 using GeneticAlgorithm.Models;
 using GeneticAlgorithm.Models.Enums;
-using GeneticAlgorithm.Operators.Mutation;
 using GeneticAlgorithm.Operators.Selection;
 using Serilog;
 
@@ -40,7 +40,7 @@ public class GeneticAlgorithmModule : Module
             switch
             { 
                 Crossover.CrossPointMachine => new CrossPointMachineCrossover(x.Resolve<Random>()),
-                Crossover.CrossPointDay =>  new CrossPointDayCrossover(x.Resolve<Random>(), x.Resolve<ILogger>()),
+                Crossover.CrossPointDay =>  new CrossPointDayCrossover(x.Resolve<Random>()),
                 _ => throw new DataException($"Unknown parameter: {nameof(Crossover)}")
             });
         

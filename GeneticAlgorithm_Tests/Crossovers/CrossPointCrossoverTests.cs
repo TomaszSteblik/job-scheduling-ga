@@ -15,19 +15,17 @@ namespace GeneticAlgorithm_Tests.Crossovers;
 public class CrossPointCrossoverTests
 {
     private readonly ITestOutputHelper _testOutputHelper;
-    private readonly Mock<ILogger> _loggerMock;
 
     public CrossPointCrossoverTests(ITestOutputHelper testOutputHelper)
     {
         _testOutputHelper = testOutputHelper;
-        _loggerMock = new Mock<ILogger>();
     }
     
     [Fact]
     public void CrossPointDayCrossover_Test()
     {
         //Arrange
-        var crossover = new CrossPointDayCrossover(new Random(1), _loggerMock.Object);
+        var crossover = new CrossPointDayCrossover(new Random(1));
         var parents = new List<Chromosome>();
         var parentOne = new Chromosome(10, 4);
         for (var i = 0; i < parentOne.Value.Length; i++)
@@ -35,8 +33,10 @@ public class CrossPointCrossoverTests
             var days = parentOne.Value[i];
             for (var index = 0; index < days.Length; index++)
             {
-                var person = new Person();
-                person.Name = 2+i.ToString() + 2+index.ToString();
+                var person = new Person
+                {
+                    Name = 2+i.ToString() + 2+index
+                };
                 days[index] = person;
             }
         }

@@ -12,7 +12,7 @@ public class Population : IPopulation
     private Chromosome[] Chromosomes { get; set; }
     private Machine[] Machines { get; set; }
     
-    public Population(Machine[] machines, Person[] people, int populationSize)
+    public Population(Machine[] machines, Person[] people, int populationSize, Random random)
     {
         Machines = machines;
         Chromosomes = new Chromosome[populationSize];
@@ -26,7 +26,7 @@ public class Population : IPopulation
 
                     var s = people.Where(x =>
                         x.Qualifications != null && x.Qualifications.Contains(Machines[k].RequiredQualification) && !Chromosomes[i].Value[j].Contains(x)).ToArray();
-                    Chromosomes[i].Value[j][k] = s[Random.Shared.Next(s.Length)];
+                    Chromosomes[i].Value[j][k] = s[random.Next(s.Length)];
                 }
             }
         }
