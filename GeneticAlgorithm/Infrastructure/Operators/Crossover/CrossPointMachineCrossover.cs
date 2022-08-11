@@ -13,33 +13,43 @@ public class CrossPointMachineCrossover : ICrossover
     }
     public Chromosome[] GenerateOffsprings(ICollection<Chromosome> selected)
     {
-        var innerLength = selected.First().Value.First().Length;
-        var outerLength = selected.First().Value.Length;
         var offsprings = new List<Chromosome>();
         for (var parentNumber = 0; parentNumber < selected.Count; parentNumber+=2)
         {
-            var crossPoint = _random.Next(1, innerLength);
-            var offspringOne = new Chromosome(outerLength,innerLength);
-            var offspringTwo = new Chromosome(outerLength,innerLength);
-            for (var i = 0; i < outerLength; i++)
-            {
-                for (var j = 0; j < crossPoint; j++)
-                {
-                    offspringOne.Value[i][j] = selected.ElementAt(parentNumber).Value[i][j];
-                    offspringTwo.Value[i][j] = selected.ElementAt(parentNumber+1).Value[i][j];
-                }
-                for (var j = crossPoint; j < innerLength; j++)
-                {
-                    offspringOne.Value[i][j] = selected.ElementAt(parentNumber+1).Value[i][j];
-                    offspringTwo.Value[i][j] = selected.ElementAt(parentNumber).Value[i][j];
-                }
-            }
+
+            var (offspringOne, offspringTwo) = 
+                GenerateChromosomePair(selected.ElementAt(parentNumber), 
+                                        selected.ElementAt(parentNumber + 1));
 
             offsprings.Add(offspringOne);
             offsprings.Add(offspringTwo);
+
+        }
+        return offsprings.ToArray();
+    }
+
+    private (Chromosome offspringOne, Chromosome offspringTwo) GenerateChromosomePair(Chromosome parentOne, Chromosome parentTwo)
+    {
+        var innerLength = parentOne.Value.First().Length;
+        var outerLength = parentOne.Value.Length;
+        var crossPoint = _random.Next(1, innerLength);
+        var offspringOne = new Chromosome(outerLength,innerLength);
+        var offspringTwo = new Chromosome(outerLength,innerLength);
+
+        for (var i = 0; i < outerLength; i++)
+        {
+            for (var j = 0; j < crossPoint; j++)
+            {
+                offspringOne.Value[i][j] = parentOne.Value[i][j];
+                offspringTwo.Value[i][j] = parentTwo.Value[i][j];
+            }
+            for (var j = crossPoint; j < innerLength; j++)
+            {
+                offspringOne.Value[i][j] = parentTwo.Value[i][j];
+                offspringTwo.Value[i][j] = parentOne.Value[i][j];
+            }
         }
         
-        return offsprings.ToArray();
-
+        return (offspringOne, offspringTwo);
     }
 }
