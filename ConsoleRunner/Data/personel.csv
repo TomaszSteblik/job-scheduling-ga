@@ -1,8 +1,8 @@
-name,qualifications,preference_days,preference_machines
-Angelika,2-3,14,1
-Krzysztof,4-2-1,12,0,3
-Karolina,2-4,11,1,3
-Bartosz,3-4,12,2
-Amelia,1-3,12,0
-Anastazja,4-1,10,
-Alicja,3-1,11,2
+name,qualifications,preference_days_count,preference_machines,preference_days
+Angelika,2-3,14,1,0-1-3-4-5-7-8-10-12-9
+Krzysztof,4-2-1,12,0,0-1-3-4-5-7-8-10-12-9
+Karolina,2-4,11,1,11-2-6-13-15-17
+Bartosz,3-4,12,2,11-2-6-13-15-17
+Amelia,1-3,12,0,0-11-6-4-10-14-18-19
+Anastazja,4-1,10,0,0-1-4-18-19-16-14
+Alicja,3-1,11,2,0-1-4-18-19-16-14

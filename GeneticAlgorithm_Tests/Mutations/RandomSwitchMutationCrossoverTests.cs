@@ -71,12 +71,12 @@ public class RandomSwitchMutationCrossoverTests
             },
             new []
             {
-                new Person(){Id = 1,Name = "Person1", Surname = "Kowalski1", PreferenceDays = 20,
-                    PreferredMachineId = 0,Qualifications = new List<Qualification>() {Qualification.Milling}},
-                new Person(){Id = 2,Name = "Person2", Surname = "Kowalski2", PreferenceDays = 20,
-                    PreferredMachineId = 1,Qualifications = new List<Qualification>() {Qualification.Milling}},
-                new Person(){Id = 3,Name = "Person3", Surname = "Kowalski3", PreferenceDays = 20,
-                    PreferredMachineId = 0,Qualifications = new List<Qualification>() {Qualification.Milling}},
+                new Person(){Id = 1,Name = "Person1", Surname = "Kowalski1", PreferenceDaysCount = 20,
+                    PreferredMachineIds = new[] {0},Qualifications = new List<Qualification>() {Qualification.Milling}},
+                new Person(){Id = 2,Name = "Person2", Surname = "Kowalski2", PreferenceDaysCount = 20,
+                    PreferredMachineIds = new[] {1},Qualifications = new List<Qualification>() {Qualification.Milling}},
+                new Person(){Id = 3,Name = "Person3", Surname = "Kowalski3", PreferenceDaysCount = 20,
+                    PreferredMachineIds = new[] {0},Qualifications = new List<Qualification>() {Qualification.Milling}},
             },
             size,
             random);

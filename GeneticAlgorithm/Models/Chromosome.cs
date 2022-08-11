@@ -1,42 +1,80 @@
 using System.Data;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("GeneticAlgorithm_Tests")]
 namespace GeneticAlgorithm.Models;
 
 public class Chromosome
 {
     public Person[][] Value { get; set; }
     public double Fitness { get; set; }
+    private readonly int _positionsCount;
 
     public Chromosome(int daysCount, int machinesCount)
     {
         Value = new Person[daysCount][];
-        for (int i = 0; i < daysCount; i++)
+        for (var i = 0; i < daysCount; i++)
         {
             Value[i] = new Person[machinesCount];
         }
+
+        _positionsCount = daysCount * machinesCount;
     }
 
-    public void RecalculateFitness(Machine[] machines)
+    internal void RecalculateFitness(Machine[] machines)
     {
         Fitness = 0;
         RecalculateFitnessByDaysWorking();
         RecalculateFitnessByPreferredMachine();
+        RecalculateFitnessByPreferredDays();
     }
 
-    private void RecalculateFitnessByPreferredMachine()
+    private void RecalculateFitnessByPreferredDays()
     {
-        Fitness += AnalyzePreferredMachines();
+        Fitness += _positionsCount;
+        Fitness -= AnalyzePreferredDays();
     }
 
-    public int AnalyzePreferredMachines()
+    ///<summary>
+    ///Method returns sum of correctly placed people in all days according to preferred days
+    ///</summary>
+    internal int AnalyzePreferredDays()
     {
         var result = 0;
         for (var i = 0; i < Value.Length; i++)
         {
             for (var j = 0; j < Value[i].Length; j++)
             {
-                if (Value[i][j].PreferredMachineId is null) continue;
-                if (Value[i][j].PreferredMachineId != j)
+                var preferredDays = Value[i][j].PreferredDays;
+                if (preferredDays is null) continue;
+
+                if (preferredDays.Contains(i))
+                    result++;
+            }
+        }
+        return result;
+    }
+
+    private void RecalculateFitnessByPreferredMachine()
+    {
+        Fitness += _positionsCount;
+        Fitness -= AnalyzePreferredMachines();
+    }
+
+    ///<summary>
+    ///Method returns sum of correctly placed people in all days according to preferred machines
+    ///</summary>
+    internal int AnalyzePreferredMachines()
+    {
+        var result = 0;
+        for (var i = 0; i < Value.Length; i++)
+        {
+            for (var j = 0; j < Value[i].Length; j++)
+            {
+                var preferredMachineIds = Value[i][j].PreferredMachineIds;
+                if (preferredMachineIds is null) continue;
+                
+                if (preferredMachineIds.Contains(j))
                     result++;
             }
         }
@@ -50,12 +88,15 @@ public class Chromosome
         var distinctBy = dic.DistinctBy(x => x.Person.Id);
         foreach (var worker in distinctBy)
         {
-            var daysDifference = Math.Abs(worker.Count - worker.Person.PreferenceDays);
+            var daysDifference = Math.Abs(worker.Count - worker.Person.PreferenceDaysCount);
             Fitness += daysDifference;
         }
     }
 
-    public int AnalyzeMultipleMachines()
+    ///<summary>
+    ///Method returns sum of days where there is at least one person working on two or more machines in the same day
+    ///</summary>
+    internal int AnalyzeMultipleMachines()
     {
         var fitness = 0;
         foreach (var day in Value)
@@ -68,7 +109,7 @@ public class Chromosome
         return fitness;
     }
     
-    public int AnalyzeWrongPosition(Machine[] machines)
+    internal int AnalyzeWrongPosition(Machine[] machines)
     {
         var fitness = 0;
         for (var day = 0; day < Value.Length; day++)

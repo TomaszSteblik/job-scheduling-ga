@@ -34,9 +34,9 @@ public class Algorithm
         for (int i = 0; i < _parameters.EpochsCount; i++)
         {
             //calculate fitness
-            Log.Debug("EPOCH {Epoch,3} AVG: {Avg} MACHINES_REPEAT:{Repeat}" +
-                              " POS_WRNG: {PositionWrong}", i,_population.GetAll().Average(x=>x.Fitness).ToString(CultureInfo.InvariantCulture),
-                _population.GetAll().Max(x=>x.AnalyzeMultipleMachines()),_population.GetAll().Max(x=>x.AnalyzeWrongPosition(_population.GetMachines())));
+            Log.Debug("EPOCH {Epoch,3} AVG: {Avg} PREF_MACH:{Repeat}" +
+                              " PREF_DAYS: {PositionWrong}", i,_population.GetAll().Average(x=>x.Fitness).ToString(CultureInfo.InvariantCulture),
+                _population.GetAll().Max(x=>x.AnalyzePreferredMachines()),_population.GetAll().Max(x=>x.AnalyzePreferredDays()));
 
             _population.RecalculateAll();
             //selection
@@ -54,7 +54,8 @@ public class Algorithm
         _population.RecalculateAll();
 
         var result = _population.GetAll().MinBy(x=>x.Fitness) ?? throw new InvalidOperationException("Empty population");
-        Log.Information("Result fitness: {Fitness}, {PreferredMachine}",result.Fitness, result.AnalyzePreferredMachines());
+        Log.Information("Result fitness: {Fitness}, pref machines: {PreferredMachine}, pref days: {PreferredDays}",
+            result.Fitness, result.AnalyzePreferredMachines(), result.AnalyzePreferredDays());
 
         var workers = result.Value.SelectMany(x => x).Select(x => x).ToList();
         var dic = workers.Select(x => new {Person = x, Count = workers.Count(z => z.Id == x.Id)});

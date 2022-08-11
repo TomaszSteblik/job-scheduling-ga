@@ -6,5 +6,6 @@ namespace GeneticAlgorithm.Models.Enums;
 public enum Crossover
 {
     CrossPointMachine,
-    CrossPointDay
+    CrossPointDay,
+    CrossPointMixed
 }
