@@ -9,7 +9,6 @@ namespace Scheduling.Bootloading;
 
 internal static class Bootloader
 {
-    private static IContainer? _container;
     internal static void Setup()
     {
         var builder = new ContainerBuilder();
@@ -22,8 +21,8 @@ internal static class Bootloader
         builder.RegisterViewModels();
         builder.AddAutoMapper();
         RegisterAvalonia();
-        _container = builder.Build();
-        autofacResolver.SetLifetimeScope(_container);
+        var container = builder.Build();
+        autofacResolver.SetLifetimeScope(container);
     }
 
     private static void InitializeLocator()
