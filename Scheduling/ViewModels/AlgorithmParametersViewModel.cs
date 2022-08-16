@@ -10,6 +10,7 @@ using GeneticAlgorithm.Infrastructure.DependencyInjection;
 using GeneticAlgorithm.Models;
 using GeneticAlgorithm.Models.Enums;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using Scheduling.Models;
 
 namespace Scheduling.ViewModels;
@@ -23,6 +24,7 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
     public IEnumerable<Elimination> EliminationValues => Enum.GetValues<Elimination>();
     public IEnumerable<Mutation> MutationValues => Enum.GetValues<Mutation>();
     public ReactiveCommand<Unit, Unit> RunGaCommand { get; }
+    [Reactive]
     public double ResultFitness { get; set; }
 
     public AlgorithmParametersViewModel(AlgorithmSettings settings, IMapper mapper)
