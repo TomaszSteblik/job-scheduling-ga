@@ -17,19 +17,17 @@ namespace Scheduling.ViewModels;
 
 public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
 {
-    private readonly IMapper _mapper;
     public AlgorithmSettings Settings { get; }
-    public IEnumerable<Crossover> CrossoverValues => Enum.GetValues<Crossover>();
-    public IEnumerable<Selection> SelectionValues => Enum.GetValues<Selection>();
-    public IEnumerable<Elimination> EliminationValues => Enum.GetValues<Elimination>();
-    public IEnumerable<Mutation> MutationValues => Enum.GetValues<Mutation>();
+    public static IEnumerable<Crossover> CrossoverValues => Enum.GetValues<Crossover>();
+    public static IEnumerable<Selection> SelectionValues => Enum.GetValues<Selection>();
+    public static IEnumerable<Elimination> EliminationValues => Enum.GetValues<Elimination>();
+    public static IEnumerable<Mutation> MutationValues => Enum.GetValues<Mutation>();
     public ReactiveCommand<Unit, Unit> RunGaCommand { get; }
     [Reactive]
     public double ResultFitness { get; set; }
 
     public AlgorithmParametersViewModel(AlgorithmSettings settings, IMapper mapper)
     {
-        _mapper = mapper;
         Settings = settings;
         Activator = new ViewModelActivator();
         this.WhenActivated((CompositeDisposable disposables) =>
