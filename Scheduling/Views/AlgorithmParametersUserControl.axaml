@@ -10,6 +10,23 @@
         <viewModels:AlgorithmParametersViewModel/>
     </Design.DataContext>
     
-    <TextBlock Text="{Binding Name}"></TextBlock>
+    <StackPanel>
+        <TextBox Text="{Binding Settings.PopulationSize}"/>
+        <TextBox Text="{Binding Settings.EpochsCount}"/>
+        <TextBox Text="{Binding Settings.MutationProbability}"/>
+        <TextBox Text="{Binding Settings.ChildrenCount}"/>
+        <TextBox Text="{Binding Settings.ParentsPerChild}"/>
+        <ComboBox Items="{Binding CrossoverValues}" 
+                  SelectedItem="{Binding Settings.Crossover}"/>
+        <ComboBox Items="{Binding SelectionValues}" 
+                  SelectedItem="{Binding Settings.Selection}"/>
+        <ComboBox Items="{Binding EliminationValues}" 
+                  SelectedItem="{Binding Settings.Elimination}"/>
+        <ComboBox Items="{Binding MutationValues}" 
+                  SelectedItem="{Binding Settings.Mutation}"/>
+        <Button Command="{Binding RunGaCommand}"
+                Content="Run"/>
+        <TextBlock Text="{Binding ResultFitness}"/>
+    </StackPanel>
     
 </UserControl>
