@@ -22,11 +22,21 @@ public static class DataReaderCsvHelper
                 var record = enumerable[index];
                 if (record.Qualifications is null)
                     throw new DataException(nameof(record));
+
+                if (record.PreferredMachineIds is null)
+                    throw new DataException(nameof(reader));
+                
+                if (record.PreferredDays is null)
+                    throw new DataException(nameof(reader));
+                
                 var person = new Person
                 {
                     Id = index,
                     Name = record.Name,
-                    Qualifications = new List<Qualification>()
+                    PreferenceDaysCount = record.DaysPreferenceCount,
+                    PreferredMachineIds = new List<int>(),
+                    Qualifications = new List<Qualification>(),
+                    PreferredDays = new List<int>()
                 };
 
                 var qualifications = record.Qualifications.Split('-');
@@ -34,6 +44,19 @@ public static class DataReaderCsvHelper
                 {
                     person.Qualifications.Add(Enum.Parse<Qualification>(qualification));
                 }
+                
+                var machines = record.PreferredMachineIds.Split('-');
+                foreach (var machineId in machines.Select(int.Parse))
+                {
+                    person.PreferredMachineIds.Add(machineId);
+                }
+                
+                var days = record.PreferredDays.Split('-');
+                foreach (var dayId in days.Select(int.Parse))
+                {
+                    person.PreferredDays.Add(dayId);
+                }
+                
                 people.Add(person);
             }
         }

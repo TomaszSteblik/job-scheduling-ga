@@ -1,7 +1,8 @@
 using GeneticAlgorithm.Abstraction;
 using GeneticAlgorithm.Models;
+using Serilog;
 
-namespace GeneticAlgorithm.Operators.Crossover;
+namespace GeneticAlgorithm.Infrastructure.Operators.Crossover;
 
 public class CrossPointDayCrossover : ICrossover
 {
@@ -31,7 +32,6 @@ public class CrossPointDayCrossover : ICrossover
                 offspringOne.Value[i] = selected.ElementAt(parentNumber).Value[i];
                 offspringTwo.Value[i] = selected.ElementAt(parentNumber+1).Value[i];
             }
-
             offsprings.Add(offspringOne);
             offsprings.Add(offspringTwo);
         }

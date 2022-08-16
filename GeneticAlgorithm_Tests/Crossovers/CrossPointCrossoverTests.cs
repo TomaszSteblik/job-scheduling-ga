@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using GeneticAlgorithm.Infrastructure.Operators.Crossover;
 using GeneticAlgorithm.Models;
-using GeneticAlgorithm.Operators.Crossover;
 using Moq;
+using Serilog;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -33,8 +33,10 @@ public class CrossPointCrossoverTests
             var days = parentOne.Value[i];
             for (var index = 0; index < days.Length; index++)
             {
-                var person = new Person();
-                person.Name = 2+i.ToString() + 2+index.ToString();
+                var person = new Person
+                {
+                    Name = 2+i.ToString() + 2+index
+                };
                 days[index] = person;
             }
         }

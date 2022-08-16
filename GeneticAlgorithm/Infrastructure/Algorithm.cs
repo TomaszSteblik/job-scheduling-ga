@@ -1,6 +1,8 @@
+using System.Diagnostics;
 using System.Globalization;
 using GeneticAlgorithm.Abstraction;
 using GeneticAlgorithm.Models;
+using Serilog;
 
 namespace GeneticAlgorithm.Infrastructure;
 
@@ -32,8 +34,9 @@ public class Algorithm
         for (int i = 0; i < _parameters.EpochsCount; i++)
         {
             //calculate fitness
-            Console.WriteLine($"EPOCH {i,3} AVG: {_population.GetAll().Average(x=>x.Fitness).ToString(CultureInfo.InvariantCulture)} MACHINES_REPEAT:{_population.GetAll().Max(x=>x.AnalyzeMultipleMachines())}" +
-                              $" POS_WRNG: {_population.GetAll().Max(x=>x.AnalyzeWrongPosition(_population.GetMachines()))}");
+            Log.Debug("EPOCH {Epoch,3} AVG: {Avg} PREF_MACH:{Repeat}" +
+                              " PREF_DAYS: {PositionWrong}", i,_population.GetAll().Average(x=>x.Fitness).ToString(CultureInfo.InvariantCulture),
+                _population.GetAll().Max(x=>x.AnalyzePreferredMachines()),_population.GetAll().Max(x=>x.AnalyzePreferredDays()));
 
             _population.RecalculateAll();
             //selection
@@ -49,7 +52,20 @@ public class Algorithm
         
         //calculate fitness
         _population.RecalculateAll();
+
+        var result = _population.GetAll().MinBy(x=>x.Fitness) ?? throw new InvalidOperationException("Empty population");
+        Log.Information("Result fitness: {Fitness}, pref machines: {PreferredMachine}, pref days: {PreferredDays}",
+            result.Fitness, result.AnalyzePreferredMachines(), result.AnalyzePreferredDays());
+
+        var workers = result.Value.SelectMany(x => x).Select(x => x).ToList();
+        var dic = workers.Select(x => new {Person = x, Count = workers.Count(z => z.Id == x.Id)});
+        var distinctBy = dic.DistinctBy(x => x.Person.Id);
+        foreach (var worker in distinctBy)
+        {
+            Log.Information("worker: {Worker}",worker);
+        }
+
         //return best 
-        return _population.GetAll().MinBy(x=>x.Fitness) ?? throw new InvalidOperationException("Empty population");  
+        return result;
     }
 }
