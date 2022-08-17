@@ -1,7 +1,7 @@
 using GeneticAlgorithm.Abstraction;
 using GeneticAlgorithm.Models;
 
-namespace GeneticAlgorithm.Operators.Selection;
+namespace GeneticAlgorithm.Infrastructure.Operators.Selection;
 
 public class ElitismSelection : ISelection
 {

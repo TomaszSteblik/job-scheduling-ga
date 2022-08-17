@@ -5,9 +5,9 @@ using GeneticAlgorithm.Abstraction;
 using GeneticAlgorithm.Infrastructure.Operators.Crossover;
 using GeneticAlgorithm.Infrastructure.Operators.Elimination;
 using GeneticAlgorithm.Infrastructure.Operators.Mutation;
+using GeneticAlgorithm.Infrastructure.Operators.Selection;
 using GeneticAlgorithm.Models;
 using GeneticAlgorithm.Models.Enums;
-using GeneticAlgorithm.Operators.Selection;
 using Serilog;
 
 namespace GeneticAlgorithm.Infrastructure.DependencyInjection;
