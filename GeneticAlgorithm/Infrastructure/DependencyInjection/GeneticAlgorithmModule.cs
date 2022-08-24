@@ -42,6 +42,10 @@ public class GeneticAlgorithmModule : Module
                 Crossover.CrossPointMachine => new CrossPointMachineCrossover(x.Resolve<Random>()),
                 Crossover.CrossPointDay =>  new CrossPointDayCrossover(x.Resolve<Random>()),
                 Crossover.CrossPointMixed => new CrossPointMixedCrossover(x.Resolve<Random>()),
+                Crossover.CrossPointImprovedMachine => new CrossPointImprovedMachineCrossover(x.Resolve<Random>(), 
+                    x.Resolve<IPopulation>()),
+                Crossover.CrossPointImprovedMixed => new CrossPointImprovedMixedCrossover(x.Resolve<Random>(), 
+                    x.Resolve<IPopulation>()),
                 _ => throw new DataException($"Unknown parameter: {nameof(Crossover)}")
             });
         
