@@ -66,8 +66,8 @@ public class RandomSwitchMutationCrossoverTests
     {
         return new Population(
             new []{
-                new Machine {Name = "Machine1",PersonelCount = 1,RequiredQualification = Qualification.Milling},
-                new Machine {Name = "Machine2",PersonelCount = 1,RequiredQualification = Qualification.Milling}
+                new Machine {Name = "Machine1",RequiredQualification = Qualification.Milling},
+                new Machine {Name = "Machine2",RequiredQualification = Qualification.Milling}
             },
             new []
             {

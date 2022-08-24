@@ -60,8 +60,8 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
                     }
                 }, new[]
                 {
-                    new Machine() {Name = "Machine1", PersonelCount = 1, RequiredQualification = Qualification.Milling},
-                    new Machine() {Name = "Machine2", PersonelCount = 1, RequiredQualification = Qualification.Sawing}
+                    new Machine() {Name = "Machine1", RequiredQualification = Qualification.Milling},
+                    new Machine() {Name = "Machine2", RequiredQualification = Qualification.Sawing}
                 },
                 Settings.PopulationSize));
             var container = builder.Build();
