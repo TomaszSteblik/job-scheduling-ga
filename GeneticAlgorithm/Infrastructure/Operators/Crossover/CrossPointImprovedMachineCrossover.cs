@@ -8,9 +8,11 @@ public class CrossPointImprovedMachineCrossover : ICrossover
     private readonly Random _random;
     private readonly IPopulation _population;
     private readonly IDictionary<Qualification, ICollection<Person>> _peopleByQualification;
+    private readonly ICrossover _machineCrossover;
 
     public CrossPointImprovedMachineCrossover(Random random, IPopulation population)
     {
+        _machineCrossover = new CrossPointMachineCrossover(random);
         _random = random;
         _population = population;
         _peopleByQualification = new Dictionary<Qualification, ICollection<Person>>();
@@ -21,52 +23,17 @@ public class CrossPointImprovedMachineCrossover : ICrossover
                 x.Qualifications != null && x.Qualifications.Contains(qualification)).ToArray();
             _peopleByQualification.Add(qualification, qualifiedPeople);
         }
-        
+
     }
+
     public Chromosome[] GenerateOffsprings(ICollection<Chromosome> selected)
     {
-        var offsprings = new List<Chromosome>();
-        for (var parentNumber = 0; parentNumber < selected.Count; parentNumber+=2)
-        {
-
-            var (offspringOne, offspringTwo) = 
-                GenerateChromosomePair(selected.ElementAt(parentNumber), 
-                    selected.ElementAt(parentNumber + 1));
-            
-            FixChromosome(offspringOne);
-            FixChromosome(offspringTwo);
-            
-            offsprings.Add(offspringOne);
-            offsprings.Add(offspringTwo);
-
-        }
-        return offsprings.ToArray();
-    }
-
-    private (Chromosome offspringOne, Chromosome offspringTwo) GenerateChromosomePair(Chromosome parentOne, Chromosome parentTwo)
-    {
-        var innerLength = parentOne.Value.First().Length;
-        var outerLength = parentOne.Value.Length;
-        var crossPoint = _random.Next(1, innerLength);
-        var offspringOne = new Chromosome(outerLength,innerLength);
-        var offspringTwo = new Chromosome(outerLength,innerLength);
-
-        for (var i = 0; i < outerLength; i++)
-        {
-            for (var j = 0; j < crossPoint; j++)
-            {
-                offspringOne.Value[i][j] = parentOne.Value[i][j];
-                offspringTwo.Value[i][j] = parentTwo.Value[i][j];
-            }
-            for (var j = crossPoint; j < innerLength; j++)
-            {
-                offspringOne.Value[i][j] = parentTwo.Value[i][j];
-                offspringTwo.Value[i][j] = parentOne.Value[i][j];
-            }
-            
-        }
+        var offsprings = _machineCrossover.GenerateOffsprings(selected);
         
-        return (offspringOne, offspringTwo);
+        foreach (var offspring in offsprings)
+            FixChromosome(offspring);
+        
+        return offsprings;
     }
 
     private void FixChromosome(Chromosome offspring)
@@ -92,8 +59,5 @@ public class CrossPointImprovedMachineCrossover : ICrossover
                         $"Not enough of qualified workers for {machineRequiredQualification}");
             }
         }
-        if(offspring.IsValid(_population.GetMachines()) is false)
-            Console.WriteLine();
-            
     }
 }
