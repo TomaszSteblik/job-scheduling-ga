@@ -9,4 +9,5 @@ public interface IPopulation
     void OrderByFitnessDesc();
     void Replace(int index, Chromosome chromosome);
     Machine[] GetMachines();
+    Person[] GetPeople();
 }

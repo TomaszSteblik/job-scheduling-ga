@@ -7,5 +7,7 @@ public enum Crossover
 {
     CrossPointMachine,
     CrossPointDay,
-    CrossPointMixed
+    CrossPointMixed,
+    CrossPointImprovedMachine,
+    CrossPointImprovedMixed
 }

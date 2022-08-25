@@ -8,7 +8,7 @@
   "Selection": "Elitism",
   "Elimination": "Elitism",
   "Mutation": "Random",
-  "Crossover": "CrossPointMixed",
+  "Crossover": "CrossPointImprovedMachine",
   "DataPathMachines": "Data/machines2.csv",
   "DataPathPersonel": "Data/personel2.csv"
 }

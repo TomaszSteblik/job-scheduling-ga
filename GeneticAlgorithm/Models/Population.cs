@@ -11,9 +11,11 @@ public class Population : IPopulation
 {
     private Chromosome[] Chromosomes { get; set; }
     private Machine[] Machines { get; set; }
+    private Person[] People { get; set; }
     
     public Population(Machine[] machines, Person[] people, int populationSize, Random random)
     {
+        People = people;
         Machines = machines;
         Chromosomes = new Chromosome[populationSize];
         for (int i = 0; i < populationSize; i++)
@@ -24,9 +26,9 @@ public class Population : IPopulation
                 for (int k = 0; k < Machines.Length; k++)
                 {
 
-                    var s = people.Where(x =>
+                    var qualifiedPeople = people.Where(x =>
                         x.Qualifications != null && x.Qualifications.Contains(Machines[k].RequiredQualification) && !Chromosomes[i].Value[j].Contains(x)).ToArray();
-                    Chromosomes[i].Value[j][k] = s[random.Next(s.Length)];
+                    Chromosomes[i].Value[j][k] = qualifiedPeople[random.Next(qualifiedPeople.Length)];
                 }
             }
         }
@@ -58,5 +60,10 @@ public class Population : IPopulation
     public Machine[] GetMachines()
     {
         return Machines;
+    }
+
+    public Person[] GetPeople()
+    {
+        return People;
     }
 }
