@@ -63,8 +63,9 @@ public class CrossPointImprovedMachineCrossover : ICrossover
                 offspringOne.Value[i][j] = parentTwo.Value[i][j];
                 offspringTwo.Value[i][j] = parentOne.Value[i][j];
             }
+            
         }
-
+        
         return (offspringOne, offspringTwo);
     }
 
@@ -74,20 +75,25 @@ public class CrossPointImprovedMachineCrossover : ICrossover
         {
             for (var j = 0; j < offspring.Value[i].Length; j++)
             {
-                var workerQualifications = offspring.Value[i][j].Qualifications;
-                var machineRequiredQualification = _population.GetMachines()[j].RequiredQualification;
-                if (workerQualifications != null && workerQualifications.Contains(machineRequiredQualification))
+                var count = offspring.Value[i].Count(x => x.Id == offspring.Value[i][j].Id);
+                if(count <= 1)
                     continue;
-
+                
+                var machineRequiredQualification = _population.GetMachines()[j].RequiredQualification;
+                
                 var qualifiedPeople = _peopleByQualification[machineRequiredQualification];
                 var unusedQualifiedPeople = qualifiedPeople
                     .Where(x => !offspring.Value[i].Contains(x))
                     .ToArray();
                 
                 offspring.Value[i][j] = unusedQualifiedPeople.Any() ? 
-                    unusedQualifiedPeople.ElementAt(_random.Next(qualifiedPeople.Count)) : 
-                    qualifiedPeople.ElementAt(_random.Next(qualifiedPeople.Count));
+                    unusedQualifiedPeople.ElementAt(_random.Next(unusedQualifiedPeople.Length)) : 
+                    throw new IndexOutOfRangeException(
+                        $"Not enough of qualified workers for {machineRequiredQualification}");
             }
         }
+        if(offspring.IsValid(_population.GetMachines()) is false)
+            Console.WriteLine();
+            
     }
 }
