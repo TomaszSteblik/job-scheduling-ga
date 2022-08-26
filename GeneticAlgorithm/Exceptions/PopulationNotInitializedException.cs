@@ -2,6 +2,7 @@ using System.Runtime.Serialization;
 
 namespace GeneticAlgorithm.Exceptions;
 
+[Serializable]
 public class PopulationNotInitializedException : Exception
 {
     public PopulationNotInitializedException() : base()
