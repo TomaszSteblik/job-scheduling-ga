@@ -18,13 +18,13 @@ public class ElitismElimination : IElimination
         var lowestFitnessCurrent = _population.GetAll().Max(x=>x.Fitness);
         foreach (var offspring in offsprings)
         {
-            offspring.RecalculateFitness(_population.GetMachines());
+            offspring.RecalculateFitness();
         }
         offsprings = offsprings.Where(x => x.IsValid(_population.GetMachines())).OrderBy(x=>x.Fitness).ToArray();
         Log.Debug("Valid chromosomes for elimination: {Count}",offsprings.Length);
         for (var i = 0; i < offsprings.Length; i++)
         {
-            offsprings[i].RecalculateFitness(_population.GetMachines());
+            offsprings[i].RecalculateFitness();
             if(offsprings[i].Fitness >= lowestFitnessCurrent)
                 continue;
             Log.Debug("ALMOST ELIMINATED");

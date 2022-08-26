@@ -30,18 +30,18 @@ public class RandomSwitchMutation : IMutation
         var dayIndexTwo = _random.Next(0, chromosome.Value.Length);
         var personIndexOne = _random.Next(0, chromosome.Value.First().Length);
         var personIndexTwo = _random.Next(0, chromosome.Value.First().Length);
-        chromosome.RecalculateFitness(_population.GetMachines());
+        chromosome.RecalculateFitness();
         var fitnessBefore = chromosome.Fitness;
         //swap here through deconstruction
         (chromosome.Value[dayIndexOne][personIndexOne], chromosome.Value[dayIndexTwo][personIndexTwo]) = 
             (chromosome.Value[dayIndexTwo][personIndexTwo], chromosome.Value[dayIndexOne][personIndexOne]);
-        chromosome.RecalculateFitness(_population.GetMachines());
+        chromosome.RecalculateFitness();
         var fitnessAfter = chromosome.Fitness;
         if (!chromosome.IsValid(_population.GetMachines()))
         {
             (chromosome.Value[dayIndexOne][personIndexOne], chromosome.Value[dayIndexTwo][personIndexTwo]) = 
                 (chromosome.Value[dayIndexTwo][personIndexTwo], chromosome.Value[dayIndexOne][personIndexOne]);
-            chromosome.RecalculateFitness(_population.GetMachines());
+            chromosome.RecalculateFitness();
             return;
         }
 
@@ -50,7 +50,7 @@ public class RandomSwitchMutation : IMutation
         
         (chromosome.Value[dayIndexOne][personIndexOne], chromosome.Value[dayIndexTwo][personIndexTwo]) = 
             (chromosome.Value[dayIndexTwo][personIndexTwo], chromosome.Value[dayIndexOne][personIndexOne]);
-        chromosome.RecalculateFitness(_population.GetMachines());
+        chromosome.RecalculateFitness();
         var fitnessCurrent = chromosome.Fitness;
         Log.Debug("Rolled back mutation fitness before: {FitnessBefore}, fitnessAfter: " +
                   "{FitnessAfter}, fitnessCurrent: {FitnessCurrent}",fitnessBefore,

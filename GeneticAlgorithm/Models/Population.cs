@@ -52,7 +52,7 @@ public class Population : IPopulation
         
         foreach (var chromosome in Chromosomes)
         {
-            chromosome.RecalculateFitness(Machines);
+            chromosome.RecalculateFitness();
         }
     }
 

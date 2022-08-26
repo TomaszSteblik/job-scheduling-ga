@@ -1,4 +1,5 @@
 using GeneticAlgorithm.Abstraction;
+using GeneticAlgorithm.Exceptions;
 using GeneticAlgorithm.Models;
 
 namespace GeneticAlgorithm.Infrastructure.Operators.Crossover;
@@ -57,16 +58,20 @@ public class CrossPointImprovedMachineCrossover : ICrossover
                     continue;
                 
                 var machineRequiredQualification = _population.GetMachines()[j].RequiredQualification;
+
+                if (_peopleByQualification == null)
+                    throw new PopulationNotInitializedException(nameof(_peopleByQualification));
                 
                 var qualifiedPeople = _peopleByQualification[machineRequiredQualification];
                 var unusedQualifiedPeople = qualifiedPeople
                     .Where(x => !offspring.Value[i].Contains(x))
                     .ToArray();
-                
+            
                 offspring.Value[i][j] = unusedQualifiedPeople.Any() ? 
                     unusedQualifiedPeople.ElementAt(_random.Next(unusedQualifiedPeople.Length)) : 
                     throw new IndexOutOfRangeException(
                         $"Not enough of qualified workers for {machineRequiredQualification}");
+                
             }
         }
     }
