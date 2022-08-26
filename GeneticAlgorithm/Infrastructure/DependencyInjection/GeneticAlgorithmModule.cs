@@ -14,27 +14,11 @@ namespace GeneticAlgorithm.Infrastructure.DependencyInjection;
 
 public class GeneticAlgorithmModule : Module
 {
-    public GeneticAlgorithmModule(Person[] people, Machine[] machines, int populationSize)
-    {
-        People = people;
-        Machines = machines;
-        PopulationSize = populationSize;
-    }
-
-    public Machine[] Machines { get; init; }
-    public Person[] People { get; init; }
-    public int PopulationSize { get; init; }
-
     protected override void Load(ContainerBuilder builder)
     {
         builder.RegisterInstance(Random.Shared);
 
-        builder.RegisterType<Population>().WithParameters(new []
-        {
-            new PositionalParameter(0,Machines),
-            new PositionalParameter(1, People),
-            new PositionalParameter(2,PopulationSize)
-        }).AsImplementedInterfaces().SingleInstance();
+        builder.RegisterType<Population>().AsImplementedInterfaces().SingleInstance();
         
         builder.Register<ICrossover>(x => x.Resolve<Parameters>().Crossover
             switch

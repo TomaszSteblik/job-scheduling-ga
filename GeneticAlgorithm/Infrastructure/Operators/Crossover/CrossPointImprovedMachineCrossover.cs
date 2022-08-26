@@ -7,7 +7,7 @@ public class CrossPointImprovedMachineCrossover : ICrossover
 {
     private readonly Random _random;
     private readonly IPopulation _population;
-    private readonly IDictionary<Qualification, ICollection<Person>> _peopleByQualification;
+    private IDictionary<Qualification, ICollection<Person>>? _peopleByQualification;
     private readonly ICrossover _machineCrossover;
 
     public CrossPointImprovedMachineCrossover(Random random, IPopulation population)
@@ -15,19 +15,29 @@ public class CrossPointImprovedMachineCrossover : ICrossover
         _machineCrossover = new CrossPointMachineCrossover(random);
         _random = random;
         _population = population;
+        CreatePeopleByQualificationIfNull();
+    }
+
+    private void CreatePeopleByQualificationIfNull()
+    {
+        var people = _population.GetPeople();
+        if(people is null)
+            return;
+        
         _peopleByQualification = new Dictionary<Qualification, ICollection<Person>>();
-        var people = population.GetPeople();
+
         foreach (var qualification in Enum.GetValues<Qualification>())
         {
             var qualifiedPeople = people.Where(x =>
                 x.Qualifications != null && x.Qualifications.Contains(qualification)).ToArray();
             _peopleByQualification.Add(qualification, qualifiedPeople);
         }
-
     }
 
     public Chromosome[] GenerateOffsprings(ICollection<Chromosome> selected)
     {
+        CreatePeopleByQualificationIfNull();
+        
         var offsprings = _machineCrossover.GenerateOffsprings(selected);
         
         foreach (var offspring in offsprings)

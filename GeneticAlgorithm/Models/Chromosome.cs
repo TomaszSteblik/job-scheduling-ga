@@ -21,7 +21,7 @@ public class Chromosome
         _positionsCount = daysCount * machinesCount;
     }
 
-    internal void RecalculateFitness(Machine[] machines)
+    internal void RecalculateFitness(Machine[]? machines)
     {
         Fitness = 0;
         RecalculateFitnessByDaysWorking();
@@ -109,7 +109,7 @@ public class Chromosome
         return fitness;
     }
     
-    internal int AnalyzeWrongPosition(Machine[] machines)
+    internal int AnalyzeWrongPosition(Machine[]? machines)
     {
         var fitness = 0;
         for (var day = 0; day < Value.Length; day++)
@@ -128,7 +128,7 @@ public class Chromosome
         return fitness;
     }
 
-    public bool IsValid(Machine[] machines)
+    public bool IsValid(Machine[]? machines)
     {
         return AnalyzeWrongPosition(machines) == 0 && AnalyzeMultipleMachines() == 0;
     }

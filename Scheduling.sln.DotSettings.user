@@ -9,6 +9,7 @@
       &lt;TestId&gt;xUnit::074FD090-EE62-4327-9AA9-A2D081CCA76E::net6.0::GeneticAlgorithm_Tests.Models.ChromosomeTests.AnalyzePreferredDays_CorrectlyPlaced2Positions_Returns2&lt;/TestId&gt;
       &lt;TestId&gt;xUnit::074FD090-EE62-4327-9AA9-A2D081CCA76E::net6.0::GeneticAlgorithm_Tests.Models.ChromosomeTests.AnalyzePreferredDays_PeopleHaveNoPreferredDays_Returns0&lt;/TestId&gt;
       &lt;TestId&gt;xUnit::074FD090-EE62-4327-9AA9-A2D081CCA76E::net6.0::GeneticAlgorithm_Tests.Models.ChromosomeTests&lt;/TestId&gt;
+      &lt;TestId&gt;xUnit::074FD090-EE62-4327-9AA9-A2D081CCA76E::net6.0::GeneticAlgorithm_Tests.Mutations.RandomSwitchMutationCrossoverTests&lt;/TestId&gt;
     &lt;/TestAncestor&gt;
   &lt;/Or&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
