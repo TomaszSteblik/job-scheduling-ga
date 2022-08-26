@@ -33,7 +33,6 @@ public class Algorithm
         //initialiaze
         _population.InitializePopulation(machines, people, populationSize);
         
-        
         for (int i = 0; i < _parameters.EpochsCount; i++)
         {
             //calculate fitness

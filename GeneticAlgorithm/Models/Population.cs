@@ -1,9 +1,5 @@
-using System.Data;
-using System.Globalization;
-using System.Text.Json.Serialization;
-using CsvHelper;
-using CsvHelper.Configuration.Attributes;
 using GeneticAlgorithm.Abstraction;
+using GeneticAlgorithm.Exceptions;
 
 namespace GeneticAlgorithm.Models;
 
@@ -12,6 +8,8 @@ public class Population : IPopulation
     private Chromosome[]? Chromosomes { get; set; }
     private Machine[]? Machines { get; set; }
     private Person[]? People { get; set; }
+    public bool IsInitialized => Chromosomes is not null || Machines is not null || People is not null;
+    
     private readonly Random _random;
     
     public Population(Random random)
@@ -40,13 +38,18 @@ public class Population : IPopulation
         }
     }
 
-    public Chromosome[]? GetAll()
+    public Chromosome[] GetAll()
     {
+        if (Chromosomes is null)
+            throw new PopulationNotInitializedException(nameof(Chromosomes));
         return Chromosomes;
     }
 
     public void RecalculateAll()
     {
+        if (Chromosomes is null)
+            throw new PopulationNotInitializedException(nameof(Chromosomes));
+        
         foreach (var chromosome in Chromosomes)
         {
             chromosome.RecalculateFitness(Machines);
@@ -55,21 +58,33 @@ public class Population : IPopulation
 
     public void OrderByFitnessDesc()
     {
+        if (Chromosomes is null)
+            throw new PopulationNotInitializedException(nameof(Chromosomes));
+        
         Chromosomes = Chromosomes.OrderByDescending(x => x.Fitness).ToArray();
     }
 
     public void Replace(int index, Chromosome chromosome)
     {
+        if (Chromosomes is null)
+            throw new PopulationNotInitializedException(nameof(Chromosomes));
+        
         Chromosomes[index] = chromosome;
     }
 
-    public Machine[]? GetMachines()
+    public Machine[] GetMachines()
     {
+        if (Machines is null)
+            throw new PopulationNotInitializedException(nameof(Machines));
+        
         return Machines;
     }
 
-    public Person[]? GetPeople()
+    public Person[] GetPeople()
     {
+        if (People is null)
+            throw new PopulationNotInitializedException(nameof(People));
+
         return People;
     }
 }
