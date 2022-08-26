@@ -42,7 +42,14 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
             var builder = new ContainerBuilder();
             var param = mapper.Map<Parameters>(Settings);
             builder.RegisterInstance(param).As<Parameters>();
-            builder.RegisterModule(new GeneticAlgorithmModule(new[]
+            builder.RegisterModule(new GeneticAlgorithmModule());
+            var container = builder.Build();
+            var result = container.Resolve<Algorithm>().Run(new[]
+                {
+                    new Machine() {Name = "Machine1", RequiredQualification = Qualification.Milling},
+                    new Machine() {Name = "Machine2", RequiredQualification = Qualification.Sawing}
+                },
+                new[]
                 {
                     new Person()
                     {
@@ -58,14 +65,8 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
                         Surname = "Kowalski",
                         Qualifications = new List<Qualification> {Qualification.Sawing}
                     }
-                }, new[]
-                {
-                    new Machine() {Name = "Machine1", RequiredQualification = Qualification.Milling},
-                    new Machine() {Name = "Machine2", RequiredQualification = Qualification.Sawing}
                 },
-                Settings.PopulationSize));
-            var container = builder.Build();
-            var result = container.Resolve<Algorithm>().Run();
+                Settings.PopulationSize);
             ResultFitness = result.Fitness;
         });
     }

@@ -30,10 +30,10 @@ internal static class Program
         builder.Register<Parameters>(x=> parameters);
         var machines = GetMachinesFromCsv(parameters.DataPathMachines);
         var people = GetPeopleFromCsv(parameters.DataPathPersonel);
-        builder.RegisterModule(new GeneticAlgorithmModule(people, machines, parameters.PopulationSize));
+        builder.RegisterModule(new GeneticAlgorithmModule());
         Container = builder.Build();
         
         var z = Container.Resolve<Algorithm>();
-        z.Run();
+        z.Run(machines, people, parameters.PopulationSize);
     }
 }

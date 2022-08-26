@@ -7,7 +7,7 @@ namespace GeneticAlgorithm.Models;
 public class Chromosome
 {
     public Person[][] Value { get; set; }
-    public double Fitness { get; set; }
+    public double Fitness { get; private set; }
     private readonly int _positionsCount;
 
     public Chromosome(int daysCount, int machinesCount)
@@ -21,7 +21,7 @@ public class Chromosome
         _positionsCount = daysCount * machinesCount;
     }
 
-    internal void RecalculateFitness(Machine[] machines)
+    internal void RecalculateFitness()
     {
         Fitness = 0;
         RecalculateFitnessByDaysWorking();

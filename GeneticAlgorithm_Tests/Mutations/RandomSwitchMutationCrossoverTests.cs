@@ -64,7 +64,8 @@ public class RandomSwitchMutationCrossoverTests
 
     private static Population GenerateMockPopulation(int size, Random random)
     {
-        return new Population(
+        var mockPopulation = new Population(random);
+        mockPopulation.InitializePopulation(
             new []{
                 new Machine {Name = "Machine1",RequiredQualification = Qualification.Milling},
                 new Machine {Name = "Machine2",RequiredQualification = Qualification.Milling}
@@ -78,8 +79,8 @@ public class RandomSwitchMutationCrossoverTests
                 new Person(){Id = 3,Name = "Person3", Surname = "Kowalski3", PreferenceDaysCount = 20,
                     PreferredMachineIds = new[] {0},Qualifications = new List<Qualification>() {Qualification.Milling}},
             },
-            size,
-            random);
+            size);
+        return mockPopulation;
     }
     
 }
