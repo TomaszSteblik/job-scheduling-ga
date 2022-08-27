@@ -140,6 +140,10 @@ workflows:
           requires:
             - tests
       - zip:
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - build-mac
             - build-win
@@ -151,6 +155,10 @@ workflows:
             - build-linux
       - publish-github-release:
           context: GITHUB_CREDS
+          filters:
+            branches:
+              only:
+                - master
           requires:
               - zip
 
