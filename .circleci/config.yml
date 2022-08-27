@@ -120,7 +120,8 @@ jobs:
     steps:
         - checkout
         - run: |
-            dotnet run --project ConsoleRunner/ConsoleRunner.csproj
+            cd ConsoleRunner
+            dotnet run
             
       
 workflows:
