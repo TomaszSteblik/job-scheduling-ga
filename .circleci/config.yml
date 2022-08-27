@@ -116,11 +116,11 @@ jobs:
           
   console-runner-run:
     executor: net-executor6
-    working_directory: ~/project/ConsoleRunner
+    working_directory: ~/project
     steps:
         - checkout
         - run: |
-            dotnet run
+            dotnet run --project ConsoleRunner/ConsoleRunner.csproj
             
       
 workflows:
