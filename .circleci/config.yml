@@ -113,6 +113,15 @@ jobs:
           dotnet build ~/project/Scheduling.sln
           dotnet-coverage collect 'dotnet test' -f xml  -o 'coverage.xml'
           dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
+          
+  console-runner-run:
+    executor: net-executor6
+    working_directory: ~/project
+    steps:
+        - checkout
+        - run: |
+            dotnet run --project ConsoleRunner/ConsoleRunner.csproj
+            
       
 workflows:
   commit:
@@ -130,6 +139,11 @@ workflows:
           requires:
             - tests
       - zip:
+          requires:
+            - build-mac
+            - build-win
+            - build-linux
+      - console-runner-run:
           requires:
             - build-mac
             - build-win
