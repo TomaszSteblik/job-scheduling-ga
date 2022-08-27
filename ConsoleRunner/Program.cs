@@ -22,7 +22,7 @@ internal static class Program
             .MinimumLevel.Debug()
             .CreateLogger();
         Log.Logger = log;
-        var stream = new FileStream("/Users/tsteblik/RiderProjects/Scheduling/ConsoleRunner/Data/parameters.json", FileMode.Open);
+        var stream = new FileStream("Data/parameters.json", FileMode.Open);
         var parameters = await JsonSerializer.DeserializeAsync<Parameters>(stream);
         if (parameters is null)
             throw new DataException("Invalid parameters format");
