@@ -1,6 +1,7 @@
 using GeneticAlgorithm.Abstraction;
 using GeneticAlgorithm.Exceptions;
 using GeneticAlgorithm.Models;
+using Serilog;
 
 namespace GeneticAlgorithm.Infrastructure.Operators.Crossover;
 
@@ -21,18 +22,24 @@ public class CrossPointImprovedMachineCrossover : ICrossover
 
     private void CreatePeopleByQualificationIfNull()
     {
-        var people = _population.GetPeople();
-        if(people is null)
-            return;
-        
-        _peopleByQualification = new Dictionary<Qualification, ICollection<Person>>();
-
-        foreach (var qualification in Enum.GetValues<Qualification>())
+        try
         {
-            var qualifiedPeople = people.Where(x =>
-                x.Qualifications != null && x.Qualifications.Contains(qualification)).ToArray();
-            _peopleByQualification.Add(qualification, qualifiedPeople);
+            var people = _population.GetPeople();
+            
+            _peopleByQualification = new Dictionary<Qualification, ICollection<Person>>();
+
+            foreach (var qualification in Enum.GetValues<Qualification>())
+            {
+                var qualifiedPeople = people.Where(x =>
+                    x.Qualifications != null && x.Qualifications.Contains(qualification)).ToArray();
+                _peopleByQualification.Add(qualification, qualifiedPeople);
+            }
         }
+        catch (Exception e)
+        {
+            Log.Debug("Failed to create _peopleByQualification: {Exception}", e.Message);
+        }
+        
     }
 
     public Chromosome[] GenerateOffsprings(ICollection<Chromosome> selected)
