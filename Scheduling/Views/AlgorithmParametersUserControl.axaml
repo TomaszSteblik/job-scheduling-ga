@@ -9,8 +9,10 @@
     <Design.DataContext>
         <viewModels:AlgorithmParametersViewModel/>
     </Design.DataContext>
-    
+    <ScrollViewer>
+
     <StackPanel>
+        
         <TextBox Text="{Binding Settings.PopulationSize}"/>
         <TextBox Text="{Binding Settings.EpochsCount}"/>
         <TextBox Text="{Binding Settings.MutationProbability}"/>
@@ -28,9 +30,10 @@
                 Content="Run"/>
         <TextBlock Text="{Binding Result.Fitness}"/>
         
-        <DataGrid Items="{Binding Values}" AutoGenerateColumns="True">
-        </DataGrid>
+        <DataGrid Items="{Binding Values}" AutoGenerateColumns="True"/>
+
         
     </StackPanel>
-    
+    </ScrollViewer>
+
 </UserControl>
