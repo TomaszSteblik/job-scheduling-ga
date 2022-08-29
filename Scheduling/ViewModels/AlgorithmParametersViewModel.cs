@@ -26,9 +26,9 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
     public static IEnumerable<Mutation> MutationValues => Enum.GetValues<Mutation>();
     public ReactiveCommand<Unit, Unit> RunGaCommand { get; }
     [Reactive] 
-    public Result Result { get; private set; }
+    public double? Result { get; private set; }
     [Reactive] 
-    public IEnumerable<object> Values { get; set; }
+    public IEnumerable<object>? Values { get; set; }
 
     public AlgorithmParametersViewModel(AlgorithmSettings settings, IMapper mapper)
     {
@@ -58,7 +58,7 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
             MockPeople(),
             Settings.PopulationSize);
         
-        Result = result;
+        Result = result.Chromosome.Fitness;
 
         var scheduledDays = _mapper.Map<AlgorithmResult>(result).Schedule;
 
