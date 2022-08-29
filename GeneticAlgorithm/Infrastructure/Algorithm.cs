@@ -28,7 +28,7 @@ public class Algorithm
         _parameters = parameters;
     }
 
-    public Chromosome Run(Machine[] machines, Person[] people, int populationSize)
+    public Result Run(Machine[] machines, Person[] people, int populationSize)
     {
         //initialiaze
         _population.InitializePopulation(machines, people, populationSize);
@@ -68,6 +68,6 @@ public class Algorithm
         }
 
         //return best 
-        return result;
+        return new Result(result, _parameters, people, _population.GetMachines());
     }
 }
