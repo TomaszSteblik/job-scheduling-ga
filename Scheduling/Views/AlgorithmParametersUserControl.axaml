@@ -28,7 +28,7 @@
                   SelectedItem="{Binding Settings.Mutation}"/>
         <Button Command="{Binding RunGaCommand}"
                 Content="Run"/>
-        <TextBlock Text="{Binding Result.Chromosome.Fitness}"/>
+        <TextBlock Text="{Binding Result}"/>
         
         <DataGrid Items="{Binding Values}" AutoGenerateColumns="True"/>
 

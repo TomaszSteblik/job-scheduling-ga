@@ -62,10 +62,12 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
 
         var scheduledDays = _mapper.Map<AlgorithmResult>(result).Schedule;
 
+        //TODO: Make application exception
         Values = scheduledDays ?? throw new Exception("Empty result schedule");
         return Task.CompletedTask;
     }
 
+    #region Mock
     //TEMPORARY METHOD
     private static Machine[] MockMachines()
     {
@@ -107,4 +109,6 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
         settings.EpochsCount = 100;
         settings.MutationProbability = 0.01;
     }
+    #endregion
+    
 }
