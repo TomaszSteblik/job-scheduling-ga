@@ -8,6 +8,8 @@
         <entry key="Scheduling/Views/AlgorithmParametersControl.axaml" value="Scheduling/Scheduling.csproj" />
         <entry key="Scheduling/Views/AlgorithmParametersUserControl.axaml" value="Scheduling/Scheduling.csproj" />
         <entry key="Scheduling/Views/MainWindow.axaml" value="Scheduling/Scheduling.csproj" />
+        <entry key="Scheduling/Views/ResultsWindow.axaml" value="Scheduling/Scheduling.csproj" />
+        <entry key="Scheduling/Views/ScheduleUserControl.axaml" value="Scheduling/Scheduling.csproj" />
         <entry key="Scheduling/Views/ScheduledDayUserControl.axaml" value="Scheduling/Scheduling.csproj" />
       </map>
     </option>

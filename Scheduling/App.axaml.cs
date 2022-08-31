@@ -1,10 +1,8 @@
-using Autofac;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Scheduling.ViewModels;
 using Scheduling.Views;
-using Splat.Autofac;
 
 namespace Scheduling
 {
@@ -21,7 +19,7 @@ namespace Scheduling
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    //DataContext = new MainWindowViewModel(),
+                    DataContext = new MainWindowViewModel(),
                 };
             }
 

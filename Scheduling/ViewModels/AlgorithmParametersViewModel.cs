@@ -13,6 +13,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Scheduling.Exceptions;
 using Scheduling.Models;
+using Scheduling.Views;
 
 namespace Scheduling.ViewModels;
 
@@ -26,10 +27,6 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
     public static IEnumerable<Elimination> EliminationValues => Enum.GetValues<Elimination>();
     public static IEnumerable<Mutation> MutationValues => Enum.GetValues<Mutation>();
     public ReactiveCommand<Unit, Unit> RunGaCommand { get; }
-    [Reactive] 
-    public double? Result { get; private set; }
-    [Reactive] 
-    public IEnumerable<object>? Values { get; set; }
 
     public AlgorithmParametersViewModel(AlgorithmSettings settings, IMapper mapper)
     {
@@ -59,11 +56,17 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
             MockPeople(),
             Settings.PopulationSize);
         
-        Result = result.Chromosome.Fitness;
+        var algorithmResult = _mapper.Map<AlgorithmResult>(result);
 
-        var scheduledDays = _mapper.Map<AlgorithmResult>(result).Schedule;
+        if (algorithmResult == null)
+            throw new EmptyResultException();
 
-        Values = scheduledDays ?? throw new EmptyResultException();
+        var window = new ResultsWindow()
+        {
+            DataContext = new ResultsViewModel(algorithmResult)
+        };
+        window.Show();
+        
         return Task.CompletedTask;
     }
 
