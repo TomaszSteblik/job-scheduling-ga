@@ -12,8 +12,12 @@ jobs:
       - checkout
       - run: |
           dotnet test --logger 'trx;LogFileName=TestResults.trx'
+      - run: |
+          dotnet tool install -g trx2junit
+          export PATH="$PATH:/root/.dotnet/tools"
+          trx2junit GeneticAlgorithm_Tests/TestResults/*.trx
       - store_test_results:
-          path: GeneticAlgorithm_Tests/TestResults/TestResults.trx
+          path: GeneticAlgorithm_Tests/TestResults
 
   build-mac:
 
@@ -113,6 +117,16 @@ jobs:
           dotnet build ~/project/Scheduling.sln
           dotnet-coverage collect 'dotnet test' -f xml  -o 'coverage.xml'
           dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
+          
+  console-runner-run:
+    executor: net-executor6
+    working_directory: ~/project
+    steps:
+        - checkout
+        - run: |
+            cd ConsoleRunner
+            dotnet run
+            
       
 workflows:
   commit:
@@ -130,12 +144,25 @@ workflows:
           requires:
             - tests
       - zip:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - build-mac
+            - build-win
+            - build-linux
+      - console-runner-run:
           requires:
             - build-mac
             - build-win
             - build-linux
       - publish-github-release:
           context: GITHUB_CREDS
+          filters:
+            branches:
+              only:
+                - master
           requires:
               - zip
 

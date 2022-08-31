@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Scheduling.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Scheduling.Views.ScheduleUserControl">
+    
+    <Design.DataContext>
+        <viewModels:ScheduleViewModel/>
+    </Design.DataContext>
+    
+    <ScrollViewer>
+        <Grid ColumnDefinitions="*" RowDefinitions="20,*">
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center"
+                       Text="{Binding ScheduleResult.Fitness, FallbackValue='N/A'}"/>
+            <DataGrid Grid.Row="1" 
+                      Items="{Binding ScheduleResult.Schedule, FallbackValue={}}" 
+                      AutoGenerateColumns="True"/>
+        </Grid>
+    </ScrollViewer>
+    
+</UserControl>
