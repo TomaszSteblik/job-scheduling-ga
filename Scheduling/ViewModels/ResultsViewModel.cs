@@ -10,7 +10,7 @@ public class ResultsViewModel : ViewModelBase
 
     public ResultsViewModel(AlgorithmResult algorithmResult)
     {
-        ScheduleViewModel = Locator.Current.GetService<ScheduleViewModel>();
+        ScheduleViewModel = Locator.Current.GetService<ScheduleViewModel>() ?? new ScheduleViewModel();
         ScheduleViewModel.ScheduleResult = algorithmResult;
     }
 }
