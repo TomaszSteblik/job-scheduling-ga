@@ -11,6 +11,7 @@ using GeneticAlgorithm.Models;
 using GeneticAlgorithm.Models.Enums;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Scheduling.Exceptions;
 using Scheduling.Models;
 
 namespace Scheduling.ViewModels;
@@ -62,8 +63,7 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
 
         var scheduledDays = _mapper.Map<AlgorithmResult>(result).Schedule;
 
-        //TODO: Make application exception
-        Values = scheduledDays ?? throw new Exception("Empty result schedule");
+        Values = scheduledDays ?? throw new EmptyResultException();
         return Task.CompletedTask;
     }
 

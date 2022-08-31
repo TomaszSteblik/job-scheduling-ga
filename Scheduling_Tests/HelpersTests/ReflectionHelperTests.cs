@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Reflection.Emit;
+using Scheduling.Exceptions;
 using Scheduling.Helpers;
 
 namespace Scheduling_Tests.HelpersTests;
@@ -47,7 +48,7 @@ public class ReflectionHelperTests
         };
         var propNames = new[] {"Test1","Test2"};
         //Act & Assert
-        Assert.Throws<Exception>(() => ReflectionHelper.GenerateTypeList(values, propNames, assembly, typeof(TestType))) ;
+        Assert.Throws<ReflectionTypeInstanceGenerationException>(() => ReflectionHelper.GenerateTypeList(values, propNames, assembly, typeof(TestType))) ;
     }
 
     [Fact]
@@ -63,7 +64,7 @@ public class ReflectionHelperTests
         };
         var propNames = new[] {"Test1","Test2"};
         //Act 
-        var exception = Assert.Throws<Exception>(() => ReflectionHelper.GenerateTypeList(values, propNames, assembly, typeof(TestType))) ;
+        var exception = Assert.Throws<ReflectionTypeInstanceGenerationException>(() => ReflectionHelper.GenerateTypeList(values, propNames, assembly, typeof(TestType))) ;
         //Assert
         Assert.Equal("Asymmetric values and prop names. Every prop name need matching value",exception.Message);
     }
@@ -142,6 +143,6 @@ public class ReflectionHelperTests
 
 public class TestType
 {
-    public string Test1 { get; set; }
-    public string Test2 { get; set; }
+    public string? Test1 { get; set; }
+    public string? Test2 { get; set; }
 }

@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
+using Scheduling.Exceptions;
 
 namespace Scheduling.Helpers;
 
-//TODO: Make application exceptions
 public static class ReflectionHelper
 {
     public static AssemblyBuilder GenerateTemporaryAssembly(string assemblyName)
@@ -41,7 +41,7 @@ public static class ReflectionHelper
             propertyBuilder.SetSetMethod(setter);
         }
 
-        var type = typeBuilder.CreateType() ?? throw new Exception("Creating temporary type failed during mapping");
+        var type = typeBuilder.CreateType() ?? throw new ReflectionTypeGenerationException("Creating temporary type failed during mapping");
         return type;
     }
 
@@ -83,10 +83,10 @@ public static class ReflectionHelper
         foreach (var value in values)
         {
             if (value.Length != propNames.Length)
-                throw new Exception("Asymmetric values and prop names. Every prop name need matching value");
+                throw new ReflectionTypeInstanceGenerationException("Asymmetric values and prop names. Every prop name need matching value");
             var obj = asmBuilder.CreateInstance(type.FullName ??
-                                                throw new Exception("Missing namespace during creation "))
-                      ?? throw new Exception("Failed to create the temporary the object");
+                                                throw new ReflectionTypeInstanceGenerationException("Missing namespace during creation "))
+                      ?? throw new ReflectionTypeInstanceGenerationException("Failed to create the temporary the object");
             for (var i = 0; i < propNames.Length; i++)
             {
                 var name = propNames[i];
