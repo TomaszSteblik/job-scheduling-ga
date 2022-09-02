@@ -1,4 +1,5 @@
 using System.Reflection;
+using Data.Extensions;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,19 +13,11 @@ internal class ScheduleContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var dbFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "Scheduling");
-        if (!Directory.Exists(dbFilePath))
-            Directory.CreateDirectory(dbFilePath);
-        
-        var dataSource = Path.Combine(dbFilePath, "ScheduleDB.db");
-
-        optionsBuilder.UseSqlite($"Data Source={dataSource};");
+        optionsBuilder.UseUserSqlite();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(ScheduleContext)) ?? throw new Exception("TBD"));
     }
-
 }
