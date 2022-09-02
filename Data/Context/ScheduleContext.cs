@@ -12,7 +12,14 @@ internal class ScheduleContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=ScheduleDB.db;");
+        var dbFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "Scheduling");
+        if (!Directory.Exists(dbFilePath))
+            Directory.CreateDirectory(dbFilePath);
+        
+        var dataSource = Path.Combine(dbFilePath, "ScheduleDB.db");
+
+        optionsBuilder.UseSqlite($"Data Source={dataSource};");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
