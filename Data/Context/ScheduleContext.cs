@@ -7,10 +7,10 @@ namespace Data.Context;
 
 internal class ScheduleContext : DbContext
 {
-    public DbSet<Machine> Machines { get; set; }
-    public DbSet<Person> People { get; set; }
-    public DbSet<Qualification> Qualifications { get; set; }
-    
+    public DbSet<Machine> Machines { get; set; } = null!;
+    public DbSet<Person> People { get; set; } = null!;
+    public DbSet<Qualification> Qualifications { get; set; } = null!;
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseUserSqlite();
