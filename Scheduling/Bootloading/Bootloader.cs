@@ -1,6 +1,7 @@
 using Autofac;
 using Avalonia.ReactiveUI;
 using Avalonia.Threading;
+using Data.DependencyInjection;
 using ReactiveUI;
 using Splat;
 using Splat.Autofac;
@@ -17,7 +18,8 @@ internal static class Bootloader
         autofacResolver.InitializeReactiveUI();
         Locator.SetLocator(autofacResolver);
         InitializeLocator();
-        builder.RegisterModule(new SchedulingModule());
+        builder.RegisterModule<SchedulingModule>();
+        builder.RegisterModule<DataModule>();
         builder.RegisterViewModels();
         builder.AddAutoMapper();
         RegisterAvalonia();
