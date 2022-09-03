@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using System;
+using System.Threading.Tasks;
 using Scheduling.Bootloading;
 
 namespace Scheduling;
@@ -8,9 +9,9 @@ internal static class Program
 {
     
     [STAThread]
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
-        Bootloader.Setup();
+        await Bootloader.Setup();
         BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
     }
