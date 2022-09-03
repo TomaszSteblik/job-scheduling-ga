@@ -1,10 +1,10 @@
-using System.Collections;
 using Data.Dtos.Update;
 using AutoMapper;
 using Data.Context;
 using Data.Dtos.Read;
 using Data.Dtos.Write;
 using Data.Entities;
+using Data.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories;
@@ -28,8 +28,8 @@ internal class PeopleRepository : IPeopleRepository
 
     public async Task<PersonRead> GetPerson(int id)
     {
-        var person = await _context.People.FirstOrDefaultAsync(x => x.Id == id) ?? 
-                     throw new Exception("Not found");
+        var person = await _context.People.FirstOrDefaultAsync(x => x.Id == id) ??
+                     throw new ItemNotFoundException(nameof(Person), id);
         return _mapper.Map<PersonRead>(person);
     }
 
@@ -41,7 +41,8 @@ internal class PeopleRepository : IPeopleRepository
 
     public async Task<bool> UpdatePerson(PersonUpdate person)
     {
-        var current = await _context.People.FindAsync(person.Id) ?? throw new Exception("not found");
+        var current = await _context.People.FindAsync(person.Id) ??
+                      throw new ItemNotFoundException(nameof(Person), person.Id);
         current.Qualifications = _mapper.Map<ICollection<Qualification>>(person.Qualifications);
         current.FirstName = person.FirstName;
         current.LastName = person.LastName;

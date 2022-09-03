@@ -5,6 +5,7 @@ using Data.Dtos.Read;
 using Data.Dtos.Update;
 using Data.Dtos.Write;
 using Data.Entities;
+using Data.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories;
@@ -28,8 +29,8 @@ internal class QualificationsRepository : IQualificationsRepository
 
     public async Task<QualificationRead> GetQualification(int id)
     {
-        var qualification = await _context.Qualifications.FirstOrDefaultAsync(x => x.Id == id) ?? 
-                                  throw new Exception("Not found exception");
+        var qualification = await _context.Qualifications.FirstOrDefaultAsync(x => x.Id == id) ??
+                                  throw new ItemNotFoundException(nameof(Qualification), id);
         return _mapper.Map<QualificationRead>(qualification);
     }
 
@@ -41,7 +42,8 @@ internal class QualificationsRepository : IQualificationsRepository
 
     public async Task<bool> UpdateQualification(QualificationUpdate qualification)
     {
-        var current = await _context.Qualifications.FindAsync(qualification.Id) ?? throw new Exception("not found");
+        var current = await _context.Qualifications.FindAsync(qualification.Id) ??
+                      throw new ItemNotFoundException(nameof(Qualification), qualification.Id);
         current.Name = qualification.Name;
         return await _context.SaveChangesAsync() == 1;
     }

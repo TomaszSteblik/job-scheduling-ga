@@ -4,6 +4,7 @@ using Data.Dtos.Read;
 using Data.Dtos.Update;
 using Data.Dtos.Write;
 using Data.Entities;
+using Data.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories;
@@ -28,7 +29,8 @@ internal class MachinesRepository : IMachinesRepository
 
     public async Task<MachineRead> GetMachine(int id)
     {
-        var machine = await _context.Machines.FindAsync(id) ?? throw new Exception("Not found");
+        var machine = await _context.Machines.FindAsync(id) ??
+                      throw new ItemNotFoundException(nameof(Machine), id);
         return _mapper.Map<MachineRead>(machine);
     }
 
@@ -42,7 +44,7 @@ internal class MachinesRepository : IMachinesRepository
     {
         var current = await _context.Machines.FindAsync(machine.Id);
         if (current is null)
-            throw new Exception("Not found");
+            throw new ItemNotFoundException(nameof(Machine), machine.Id);
 
         current.Name = machine.Name;
         current.RequiredQualification = _mapper.Map<Qualification>(machine.RequiredQualification);
