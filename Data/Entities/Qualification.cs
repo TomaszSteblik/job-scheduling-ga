@@ -1,6 +1,6 @@
-namespace Data.Models;
+namespace Data.Entities;
 
-public class Qualification
+internal class Qualification
 {
     public int Id { get; set; }
     public string Name { get; set; }

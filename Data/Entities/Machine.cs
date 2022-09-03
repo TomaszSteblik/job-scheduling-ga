@@ -1,6 +1,6 @@
-namespace Data.Models;
+namespace Data.Entities;
 
-public class Machine
+internal class Machine
 {
     public int Id { get; set; }
     public string Name { get; set; }

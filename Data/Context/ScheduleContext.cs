@@ -1,6 +1,6 @@
 using System.Reflection;
+using Data.Entities;
 using Data.Extensions;
-using Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Context;

@@ -1,11 +1,13 @@
-using Data.Models;
+using Data.Dtos.Read;
+using Data.Dtos.Update;
+using Data.Dtos.Write;
 
 namespace Data.Repositories;
 
 public interface IQualificationsRepository
 {
-    Task<bool> AddQualification(Qualification qualification);
-    Task<Qualification> GetQualification(int id);
-    Task<IEnumerable<Qualification>> GetQualifications();
-    Task<bool> UpdateQualification(Qualification qualification);
+    Task<bool> AddQualification(QualificationWrite qualification);
+    Task<QualificationRead> GetQualification(int id);
+    Task<IEnumerable<QualificationRead>> GetQualifications();
+    Task<bool> UpdateQualification(QualificationUpdate qualification);
 }

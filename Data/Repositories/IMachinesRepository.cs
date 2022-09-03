@@ -1,11 +1,13 @@
-using Data.Models;
+using Data.Dtos.Read;
+using Data.Dtos.Update;
+using Data.Dtos.Write;
 
 namespace Data.Repositories;
 
 public interface IMachinesRepository
 {
-    Task<bool> AddMachine(Machine machine);
-    Task<Machine> GetMachine(int id);
-    Task<ICollection<Machine>> GetMachines();
-    Task<bool> UpdateMachine(Machine machine);
+    Task<bool> AddMachine(MachineWrite machine);
+    Task<MachineRead> GetMachine(int id);
+    Task<ICollection<MachineRead>> GetMachines();
+    Task<bool> UpdateMachine(MachineUpdate machine);
 }
