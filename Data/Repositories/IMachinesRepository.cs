@@ -9,5 +9,5 @@ public interface IMachinesRepository
     Task<bool> AddMachine(MachineWrite machine);
     Task<MachineRead> GetMachine(int id);
     Task<ICollection<MachineRead>> GetMachines();
-    Task<bool> UpdateMachine(MachineUpdate machine);
+    Task<bool> UpdateMachine(MachineUpdate machineDt0);
 }
