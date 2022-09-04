@@ -13,13 +13,17 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Scheduling.Exceptions;
 using Scheduling.Models;
+using Scheduling.Repositories;
 using Scheduling.Views;
+using Scheduling.Views.Windows;
+using Machine = GeneticAlgorithm.Models.Machine;
 
 namespace Scheduling.ViewModels;
 
 public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
 {
     private readonly IMapper _mapper;
+    private readonly ISelectedDataRepository _selectedDataRepository;
     public AlgorithmSettings Settings { get; }
     public ViewModelActivator Activator { get; }
     public static IEnumerable<Crossover> CrossoverValues => Enum.GetValues<Crossover>();
@@ -28,9 +32,10 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
     public static IEnumerable<Mutation> MutationValues => Enum.GetValues<Mutation>();
     public ReactiveCommand<Unit, Unit> RunGaCommand { get; }
 
-    public AlgorithmParametersViewModel(AlgorithmSettings settings, IMapper mapper)
+    public AlgorithmParametersViewModel(AlgorithmSettings settings, IMapper mapper, ISelectedDataRepository selectedDataRepository)
     {
         _mapper = mapper;
+        _selectedDataRepository = selectedDataRepository;
         Settings = settings;
         Activator = new ViewModelActivator();
         MockSettings(settings);
@@ -52,8 +57,8 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
         builder.RegisterModule(new GeneticAlgorithmModule());
         var container = builder.Build();
             
-        var result = container.Resolve<Algorithm>().Run(MockMachines(),
-            MockPeople(),
+        var result = container.Resolve<Algorithm>().Run(_mapper.Map<Machine[]>(_selectedDataRepository.GetMachines()),
+            _mapper.Map<Person[]>(_selectedDataRepository.GetWorkers()),
             Settings.PopulationSize);
         
         var algorithmResult = _mapper.Map<AlgorithmResult>(result);
@@ -72,38 +77,6 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
 
     #region Mock
     //TEMPORARY METHOD
-    private static Machine[] MockMachines()
-    {
-        return new[]
-        {
-            new Machine() {Name = "Machine1", RequiredQualification = Qualification.Milling},
-            new Machine() {Name = "Machine2", RequiredQualification = Qualification.Sawing}
-        };
-    }
-
-    //TEMPORARY METHOD
-    private static Person[] MockPeople()
-    {
-        return new[]
-        {
-            new Person()
-            {
-                Id = 0,
-                Name = "Joe",
-                Surname = "Doe",
-                Qualifications = new List<Qualification> {Qualification.Milling}
-            },
-            new Person()
-            {
-                Id = 1,
-                Name = "Janusz",
-                Surname = "Kowalski",
-                Qualifications = new List<Qualification> {Qualification.Sawing}
-            }
-        };
-    }
-    
-    //TEMPORARY METHOD
     private static void MockSettings(AlgorithmSettings settings)
     {
         settings.PopulationSize = 100;
@@ -113,5 +86,4 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
         settings.MutationProbability = 0.01;
     }
     #endregion
-    
 }

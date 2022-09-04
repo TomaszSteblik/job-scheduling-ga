@@ -2,7 +2,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using Scheduling.ViewModels;
 
-namespace Scheduling.Views;
+namespace Scheduling.Views.UserControls;
 
 public partial class ScheduleUserControl : ReactiveUserControl<ScheduleViewModel>
 {

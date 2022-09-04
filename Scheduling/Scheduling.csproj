@@ -34,4 +34,22 @@
       <ProjectReference Include="..\Data\Data.csproj" />
       <ProjectReference Include="..\GeneticAlgorithm\GeneticAlgorithm.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <Compile Update="Views\Windows\MainWindow.axaml.cs">
+        <DependentUpon>MainWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\Windows\ResultsWindow.axaml.cs">
+        <DependentUpon>ResultsWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\UserControls\AlgorithmParametersUserControl.axaml.cs">
+        <DependentUpon>AlgorithmParametersUserControl.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\UserControls\ScheduleUserControl.axaml.cs">
+        <DependentUpon>ScheduleUserControl.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
 </Project>

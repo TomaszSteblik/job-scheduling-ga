@@ -3,6 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Scheduling.ViewModels;
 using Scheduling.Views;
+using MainWindow = Scheduling.Views.Windows.MainWindow;
 
 namespace Scheduling
 {

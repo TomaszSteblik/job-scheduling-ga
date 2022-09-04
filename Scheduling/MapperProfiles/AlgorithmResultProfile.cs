@@ -4,6 +4,7 @@ using AutoMapper;
 using GeneticAlgorithm.Models;
 using Scheduling.Models;
 using Scheduling.Helpers;
+using Machine = GeneticAlgorithm.Models.Machine;
 
 namespace Scheduling.MapperProfiles;
 

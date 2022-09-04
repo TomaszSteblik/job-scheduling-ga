@@ -1,10 +1,9 @@
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using Scheduling.ViewModels;
 
-namespace Scheduling.Views;
+namespace Scheduling.Views.Windows;
 
 public partial class ResultsWindow : ReactiveWindow<ResultsViewModel>
 {

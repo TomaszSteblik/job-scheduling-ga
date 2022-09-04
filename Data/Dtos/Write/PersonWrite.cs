@@ -7,5 +7,6 @@ public class PersonWrite
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public ICollection<MachineWrite>? PreferredMachines { get; set; }
+    public ICollection<int>? PreferredDays { get; set; }
     public ICollection<PropertyQualificationWrite>? Qualifications { get; set; }
 }

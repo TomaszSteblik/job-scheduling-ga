@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Scheduling.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Scheduling.Views.AlgorithmParametersUserControl">
+             x:Class="Scheduling.Views.UserControls.AlgorithmParametersUserControl">
     
     <Design.DataContext>
         <viewModels:AlgorithmParametersViewModel/>

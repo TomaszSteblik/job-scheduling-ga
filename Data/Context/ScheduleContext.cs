@@ -10,6 +10,7 @@ internal class ScheduleContext : DbContext
     public DbSet<Machine> Machines { get; set; } = null!;
     public DbSet<Person> People { get; set; } = null!;
     public DbSet<Qualification> Qualifications { get; set; } = null!;
+    public DbSet<Day> Days { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
