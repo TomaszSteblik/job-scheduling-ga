@@ -22,7 +22,7 @@
             <TextBlock>Workers tab</TextBlock>
         </TabItem>
         <TabItem Header="Add data">
-            <TextBlock>Placeholder</TextBlock>
+            <userControls:AddDataUserControl/>
         </TabItem>
     </TabControl>
 

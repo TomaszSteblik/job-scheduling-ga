@@ -14,5 +14,6 @@ public class MachineProfile : Profile
         CreateMap<Machine, MachineRead>().ReverseMap();
         CreateMap<Machine, MachineWrite>().ReverseMap();
         CreateMap<Machine, MachineUpdate>().ReverseMap();
+        CreateMap<AddMachine, MachineWrite>().ReverseMap();
     }
 }

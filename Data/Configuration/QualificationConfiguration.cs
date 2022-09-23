@@ -20,11 +20,6 @@ internal class QualificationConfiguration : IEntityTypeConfiguration<Qualificati
             .HasColumnType("varchar");
 
         builder
-            .HasMany<Machine>(x => x.Machines)
-            .WithOne(s => s.RequiredQualification)
-            .HasForeignKey(z=>z.Id);
-
-        builder
             .HasMany<Person>(q => q.People)
             .WithMany(p => p.Qualifications);
     }

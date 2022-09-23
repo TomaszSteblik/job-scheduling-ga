@@ -15,5 +15,6 @@ public class WorkerProfile : Profile
         CreateMap<Worker, PersonWrite>().ReverseMap();
         CreateMap<Worker, PersonUpdate>().ReverseMap();
         CreateMap<Worker, Person>().ReverseMap();
+        CreateMap<AddWorker, PersonWrite>();
     }
 }
