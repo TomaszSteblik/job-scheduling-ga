@@ -5,23 +5,31 @@ namespace Scheduling.Repositories;
 
 class SelectedDataRepository : ISelectedDataRepository
 {
+    private IEnumerable<Worker> _workers;
+    private IEnumerable<Machine> _machines;
+    public SelectedDataRepository()
+    {
+        _workers = new List<Worker>();
+        _machines = new List<Machine>();
+    }
+    
     public IEnumerable<Worker> GetWorkers()
     {
-        throw new System.NotImplementedException();
+        return _workers;
     }
 
     public void SetWorkers(IEnumerable<Worker> workers)
     {
-        throw new System.NotImplementedException();
+        _workers = workers;
     }
 
     public IEnumerable<Machine> GetMachines()
     {
-        throw new System.NotImplementedException();
+        return _machines;
     }
 
     public void SetMachines(IEnumerable<Machine> machines)
     {
-        throw new System.NotImplementedException();
+        _machines = machines;
     }
 }
