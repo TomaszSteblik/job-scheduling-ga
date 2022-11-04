@@ -9,7 +9,7 @@ internal static class ContextExtensions
         var dbFilePath = GetSchedulingPath();
         if (!Directory.Exists(dbFilePath))
             Directory.CreateDirectory(dbFilePath);
-        
+
         var dataSource = Path.Combine(dbFilePath, "ScheduleDB.db");
 
         optionsBuilder.UseSqlite($"Data Source={dataSource};");

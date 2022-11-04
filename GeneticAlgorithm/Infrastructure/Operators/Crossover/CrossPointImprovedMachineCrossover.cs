@@ -25,7 +25,7 @@ public class CrossPointImprovedMachineCrossover : ICrossover
         try
         {
             var people = _population.GetPeople();
-            
+
             _peopleByQualification = new Dictionary<Qualification, ICollection<Person>>();
 
             foreach (var qualification in Enum.GetValues<Qualification>())
@@ -39,18 +39,18 @@ public class CrossPointImprovedMachineCrossover : ICrossover
         {
             Log.Debug("Failed to create _peopleByQualification: {Exception}", e.Message);
         }
-        
+
     }
 
     public Chromosome[] GenerateOffsprings(ICollection<Chromosome> selected)
     {
         CreatePeopleByQualificationIfNull();
-        
+
         var offsprings = _machineCrossover.GenerateOffsprings(selected);
-        
+
         foreach (var offspring in offsprings)
             FixChromosome(offspring);
-        
+
         return offsprings;
     }
 
@@ -61,24 +61,24 @@ public class CrossPointImprovedMachineCrossover : ICrossover
             for (var j = 0; j < offspring.Value[i].Length; j++)
             {
                 var count = offspring.Value[i].Count(x => x.Id == offspring.Value[i][j].Id);
-                if(count <= 1)
+                if (count <= 1)
                     continue;
-                
+
                 var machineRequiredQualification = _population.GetMachines()[j].RequiredQualification;
 
                 if (_peopleByQualification == null)
                     throw new PopulationNotInitializedException(nameof(_peopleByQualification));
-                
+
                 var qualifiedPeople = _peopleByQualification[machineRequiredQualification];
                 var unusedQualifiedPeople = qualifiedPeople
                     .Where(x => !offspring.Value[i].Contains(x))
                     .ToArray();
-            
-                offspring.Value[i][j] = unusedQualifiedPeople.Any() ? 
-                    unusedQualifiedPeople.ElementAt(_random.Next(unusedQualifiedPeople.Length)) : 
+
+                offspring.Value[i][j] = unusedQualifiedPeople.Any() ?
+                    unusedQualifiedPeople.ElementAt(_random.Next(unusedQualifiedPeople.Length)) :
                     throw new IndexOutOfRangeException(
                         $"Not enough of qualified workers for {machineRequiredQualification}");
-                
+
             }
         }
     }

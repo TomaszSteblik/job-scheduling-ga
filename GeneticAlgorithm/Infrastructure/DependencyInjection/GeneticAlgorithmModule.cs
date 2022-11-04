@@ -19,34 +19,34 @@ public class GeneticAlgorithmModule : Module
         builder.RegisterInstance(Random.Shared);
 
         builder.RegisterType<Population>().AsImplementedInterfaces().SingleInstance();
-        
+
         builder.Register<ICrossover>(x => x.Resolve<Parameters>().Crossover
             switch
-            { 
+            {
                 Crossover.CrossPointMachine => new CrossPointMachineCrossover(x.Resolve<Random>()),
-                Crossover.CrossPointDay =>  new CrossPointDayCrossover(x.Resolve<Random>()),
+                Crossover.CrossPointDay => new CrossPointDayCrossover(x.Resolve<Random>()),
                 Crossover.CrossPointMixed => new CrossPointMixedCrossover(x.Resolve<Random>()),
-                Crossover.CrossPointImprovedMachine => new CrossPointImprovedMachineCrossover(x.Resolve<Random>(), 
+                Crossover.CrossPointImprovedMachine => new CrossPointImprovedMachineCrossover(x.Resolve<Random>(),
                     x.Resolve<IPopulation>()),
-                Crossover.CrossPointImprovedMixed => new CrossPointImprovedMixedCrossover(x.Resolve<Random>(), 
+                Crossover.CrossPointImprovedMixed => new CrossPointImprovedMixedCrossover(x.Resolve<Random>(),
                     x.Resolve<IPopulation>()),
                 _ => throw new DataException($"Unknown parameter: {nameof(Crossover)}")
             });
-        
+
         builder.Register<IElimination>(x => x.Resolve<Parameters>().Elimination
             switch
             {
                 Elimination.Elitism => new ElitismElimination(x.Resolve<IPopulation>()),
                 _ => throw new DataException($"Unknown parameter: {nameof(Elimination)}")
             });
-        
+
         builder.Register<ISelection>(x => x.Resolve<Parameters>().Selection
             switch
             {
                 Selection.Elitism => new ElitismSelection(),
                 _ => throw new DataException($"Unknown parameter: {nameof(Selection)}")
             });
-        
+
         builder.Register<IMutation>(x => x.Resolve<Parameters>().Mutation
             switch
             {

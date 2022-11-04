@@ -14,11 +14,11 @@ public class CrossPointMachineCrossover : ICrossover
     public Chromosome[] GenerateOffsprings(ICollection<Chromosome> selected)
     {
         var offsprings = new List<Chromosome>();
-        for (var parentNumber = 0; parentNumber < selected.Count; parentNumber+=2)
+        for (var parentNumber = 0; parentNumber < selected.Count; parentNumber += 2)
         {
 
-            var (offspringOne, offspringTwo) = 
-                GenerateChromosomePair(selected.ElementAt(parentNumber), 
+            var (offspringOne, offspringTwo) =
+                GenerateChromosomePair(selected.ElementAt(parentNumber),
                                         selected.ElementAt(parentNumber + 1));
 
             offsprings.Add(offspringOne);
@@ -33,8 +33,8 @@ public class CrossPointMachineCrossover : ICrossover
         var innerLength = parentOne.Value.First().Length;
         var outerLength = parentOne.Value.Length;
         var crossPoint = _random.Next(1, innerLength);
-        var offspringOne = new Chromosome(outerLength,innerLength);
-        var offspringTwo = new Chromosome(outerLength,innerLength);
+        var offspringOne = new Chromosome(outerLength, innerLength);
+        var offspringTwo = new Chromosome(outerLength, innerLength);
 
         for (var i = 0; i < outerLength; i++)
         {
@@ -49,7 +49,7 @@ public class CrossPointMachineCrossover : ICrossover
                 offspringTwo.Value[i][j] = parentOne.Value[i][j];
             }
         }
-        
+
         return (offspringOne, offspringTwo);
     }
 }

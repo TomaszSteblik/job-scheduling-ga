@@ -17,6 +17,6 @@ internal class MachineProfile : Profile
         CreateMap<MachineRead, PropertyMachineWrite>().ReverseMap();
         CreateMap<MachineWrite, Machine>()
             .ForMember(x => x.QualificationId, src => src.MapFrom(z => z.RequiredQualification.Id));
-        
+
     }
 }

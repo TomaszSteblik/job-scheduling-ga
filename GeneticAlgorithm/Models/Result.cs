@@ -6,7 +6,7 @@ public class Result
     public Parameters Parameters { get; }
     public Person[] People { get; }
     public Machine[] Machines { get; }
-    
+
     public Result(Chromosome chromosome, Parameters parameters, Person[] people, Machine[] machines)
     {
         Chromosome = chromosome;

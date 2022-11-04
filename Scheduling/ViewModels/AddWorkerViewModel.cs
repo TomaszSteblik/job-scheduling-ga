@@ -25,19 +25,19 @@ public class AddWorkerViewModel : ViewModelBase, IActivatableViewModel
 
     [Reactive]
     public IEnumerable<QualificationRead> Qualifications { get; set; }
-    
+
     [Reactive]
     public ICollection<MachineRead> Machines { get; set; }
 
-    [Reactive] 
+    [Reactive]
     public IEnumerable<int> Days { get; set; }
-    
+
     [Reactive]
     public AddWorker Worker { get; set; }
-    
+
     public ReactiveCommand<Unit, Unit> AddCommand { get; set; }
     public ViewModelActivator Activator { get; }
-    public IEnumerable<int> PreferredDays => Enumerable.Range(0,20);
+    public IEnumerable<int> PreferredDays => Enumerable.Range(0, 20);
 
     public AddWorkerViewModel(IMapper mapper, IPeopleRepository peopleRepository,
         IQualificationsRepository qualificationsRepository, IMachinesRepository machinesRepository)
@@ -62,7 +62,7 @@ public class AddWorkerViewModel : ViewModelBase, IActivatableViewModel
     {
         Qualifications = await _qualificationsRepository.GetQualifications();
         Machines = await _machinesRepository.GetMachines();
-        Days = Enumerable.Range(1,20);
+        Days = Enumerable.Range(1, 20);
         Disposable.Create(() =>
             {
                 /* handle deactivation */

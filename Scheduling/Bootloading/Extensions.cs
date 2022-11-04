@@ -17,7 +17,7 @@ internal static class Extensions
     {
         var assembly = Assembly.GetExecutingAssembly();
         var types = assembly.GetTypes();
-        var viewModelTypes = types.Where(x=>x.Name.Contains(ViewmodelTypeNameFragment));
+        var viewModelTypes = types.Where(x => x.Name.Contains(ViewmodelTypeNameFragment));
         foreach (var viewModelType in viewModelTypes)
         {
             builder.RegisterType(viewModelType).AsSelf();
@@ -46,7 +46,7 @@ internal static class Extensions
         return builder;
     }
 
-    private static string GetSchedulingPath() =>  
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), 
-            "Scheduling",$"log_{DateTime.Now.ToString(CultureInfo.CurrentCulture)}.txt");
-    }
+    private static string GetSchedulingPath() =>
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "Scheduling", $"log_{DateTime.Now.ToString(CultureInfo.CurrentCulture)}.txt");
+}

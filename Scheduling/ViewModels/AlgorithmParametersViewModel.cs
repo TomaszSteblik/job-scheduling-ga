@@ -56,11 +56,11 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
         builder.RegisterInstance(param).As<Parameters>();
         builder.RegisterModule(new GeneticAlgorithmModule());
         var container = builder.Build();
-            
+
         var result = container.Resolve<Algorithm>().Run(_mapper.Map<Machine[]>(_selectedDataRepository.GetMachines()),
             _mapper.Map<Person[]>(_selectedDataRepository.GetWorkers()),
             Settings.PopulationSize);
-        
+
         var algorithmResult = _mapper.Map<AlgorithmResult>(result);
 
         if (algorithmResult == null)
@@ -71,7 +71,7 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
             DataContext = new ResultsViewModel(algorithmResult)
         };
         window.Show();
-        
+
         return Task.CompletedTask;
     }
 

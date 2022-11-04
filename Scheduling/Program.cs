@@ -8,7 +8,7 @@ namespace Scheduling;
 
 internal static class Program
 {
-    
+
     [STAThread]
     public static async Task Main(string[] args)
     {

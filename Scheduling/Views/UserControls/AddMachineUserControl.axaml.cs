@@ -8,7 +8,7 @@ using Splat;
 
 namespace Scheduling.Views.UserControls;
 
-public partial class AddMachineUserControl : ReactiveUserControl<AddMachineViewModel>   
+public partial class AddMachineUserControl : ReactiveUserControl<AddMachineViewModel>
 {
     public AddMachineUserControl()
     {

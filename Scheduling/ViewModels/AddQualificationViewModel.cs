@@ -16,7 +16,7 @@ public class AddQualificationViewModel : ViewModelBase
 {
     private readonly IMapper _mapper;
     private readonly IQualificationsRepository _qualificationsRepository;
-    
+
     [Reactive]
     public Qualification Qualification { get; set; }
 
@@ -30,7 +30,7 @@ public class AddQualificationViewModel : ViewModelBase
         AddCommand = ReactiveCommand.CreateFromTask(AddQualification);
         AddCommand.LogExceptions();
     }
-    
+
     private async Task AddQualification()
     {
         var qualificationWrite = _mapper.Map<QualificationWrite>(Qualification);

@@ -73,7 +73,7 @@ public class Chromosome
             {
                 var preferredMachineIds = Value[i][j].PreferredMachineIds;
                 if (preferredMachineIds is null) continue;
-                
+
                 if (preferredMachineIds.Contains(j))
                     result++;
             }
@@ -84,7 +84,7 @@ public class Chromosome
     private void RecalculateFitnessByDaysWorking()
     {
         var workers = Value.SelectMany(x => x).Select(x => x).ToList();
-        var dic = workers.Select(x => new {Person = x, Count = workers.Count(z => z.Id == x.Id)});
+        var dic = workers.Select(x => new { Person = x, Count = workers.Count(z => z.Id == x.Id) });
         var distinctBy = dic.DistinctBy(x => x.Person.Id);
         foreach (var worker in distinctBy)
         {
@@ -102,13 +102,13 @@ public class Chromosome
         foreach (var day in Value)
         {
             var count = day.DistinctBy(x => x.Id).Count();
-            if(count != day.Length)
+            if (count != day.Length)
                 fitness += 1;
         }
 
         return fitness;
     }
-    
+
     internal int AnalyzeWrongPosition(Machine[] machines)
     {
         var fitness = 0;
