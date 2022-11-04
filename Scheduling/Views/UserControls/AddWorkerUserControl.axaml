@@ -1,0 +1,79 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Scheduling.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="Scheduling.Views.UserControls.AddWorkerUserControl">
+    
+    <Design.DataContext>
+        <viewModels:AddWorkerViewModel/>
+    </Design.DataContext>
+    
+    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="3" Padding="4">
+        <StackPanel>
+            <Label FontStyle="Oblique" FontSize="18">Add new person</Label>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Margin="0 0 15  0">First name: </Label>
+                    <TextBox Text="{Binding Worker.FirstName}"
+                             Margin="0 0 15  0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Margin="0 0 15  0">Last name: </Label>
+                    <TextBox Text="{Binding Worker.LastName}"
+                             Margin="0 0 15  0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Margin="0 0 15  0">Preferred machines: </Label>
+                    <ListBox  SelectedItems="{Binding Worker.PreferredMachines}"
+                              Items="{Binding Machines}"
+                              SelectionMode="Multiple">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Margin="0 0 15  0">Qualifications: </Label>
+                    <ListBox  SelectedItems="{Binding Worker.Qualifications}"
+                              Items="{Binding Qualifications}"
+                              SelectionMode="Multiple">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Margin="0 0 15  0">Preferred days: </Label>
+                    <ListBox  SelectedItems="{Binding Worker.PreferredDays}"
+                              Items="{Binding PreferredDays}"
+                              SelectionMode="Multiple"
+                              >
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding .}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+                <Button Command="{Binding AddCommand}"
+                        Width="100"
+                        HorizontalContentAlignment="Center">
+                    Add
+                </Button>
+            </StackPanel>
+        </StackPanel>
+        
+    </Border>
+    
+</UserControl>

@@ -11,6 +11,13 @@
         <entry key="Scheduling/Views/ResultsWindow.axaml" value="Scheduling/Scheduling.csproj" />
         <entry key="Scheduling/Views/ScheduleUserControl.axaml" value="Scheduling/Scheduling.csproj" />
         <entry key="Scheduling/Views/ScheduledDayUserControl.axaml" value="Scheduling/Scheduling.csproj" />
+        <entry key="Scheduling/Views/UserControls/AddDataUserControl.axaml" value="Scheduling/Scheduling.csproj" />
+        <entry key="Scheduling/Views/UserControls/AddMachineUserControl.axaml" value="Scheduling/Scheduling.csproj" />
+        <entry key="Scheduling/Views/UserControls/AddQualificationUserControl.axaml" value="Scheduling/Scheduling.csproj" />
+        <entry key="Scheduling/Views/UserControls/AddWorkerUserControl.axaml" value="Scheduling/Scheduling.csproj" />
+        <entry key="Scheduling/Views/UserControls/AlgorithmParametersUserControl.axaml" value="Scheduling/Scheduling.csproj" />
+        <entry key="Scheduling/Views/UserControls/ScheduleUserControl.axaml" value="Scheduling/Scheduling.csproj" />
+        <entry key="Scheduling/Views/Windows/MainWindow.axaml" value="Scheduling/Scheduling.csproj" />
       </map>
     </option>
   </component>

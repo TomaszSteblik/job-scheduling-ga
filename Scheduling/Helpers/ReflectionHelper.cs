@@ -29,7 +29,7 @@ public static class ReflectionHelper
                 PropertyAttributes.None,
                 CallingConventions.HasThis,
                 typeof(string), Type.EmptyTypes);
-            
+
             var backingFieldBuilder = typeBuilder.DefineField($"_{name}",
                 typeof(string),
                 FieldAttributes.Private);
@@ -51,7 +51,7 @@ public static class ReflectionHelper
             typeBuilder.DefineMethod($"{propName}_getter",
                 MethodAttributes.Public,
                 null,
-                new[] {typeof(string)});
+                new[] { typeof(string) });
 
         var setterIl = setterBuilder.GetILGenerator();
 
@@ -59,7 +59,7 @@ public static class ReflectionHelper
         setterIl.Emit(OpCodes.Ldarg_1);
         setterIl.Emit(OpCodes.Stfld, backingFieldBuilder);
         setterIl.Emit(OpCodes.Ret);
-        
+
         return setterBuilder;
     }
 
@@ -69,11 +69,11 @@ public static class ReflectionHelper
             MethodAttributes.Public, typeof(string), Type.EmptyTypes);
 
         var getterIl = getterBuilder.GetILGenerator();
-        
+
         getterIl.Emit(OpCodes.Ldarg_0);
         getterIl.Emit(OpCodes.Ldfld, backingFieldBuilder);
         getterIl.Emit(OpCodes.Ret);
-        
+
         return getterBuilder;
     }
 

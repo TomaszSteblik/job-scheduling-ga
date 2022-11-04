@@ -23,6 +23,7 @@ internal class MachinesRepository : IMachinesRepository
     public async Task<bool> AddMachine(MachineWrite machineDto)
     {
         var machine = _mapper.Map<Machine>(machineDto);
+        machine.RequiredQualification = await _context.Qualifications.FindAsync(machine.QualificationId);
         await _context.Machines.AddAsync(machine);
         return await _context.SaveChangesAsync() == 1;
     }

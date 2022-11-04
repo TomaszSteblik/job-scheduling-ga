@@ -18,5 +18,9 @@ internal class MachineConfiguration : IEntityTypeConfiguration<Machine>
         builder
             .Property(x => x.Name)
             .HasColumnType("varchar");
+
+        builder.HasOne<Qualification>(x => x.RequiredQualification)
+            .WithMany(z => z.Machines)
+            .HasForeignKey(y => y.QualificationId);
     }
 }

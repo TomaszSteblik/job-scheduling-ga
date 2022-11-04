@@ -1,13 +1,14 @@
 ﻿using Avalonia;
 using System;
 using System.Threading.Tasks;
+using Avalonia.Logging;
 using Scheduling.Bootloading;
 
 namespace Scheduling;
 
 internal static class Program
 {
-    
+
     [STAThread]
     public static async Task Main(string[] args)
     {
@@ -20,5 +21,5 @@ internal static class Program
     private static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .LogToTrace();
+            .LogToTrace(LogEventLevel.Debug, LogArea.Property, LogArea.Layout);
 }

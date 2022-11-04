@@ -22,7 +22,10 @@ internal class PeopleRepository : IPeopleRepository
 
     public async Task<bool> AddPerson(PersonWrite person)
     {
-        await _context.People.AddAsync(_mapper.Map<Person>(person));
+        var personEntity = _mapper.Map<Person>(person);
+        personEntity.Qualifications = await _context.Qualifications.Where(x => person.Qualifications.Select(z => z.Id).Contains(x.Id)).ToListAsync();
+        personEntity.PreferredMachines = await _context.Machines.Where(x => person.PreferredMachines.Select(z => z.Id).Contains(x.Id)).ToListAsync();
+        await _context.People.AddAsync(personEntity);
         return await _context.SaveChangesAsync() == 1;
     }
 

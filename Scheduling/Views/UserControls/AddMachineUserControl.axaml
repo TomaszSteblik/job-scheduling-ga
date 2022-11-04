@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Scheduling.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="Scheduling.Views.UserControls.AddMachineUserControl">
+    
+    <Design.DataContext>
+        <viewModels:AddMachineViewModel/>
+    </Design.DataContext>
+    
+    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="3" Padding="4">
+        <StackPanel>
+            <Label FontStyle="Oblique" FontSize="18">Add new machine</Label>
+            <StackPanel Orientation="Horizontal">
+                <Label>Machine name:</Label>
+                <TextBox Text="{Binding Machine.Name}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                <Label>Required qualification</Label>
+                <ComboBox SelectedItem="{Binding Machine.RequiredQualification}"
+                          Items="{Binding Qualifications}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <Button Command="{Binding AddCommand}"
+                    Width="100"
+                    HorizontalContentAlignment="Center">
+                Add
+            </Button>
+        </StackPanel>
+    </Border>
+    
+</UserControl>

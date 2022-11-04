@@ -14,7 +14,7 @@ namespace ConsoleRunner;
 internal static class Program
 {
     private static IContainer? Container { get; set; }
-    
+
     public static async Task Main()
     {
         var log = new LoggerConfiguration()
@@ -27,12 +27,12 @@ internal static class Program
         if (parameters is null)
             throw new DataException("Invalid parameters format");
         var builder = new ContainerBuilder();
-        builder.Register<Parameters>(x=> parameters);
+        builder.Register<Parameters>(x => parameters);
         var machines = GetMachinesFromCsv(parameters.DataPathMachines);
         var people = GetPeopleFromCsv(parameters.DataPathPersonel);
         builder.RegisterModule(new GeneticAlgorithmModule());
         Container = builder.Build();
-        
+
         var z = Container.Resolve<Algorithm>();
         z.Run(machines, people, parameters.PopulationSize);
     }

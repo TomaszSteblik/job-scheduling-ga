@@ -22,5 +22,9 @@ internal class PersonConfiguration : IEntityTypeConfiguration<Person>
         builder
             .Property(x => x.LastName)
             .HasColumnType("varchar");
+
+        builder
+            .HasMany<Day>(x => x.PreferredDays)
+            .WithMany(x => x.People);
     }
 }

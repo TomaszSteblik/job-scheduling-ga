@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:Scheduling.Views"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="Scheduling.Views.MainWindow"
+        xmlns:userControls="clr-namespace:Scheduling.Views.UserControls"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800"
+        x:Class="Scheduling.Views.Windows.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Scheduling">
 
@@ -14,14 +15,14 @@
     </Design.DataContext>
 
     <TabControl>
-        <TabItem Header="GA parameters">
-            <views:AlgorithmParametersUserControl/>
+        <TabItem Header="Parameters">
+            <userControls:AlgorithmParametersUserControl/>
         </TabItem>
-        <TabItem Header="Workers">
+        <TabItem Header="Select data">
             <TextBlock>Workers tab</TextBlock>
         </TabItem>
-        <TabItem Header="Placeholder">
-            <TextBlock>Placeholder</TextBlock>
+        <TabItem Header="Add data">
+            <userControls:AddDataUserControl/>
         </TabItem>
     </TabControl>
 

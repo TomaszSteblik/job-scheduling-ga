@@ -7,9 +7,10 @@ namespace Scheduling.Exceptions;
 public class ReflectionTypeInstanceGenerationException : Exception
 {
     public ReflectionTypeInstanceGenerationException() : base() { }
-    
-    public ReflectionTypeInstanceGenerationException(string message) : 
-        base($"{message}") { }
+
+    public ReflectionTypeInstanceGenerationException(string message) :
+        base($"{message}")
+    { }
 
     protected ReflectionTypeInstanceGenerationException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }

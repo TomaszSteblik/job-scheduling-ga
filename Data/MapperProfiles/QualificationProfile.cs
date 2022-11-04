@@ -14,5 +14,6 @@ internal class QualificationProfile : Profile
         CreateMap<Qualification, QualificationWrite>().ReverseMap();
         CreateMap<Qualification, PropertyQualificationWrite>().ReverseMap();
         CreateMap<Qualification, QualificationUpdate>().ReverseMap();
+        CreateMap<QualificationRead, PropertyQualificationWrite>().ReverseMap();
     }
 }

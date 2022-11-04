@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace Scheduling.Views
+namespace Scheduling.Views.Windows
 {
     public partial class MainWindow : Window
     {

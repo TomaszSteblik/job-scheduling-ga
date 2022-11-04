@@ -6,5 +6,6 @@ public class PersonUpdate
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public ICollection<MachineUpdate>? PreferredMachines { get; set; }
+    public ICollection<int>? PreferredDays { get; set; }
     public ICollection<QualificationUpdate>? Qualifications { get; set; }
 }

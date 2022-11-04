@@ -5,14 +5,15 @@
         xmlns:views="clr-namespace:Scheduling.Views"
         xmlns:scheduling="clr-namespace:Scheduling"
         xmlns:viewModels="clr-namespace:Scheduling.ViewModels"
+        xmlns:userControls="clr-namespace:Scheduling.Views.UserControls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="Scheduling.Views.ResultsWindow"
+        x:Class="Scheduling.Views.Windows.ResultsWindow"
         Title="ResultsWindow">
     
     <Design.DataContext>
         <viewModels:ResultsViewModel/>
     </Design.DataContext>
     
-    <views:ScheduleUserControl DataContext="{Binding ScheduleViewModel}"/>
+    <userControls:ScheduleUserControl DataContext="{Binding ScheduleViewModel}"/>
     
 </Window>

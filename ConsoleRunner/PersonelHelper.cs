@@ -8,11 +8,11 @@ internal class PersonelHelper
     [JsonInclude]
     [Name("name")]
     public string? Name { get; set; }
-        
+
     [JsonInclude]
     [Name("qualifications")]
     public string? Qualifications { get; set; }
-    
+
     [JsonInclude]
     [Name("preference_days_count")]
     public int DaysPreferenceCount { get; set; }
@@ -20,9 +20,9 @@ internal class PersonelHelper
     [JsonInclude]
     [Name("preference_machines")]
     public string? PreferredMachineIds { get; set; }
-    
+
     [JsonInclude]
     [Name("preference_days")]
     public string? PreferredDays { get; set; }
-    
+
 }

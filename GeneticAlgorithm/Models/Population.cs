@@ -9,9 +9,9 @@ public class Population : IPopulation
     private Machine[]? Machines { get; set; }
     private Person[]? People { get; set; }
     public bool IsInitialized => Chromosomes is not null || Machines is not null || People is not null;
-    
+
     private readonly Random _random;
-    
+
     public Population(Random random)
     {
         _random = random;
@@ -49,7 +49,7 @@ public class Population : IPopulation
     {
         if (Chromosomes is null)
             throw new PopulationNotInitializedException(nameof(Chromosomes));
-        
+
         foreach (var chromosome in Chromosomes)
         {
             chromosome.RecalculateFitness();
@@ -60,7 +60,7 @@ public class Population : IPopulation
     {
         if (Chromosomes is null)
             throw new PopulationNotInitializedException(nameof(Chromosomes));
-        
+
         Chromosomes = Chromosomes.OrderByDescending(x => x.Fitness).ToArray();
     }
 
@@ -68,7 +68,7 @@ public class Population : IPopulation
     {
         if (Chromosomes is null)
             throw new PopulationNotInitializedException(nameof(Chromosomes));
-        
+
         Chromosomes[index] = chromosome;
     }
 
@@ -76,7 +76,7 @@ public class Population : IPopulation
     {
         if (Machines is null)
             throw new PopulationNotInitializedException(nameof(Machines));
-        
+
         return Machines;
     }
 

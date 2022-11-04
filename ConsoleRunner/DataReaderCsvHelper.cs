@@ -11,7 +11,7 @@ public static class DataReaderCsvHelper
     {
         var people = new List<Person>();
         if (parametersDataPathPersonel is null)
-            throw new ArgumentNullException(nameof(parametersDataPathPersonel),"Null path to personel");
+            throw new ArgumentNullException(nameof(parametersDataPathPersonel), "Null path to personel");
         using (var reader = new StreamReader(parametersDataPathPersonel))
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
         {
@@ -25,10 +25,10 @@ public static class DataReaderCsvHelper
 
                 if (record.PreferredMachineIds is null)
                     throw new DataException(nameof(reader));
-                
+
                 if (record.PreferredDays is null)
                     throw new DataException(nameof(reader));
-                
+
                 var person = new Person
                 {
                     Id = index,
@@ -44,19 +44,19 @@ public static class DataReaderCsvHelper
                 {
                     person.Qualifications.Add(Enum.Parse<Qualification>(qualification));
                 }
-                
+
                 var machines = record.PreferredMachineIds.Split('-');
                 foreach (var machineId in machines.Select(int.Parse))
                 {
                     person.PreferredMachineIds.Add(machineId);
                 }
-                
+
                 var days = record.PreferredDays.Split('-');
                 foreach (var dayId in days.Select(int.Parse))
                 {
                     person.PreferredDays.Add(dayId);
                 }
-                
+
                 people.Add(person);
             }
         }

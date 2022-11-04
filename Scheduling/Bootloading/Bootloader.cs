@@ -24,6 +24,7 @@ internal static class Bootloader
         builder.RegisterModule<DataModule>();
         builder.RegisterViewModels();
         builder.AddAutoMapper();
+        builder.AddSerilog();
         RegisterAvalonia();
         var container = builder.Build();
         await container.ApplyMigrations();

@@ -17,37 +17,54 @@ namespace Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
 
-            modelBuilder.Entity("Data.Models.Machine", b =>
+            modelBuilder.Entity("Data.Entities.Day", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DayOfSchedule")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Days");
+                });
+
+            modelBuilder.Entity("Data.Entities.Machine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("varchar");
 
                     b.Property<int?>("PersonId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("QualificationId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PersonId");
 
+                    b.HasIndex("QualificationId");
+
                     b.ToTable("Machines");
                 });
 
-            modelBuilder.Entity("Data.Models.Person", b =>
+            modelBuilder.Entity("Data.Entities.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("varchar");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("varchar");
 
                     b.HasKey("Id");
@@ -55,19 +72,33 @@ namespace Data.Migrations
                     b.ToTable("People");
                 });
 
-            modelBuilder.Entity("Data.Models.Qualification", b =>
+            modelBuilder.Entity("Data.Entities.Qualification", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("varchar");
 
                     b.HasKey("Id");
 
                     b.ToTable("Qualifications");
+                });
+
+            modelBuilder.Entity("DayPerson", b =>
+                {
+                    b.Property<int>("PeopleId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PreferredDaysId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("PeopleId", "PreferredDaysId");
+
+                    b.HasIndex("PreferredDaysId");
+
+                    b.ToTable("DayPerson");
                 });
 
             modelBuilder.Entity("PersonQualification", b =>
@@ -85,42 +116,57 @@ namespace Data.Migrations
                     b.ToTable("PersonQualification");
                 });
 
-            modelBuilder.Entity("Data.Models.Machine", b =>
+            modelBuilder.Entity("Data.Entities.Machine", b =>
                 {
-                    b.HasOne("Data.Models.Qualification", "RequiredQualification")
-                        .WithMany("Machines")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Models.Person", null)
+                    b.HasOne("Data.Entities.Person", null)
                         .WithMany("PreferredMachines")
                         .HasForeignKey("PersonId");
+
+                    b.HasOne("Data.Entities.Qualification", "RequiredQualification")
+                        .WithMany("Machines")
+                        .HasForeignKey("QualificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("RequiredQualification");
                 });
 
-            modelBuilder.Entity("PersonQualification", b =>
+            modelBuilder.Entity("DayPerson", b =>
                 {
-                    b.HasOne("Data.Models.Person", null)
+                    b.HasOne("Data.Entities.Person", null)
                         .WithMany()
                         .HasForeignKey("PeopleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Data.Models.Qualification", null)
+                    b.HasOne("Data.Entities.Day", null)
+                        .WithMany()
+                        .HasForeignKey("PreferredDaysId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PersonQualification", b =>
+                {
+                    b.HasOne("Data.Entities.Person", null)
+                        .WithMany()
+                        .HasForeignKey("PeopleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Entities.Qualification", null)
                         .WithMany()
                         .HasForeignKey("QualificationsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Data.Models.Person", b =>
+            modelBuilder.Entity("Data.Entities.Person", b =>
                 {
                     b.Navigation("PreferredMachines");
                 });
 
-            modelBuilder.Entity("Data.Models.Qualification", b =>
+            modelBuilder.Entity("Data.Entities.Qualification", b =>
                 {
                     b.Navigation("Machines");
                 });
