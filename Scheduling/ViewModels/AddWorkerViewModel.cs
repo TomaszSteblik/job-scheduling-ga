@@ -37,6 +37,7 @@ public class AddWorkerViewModel : ViewModelBase, IActivatableViewModel
     
     public ReactiveCommand<Unit, Unit> AddCommand { get; set; }
     public ViewModelActivator Activator { get; }
+    public IEnumerable<int> PreferredDays => Enumerable.Range(0,20);
 
     public AddWorkerViewModel(IMapper mapper, IPeopleRepository peopleRepository,
         IQualificationsRepository qualificationsRepository, IMachinesRepository machinesRepository)
@@ -71,18 +72,5 @@ public class AddWorkerViewModel : ViewModelBase, IActivatableViewModel
 
 
 
-    private async Task AddPerson()
-    {
-        try
-        {
-            await _peopleRepository.AddPerson(_mapper.Map<PersonWrite>(Worker));
-
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }
-
+    private async Task AddPerson() => await _peopleRepository.AddPerson(_mapper.Map<PersonWrite>(Worker));
 }
