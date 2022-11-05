@@ -22,5 +22,9 @@ internal class MachineConfiguration : IEntityTypeConfiguration<Machine>
         builder.HasOne<Qualification>(x => x.RequiredQualification)
             .WithMany(z => z.Machines)
             .HasForeignKey(y => y.QualificationId);
+        
+        builder
+            .HasMany<Person>(m => m.People)
+            .WithMany(p => p.PreferredMachines);
     }
 }

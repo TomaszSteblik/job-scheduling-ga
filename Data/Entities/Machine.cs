@@ -6,4 +6,5 @@ internal class Machine
     public string? Name { get; set; }
     public int QualificationId { get; set; }
     public Qualification? RequiredQualification { get; set; }
+    public ICollection<Person> People { get; set; }
 }
