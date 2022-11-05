@@ -8,7 +8,7 @@ public class Person
     public int PreferenceDaysCount { get; set; }
     public ICollection<int>? PreferredMachineIds { get; set; }
     public ICollection<int>? PreferredDays { get; set; }
-    public ICollection<Qualification>? Qualifications { get; set; }
+    public ICollection<string>? Qualifications { get; set; }
     public override string ToString()
     {
         return Name ?? string.Empty;

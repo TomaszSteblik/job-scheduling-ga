@@ -11,6 +11,9 @@ namespace GeneticAlgorithm_Tests.Mutations;
 public class RandomSwitchMutationCrossoverTests
 {
     private readonly ITestOutputHelper _testOutputHelper;
+    private const string Milling = "Milling";
+    private const string Sawing = "Sawing";
+    private const string Painting = "Painting";
 
     public RandomSwitchMutationCrossoverTests(ITestOutputHelper testOutputHelper)
     {
@@ -67,17 +70,17 @@ public class RandomSwitchMutationCrossoverTests
         var mockPopulation = new Population(random);
         mockPopulation.InitializePopulation(
             new[]{
-                new Machine {Name = "Machine1",RequiredQualification = Qualification.Milling},
-                new Machine {Name = "Machine2",RequiredQualification = Qualification.Milling}
+                new Machine {Name = "Machine1",RequiredQualification = Milling},
+                new Machine {Name = "Machine2",RequiredQualification = Milling}
             },
             new[]
             {
                 new Person(){Id = 1,Name = "Person1", Surname = "Kowalski1", PreferenceDaysCount = 20,
-                    PreferredMachineIds = new[] {0},Qualifications = new List<Qualification>() {Qualification.Milling}},
+                    PreferredMachineIds = new[] {0},Qualifications = new List<string>() {Milling}},
                 new Person(){Id = 2,Name = "Person2", Surname = "Kowalski2", PreferenceDaysCount = 20,
-                    PreferredMachineIds = new[] {1},Qualifications = new List<Qualification>() {Qualification.Milling}},
+                    PreferredMachineIds = new[] {1},Qualifications = new List<string>() {Milling}},
                 new Person(){Id = 3,Name = "Person3", Surname = "Kowalski3", PreferenceDaysCount = 20,
-                    PreferredMachineIds = new[] {0},Qualifications = new List<Qualification>() {Qualification.Milling}},
+                    PreferredMachineIds = new[] {0},Qualifications = new List<string>() {Milling}},
             },
             size);
         return mockPopulation;

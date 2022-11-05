@@ -9,7 +9,7 @@ public class CrossPointImprovedMachineCrossover : ICrossover
 {
     private readonly Random _random;
     private readonly IPopulation _population;
-    private IDictionary<Qualification, ICollection<Person>>? _peopleByQualification;
+    private IDictionary<string, ICollection<Person>>? _peopleByQualification;
     private readonly ICrossover _machineCrossover;
 
     public CrossPointImprovedMachineCrossover(Random random, IPopulation population)
@@ -26,9 +26,10 @@ public class CrossPointImprovedMachineCrossover : ICrossover
         {
             var people = _population.GetPeople();
 
-            _peopleByQualification = new Dictionary<Qualification, ICollection<Person>>();
+            _peopleByQualification = new Dictionary<string, ICollection<Person>>();
+            var qualifications = people.SelectMany(x => x.Qualifications ?? ArraySegment<string>.Empty).Distinct();
 
-            foreach (var qualification in Enum.GetValues<Qualification>())
+            foreach (var qualification in qualifications)
             {
                 var qualifiedPeople = people.Where(x =>
                     x.Qualifications != null && x.Qualifications.Contains(qualification)).ToArray();

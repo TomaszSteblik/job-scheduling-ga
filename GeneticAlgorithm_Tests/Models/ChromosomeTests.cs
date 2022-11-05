@@ -236,21 +236,25 @@ public class ChromosomeTests
 
     #region AnalyzeWrongPosition
 
+    private const string Milling = "Milling";
+    private const string Sawing = "Sawing";
+    private const string Painting = "Painting";
+    
     [Fact]
     public void AnalyzeWrongPosition_EveryoneHaveCorrectQualifications_Returns0()
     {
-        //Act
+        //Arrange
         var chromosome = new Chromosome(3, 3);
         var machines = new[]
         {
-            new Machine(){RequiredQualification = Qualification.Milling},
-            new Machine(){RequiredQualification = Qualification.Sawing},
-            new Machine(){RequiredQualification = Qualification.Painting}
+            new Machine(){RequiredQualification = "Milling"},
+            new Machine(){RequiredQualification = "Sawing"},
+            new Machine(){RequiredQualification = "Painting"}
         };
-        var person1 = new Person() { Qualifications = new[] { Qualification.Milling, Qualification.Sawing } };
-        var person2 = new Person() { Qualifications = new[] { Qualification.Sawing } };
-        var person3 = new Person() { Qualifications = new[] { Qualification.Painting } };
-        var person4 = new Person() { Qualifications = new[] { Qualification.Milling } };
+        var person1 = new Person() { Qualifications = new[] { Milling, Sawing } };
+        var person2 = new Person() { Qualifications = new[] { Sawing } };
+        var person3 = new Person() { Qualifications = new[] { Painting } };
+        var person4 = new Person() { Qualifications = new[] { Milling } };
 
         chromosome.Value = new[]
         {
@@ -273,14 +277,14 @@ public class ChromosomeTests
         var chromosome = new Chromosome(3, 3);
         var machines = new[]
         {
-            new Machine(){RequiredQualification = Qualification.Milling},
-            new Machine(){RequiredQualification = Qualification.Sawing},
-            new Machine(){RequiredQualification = Qualification.Painting}
+            new Machine(){RequiredQualification = Milling},
+            new Machine(){RequiredQualification = Sawing},
+            new Machine(){RequiredQualification = Painting}
         };
-        var person1 = new Person() { Qualifications = new[] { Qualification.Milling, Qualification.Sawing } };
-        var person2 = new Person() { Qualifications = new[] { Qualification.Sawing } };
-        var person3 = new Person() { Qualifications = new[] { Qualification.Painting } };
-        var person4 = new Person() { Qualifications = new[] { Qualification.Milling } };
+        var person1 = new Person() { Qualifications = new[] { Milling, Sawing } };
+        var person2 = new Person() { Qualifications = new[] { Sawing } };
+        var person3 = new Person() { Qualifications = new[] { Painting } };
+        var person4 = new Person() { Qualifications = new[] { Milling } };
 
         chromosome.Value = new[]
         {
@@ -303,14 +307,14 @@ public class ChromosomeTests
         var chromosome = new Chromosome(3, 3);
         var machines = new[]
         {
-            new Machine(){RequiredQualification = Qualification.Milling},
-            new Machine(){RequiredQualification = Qualification.Sawing},
-            new Machine(){RequiredQualification = Qualification.Painting}
+            new Machine(){RequiredQualification = Milling},
+            new Machine(){RequiredQualification = Sawing},
+            new Machine(){RequiredQualification = Painting}
         };
-        var person1 = new Person() { Qualifications = new[] { Qualification.Milling, Qualification.Sawing } };
-        var person2 = new Person() { Qualifications = new[] { Qualification.Sawing } };
-        var person3 = new Person() { Qualifications = new[] { Qualification.Painting } };
-        var person4 = new Person() { Qualifications = new[] { Qualification.Milling } };
+        var person1 = new Person() { Qualifications = new[] { Milling, Sawing } };
+        var person2 = new Person() { Qualifications = new[] { Sawing } };
+        var person3 = new Person() { Qualifications = new[] { Painting } };
+        var person4 = new Person() { Qualifications = new[] { Milling } };
 
         chromosome.Value = new[]
         {
@@ -333,14 +337,14 @@ public class ChromosomeTests
         var chromosome = new Chromosome(3, 3);
         var machines = new[]
         {
-            new Machine(){RequiredQualification = Qualification.Milling},
-            new Machine(){RequiredQualification = Qualification.Sawing},
-            new Machine(){RequiredQualification = Qualification.Painting}
+            new Machine(){RequiredQualification = Milling},
+            new Machine(){RequiredQualification = Sawing},
+            new Machine(){RequiredQualification = Painting}
         };
-        var person1 = new Person() { Qualifications = new[] { Qualification.Milling, Qualification.Sawing } };
-        var person2 = new Person() { Qualifications = new[] { Qualification.Sawing } };
-        var person3 = new Person() { Qualifications = new[] { Qualification.Painting } };
-        var person4 = new Person() { Qualifications = new[] { Qualification.Milling } };
+        var person1 = new Person() { Qualifications = new[] { Milling, Sawing } };
+        var person2 = new Person() { Qualifications = new[] { Sawing } };
+        var person3 = new Person() { Qualifications = new[] { Painting } };
+        var person4 = new Person() { Qualifications = new[] { Milling } };
 
         chromosome.Value = new[]
         {

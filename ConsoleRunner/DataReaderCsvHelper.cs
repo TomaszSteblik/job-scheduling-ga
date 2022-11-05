@@ -35,14 +35,14 @@ public static class DataReaderCsvHelper
                     Name = record.Name,
                     PreferenceDaysCount = record.DaysPreferenceCount,
                     PreferredMachineIds = new List<int>(),
-                    Qualifications = new List<Qualification>(),
+                    Qualifications = new List<string>(),
                     PreferredDays = new List<int>()
                 };
 
                 var qualifications = record.Qualifications.Split('-');
                 foreach (var qualification in qualifications)
                 {
-                    person.Qualifications.Add(Enum.Parse<Qualification>(qualification));
+                    person.Qualifications.Add(qualification);
                 }
 
                 var machines = record.PreferredMachineIds.Split('-');
