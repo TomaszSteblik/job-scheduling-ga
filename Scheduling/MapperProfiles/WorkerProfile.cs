@@ -1,3 +1,4 @@
+using System.Linq;
 using AutoMapper;
 using Data.Dtos.Read;
 using Data.Dtos.Update;
@@ -14,7 +15,17 @@ public class WorkerProfile : Profile
         CreateMap<Worker, PersonRead>().ReverseMap();
         CreateMap<Worker, PersonWrite>().ReverseMap();
         CreateMap<Worker, PersonUpdate>().ReverseMap();
-        CreateMap<Worker, Person>().ReverseMap();
+        CreateMap<Worker, Person>()
+            .ForMember(dest => dest.Name,
+                opt =>
+                    opt.MapFrom(src => src.FirstName))
+            .ForMember(dest => dest.Surname,
+                opt =>
+                    opt.MapFrom(src => src.LastName))
+            .ForMember(dest => dest.PreferredMachineIds,
+                opt =>
+                    opt.MapFrom(src => src.PreferredMachines.Select((item, index) => index)))
+            .ReverseMap();
         CreateMap<AddWorker, PersonWrite>();
     }
 }

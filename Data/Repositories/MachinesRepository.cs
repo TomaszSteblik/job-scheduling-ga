@@ -37,7 +37,7 @@ internal class MachinesRepository : IMachinesRepository
 
     public async Task<ICollection<MachineRead>> GetMachines()
     {
-        var machines = await _context.Machines.ToListAsync();
+        var machines = await _context.Machines.Include(x=>x.RequiredQualification).ToListAsync();
         return _mapper.Map<ICollection<MachineRead>>(machines);
     }
 

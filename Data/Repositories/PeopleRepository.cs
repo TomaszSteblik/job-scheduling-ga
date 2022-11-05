@@ -38,7 +38,11 @@ internal class PeopleRepository : IPeopleRepository
 
     public async Task<ICollection<PersonRead>> GetPeople()
     {
-        var people = await _context.People.ToListAsync();
+        var people = await _context.People
+            .Include(x=>x.Qualifications)
+            .Include(x=>x.PreferredDays)
+            .Include(x=> x.PreferredMachines)
+            .ToListAsync();
         return _mapper.Map<ICollection<PersonRead>>(people);
     }
 
