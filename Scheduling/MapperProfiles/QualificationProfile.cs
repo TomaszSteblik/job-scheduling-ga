@@ -10,7 +10,8 @@ public class QualificationProfile : Profile
 {
     public QualificationProfile()
     {
-        CreateMap<Qualification, GeneticAlgorithm.Models.Qualification>().ReverseMap();
+        CreateMap<Qualification, string>()
+            .ConvertUsing(x=>x.Name ?? "Unnamed qualification");
         CreateMap<Qualification, QualificationUpdate>().ReverseMap();
         CreateMap<Qualification, QualificationRead>().ReverseMap();
         CreateMap<Qualification, QualificationWrite>().ReverseMap();

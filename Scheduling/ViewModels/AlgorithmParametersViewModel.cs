@@ -56,10 +56,16 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
         builder.RegisterInstance(param).As<Parameters>();
         builder.RegisterModule(new GeneticAlgorithmModule());
         var container = builder.Build();
+        var machines = _selectedDataRepository.GetMachines();
+        var ma = _mapper.Map<Machine[]>(machines);
+        var workers = _selectedDataRepository.GetWorkers();
+        var mw = _mapper.Map<Person[]>(workers);
+        for (var i = 0; i < mw.Length; i++)
+        {
+            mw[i].Id = i;
+        }
 
-        var result = container.Resolve<Algorithm>().Run(_mapper.Map<Machine[]>(_selectedDataRepository.GetMachines()),
-            _mapper.Map<Person[]>(_selectedDataRepository.GetWorkers()),
-            Settings.PopulationSize);
+        var result = container.Resolve<Algorithm>().Run(ma,mw, Settings.PopulationSize);
 
         var algorithmResult = _mapper.Map<AlgorithmResult>(result);
 

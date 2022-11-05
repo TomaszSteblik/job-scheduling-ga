@@ -19,7 +19,7 @@
             <userControls:AlgorithmParametersUserControl/>
         </TabItem>
         <TabItem Header="Select data">
-            <TextBlock>Workers tab</TextBlock>
+            <userControls:SelectDataUserControl/>
         </TabItem>
         <TabItem Header="Add data">
             <userControls:AddDataUserControl/>

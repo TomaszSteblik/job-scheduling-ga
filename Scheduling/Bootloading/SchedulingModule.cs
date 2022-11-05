@@ -10,5 +10,6 @@ public class SchedulingModule : Module
     {
         builder.RegisterType<AlgorithmSettings>().AsSelf().SingleInstance();
         builder.RegisterType<SelectedDataRepository>().AsImplementedInterfaces().SingleInstance();
+        builder.RegisterType<DataRepository>().AsImplementedInterfaces();
     }
 }

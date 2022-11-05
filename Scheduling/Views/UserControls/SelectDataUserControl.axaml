@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Scheduling.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="Scheduling.Views.UserControls.SelectDataUserControl">
+    <Design.DataContext>
+        <viewModels:SelectDataViewModel/>
+    </Design.DataContext>
+    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="3" Padding="4">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="0 0 15  0">Machines to schedule: </Label>
+                <ListBox  SelectedItems="{Binding SelectedMachines}"
+                          Items="{Binding AvailableMachines}"
+                          SelectionMode="Multiple">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="0 0 15  0">Workers to schedule: </Label>
+                <ListBox  SelectedItems="{Binding SelectedWorkers}"
+                          Items="{Binding AvailableWorkers}"
+                          SelectionMode="Multiple">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding FirstName}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+            
+    
+    
+    
+</UserControl>
