@@ -15,7 +15,10 @@ public class AlgorithmResultProfile : Profile
         CreateMap<Result, AlgorithmResult>()
             .ForMember(x => x.Schedule,
                 opt => opt.MapFrom(
-                    result => GenerateScheduleFromChromosome(result.Chromosome, result.Machines)));
+                    result => GenerateScheduleFromChromosome(result.Chromosome, result.Machines)))
+            .ForMember(x=>x.Fitness,
+                opt => opt.MapFrom(
+                    result => result.Chromosome.Fitness));
     }
 
     private static IEnumerable<object> GenerateScheduleFromChromosome(Chromosome chromosome, Machine[] machines)
@@ -26,7 +29,7 @@ public class AlgorithmResultProfile : Profile
         var type = ReflectionHelper.GenerateTemporaryType(propNames, asmBuilder, "ScheduleDay");
 
         var scheduledDaysList = ReflectionHelper.GenerateTypeList(
-            chromosome.Value.Select(x => x.Select(z => z.Id.ToString()).ToArray()),
+            chromosome.Value.Select(x => x.Select(z => $"{z.Name} {z.Surname}").ToArray()),
             propNames, asmBuilder, type);
 
         return scheduledDaysList;

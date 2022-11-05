@@ -19,6 +19,7 @@
         <entry key="Scheduling/Views/UserControls/ScheduleUserControl.axaml" value="Scheduling/Scheduling.csproj" />
         <entry key="Scheduling/Views/UserControls/SelectDataUserControl.axaml" value="Scheduling/Scheduling.csproj" />
         <entry key="Scheduling/Views/Windows/MainWindow.axaml" value="Scheduling/Scheduling.csproj" />
+        <entry key="Scheduling/Views/Windows/ResultsWindow.axaml" value="Scheduling/Scheduling.csproj" />
       </map>
     </option>
   </component>
