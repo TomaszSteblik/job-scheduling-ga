@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Globalization;
 using GeneticAlgorithm.Abstraction;
 using GeneticAlgorithm.Models;
@@ -15,8 +14,6 @@ public class Algorithm
     private readonly IMutation _mutation;
     private readonly Parameters _parameters;
 
-
-
     public Algorithm(Parameters parameters, IPopulation population, ISelection selection,
         ICrossover crossover, IElimination elimination, IMutation mutation)
     {
@@ -28,18 +25,14 @@ public class Algorithm
         _parameters = parameters;
     }
 
-    public Result Run(Machine[] machines, Person[] people, int populationSize)
+    public Result Run(Machine[] machines, Person[] people)
     {
         //initialiaze
-        _population.InitializePopulation(machines, people, populationSize);
+        _population.InitializePopulation(machines, people, _parameters.PopulationSize);
 
         for (int i = 0; i < _parameters.EpochsCount; i++)
         {
             //calculate fitness
-            Log.Debug("EPOCH {Epoch,3} AVG: {Avg} PREF_MACH:{Repeat}" +
-                              " PREF_DAYS: {PositionWrong}", i, _population.GetAll().Average(x => x.Fitness).ToString(CultureInfo.InvariantCulture),
-                _population.GetAll().Max(x => x.AnalyzePreferredMachines()), _population.GetAll().Max(x => x.AnalyzePreferredDays()));
-
             _population.RecalculateAll();
             //selection
             var selected = _selection.Select(_population, _parameters.ChildrenCount * _parameters.ParentsPerChild);
@@ -54,19 +47,8 @@ public class Algorithm
 
         //calculate fitness
         _population.RecalculateAll();
-
-        var result = _population.GetAll().MinBy(x => x.Fitness) ?? throw new InvalidOperationException("Empty population");
-        Log.Information("Result fitness: {Fitness}, pref machines: {PreferredMachine}, pref days: {PreferredDays}",
-            result.Fitness, result.AnalyzePreferredMachines(), result.AnalyzePreferredDays());
-
-        var workers = result.Value.SelectMany(x => x).Select(x => x).ToList();
-        var dic = workers.Select(x => new { Person = x, Count = workers.Count(z => z.Id == x.Id) });
-        var distinctBy = dic.DistinctBy(x => x.Person.Id);
-        foreach (var worker in distinctBy)
-        {
-            Log.Information("worker: {Worker}", worker);
-        }
-
+        var result = _population.GetAll().MinBy(x => x.Fitness) ?? 
+                     throw new InvalidOperationException("Empty population");
         //return best 
         return new Result(result, _parameters, people, _population.GetMachines());
     }

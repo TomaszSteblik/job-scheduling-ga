@@ -19,6 +19,7 @@ internal class ScheduleContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(ScheduleContext)) ?? throw new Exception("TBD"));
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(ScheduleContext)) ?? 
+                                                     throw new Exception("TBD"));
     }
 }

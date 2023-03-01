@@ -25,6 +25,9 @@ public class WorkerProfile : Profile
             .ForMember(dest => dest.PreferredMachineIds,
                 opt =>
                     opt.MapFrom(src => src.PreferredMachines.Select((item, index) => index)))
+            .ForMember(dest => dest.PreferenceDaysCount,
+                opt =>
+                    opt.MapFrom(src=> src.PreferredDays.Count))
             .ReverseMap();
         CreateMap<AddWorker, PersonWrite>();
     }

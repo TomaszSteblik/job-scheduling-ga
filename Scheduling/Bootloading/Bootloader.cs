@@ -39,8 +39,10 @@ internal static class Bootloader
 
     private static void RegisterAvalonia()
     {
-        Locator.CurrentMutable.RegisterConstant(new AvaloniaActivationForViewFetcher(), typeof(IActivationForViewFetcher));
-        Locator.CurrentMutable.RegisterConstant(new AutoDataTemplateBindingHook(), typeof(IPropertyBindingHook));
+        Locator.CurrentMutable.RegisterConstant(new AvaloniaActivationForViewFetcher(), 
+            typeof(IActivationForViewFetcher));
+        Locator.CurrentMutable.RegisterConstant(new AutoDataTemplateBindingHook(), 
+            typeof(IPropertyBindingHook));
         RxApp.MainThreadScheduler = AvaloniaScheduler.Instance;
     }
 }
