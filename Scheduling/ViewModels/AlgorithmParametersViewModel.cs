@@ -35,7 +35,8 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
     public static IEnumerable<Mutation> MutationValues => Enum.GetValues<Mutation>();
     public ReactiveCommand<Unit, Unit> RunGaCommand { get; }
 
-    public AlgorithmParametersViewModel(AlgorithmSettings settings, IMapper mapper, ISelectedDataRepository selectedDataRepository)
+    public AlgorithmParametersViewModel(AlgorithmSettings settings, IMapper mapper, 
+        ISelectedDataRepository selectedDataRepository)
     {
         _mapper = mapper;
         _selectedDataRepository = selectedDataRepository;
@@ -70,7 +71,7 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
             mw[i].PreferredMachineIds = workers[i].PreferredMachines.Select(x => machines.IndexOf(x)).ToList();
         }
 
-        var result = container.Resolve<Algorithm>().Run(ma,mw, Settings.PopulationSize);
+        var result = container.Resolve<Algorithm>().Run(ma,mw);
 
         var algorithmResult = _mapper.Map<AlgorithmResult>(result);
 

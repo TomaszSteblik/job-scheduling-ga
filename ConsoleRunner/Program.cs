@@ -34,6 +34,6 @@ internal static class Program
         Container = builder.Build();
 
         var z = Container.Resolve<Algorithm>();
-        z.Run(machines, people, parameters.PopulationSize);
+        z.Run(machines, people);
     }
 }
