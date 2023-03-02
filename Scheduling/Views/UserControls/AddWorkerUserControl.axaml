@@ -25,6 +25,11 @@
                              Margin="0 0 15  0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
+                    <Label Margin="0 0 15  0">Preferred working days count: </Label>
+                    <TextBox Text="{Binding Worker.PreferenceDaysCount}"
+                             Margin="0 0 15  0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                     <Label Margin="0 0 15  0">Preferred machines: </Label>
                     <ListBox  SelectedItems="{Binding Worker.PreferredMachines}"
                               Items="{Binding Machines}"

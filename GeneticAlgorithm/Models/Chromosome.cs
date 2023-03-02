@@ -73,7 +73,6 @@ public class Chromosome
             {
                 var preferredMachineIds = Value[i][j].PreferredMachineIds;
                 if (preferredMachineIds is null) continue;
-
                 if (preferredMachineIds.Contains(j))
                     result++;
             }

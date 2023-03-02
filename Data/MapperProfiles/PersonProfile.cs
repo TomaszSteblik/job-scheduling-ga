@@ -24,7 +24,10 @@ internal class PersonProfile : Profile
             .ReverseMap();
         CreateMap<PersonWrite, Person>()
             .ForMember(x => x.PreferredDays, opt =>
-                opt.MapFrom(src => src.PreferredDays != null ? src.PreferredDays.Select(i => new Day() { DayOfSchedule = i }) : ImmutableArray<Day>.Empty));
+                opt.MapFrom(src => src.PreferredDays != null ? src.PreferredDays.Select(i => new Day()
+                {
+                    DayOfSchedule = i
+                }) : ImmutableArray<Day>.Empty));
 
     }
 }

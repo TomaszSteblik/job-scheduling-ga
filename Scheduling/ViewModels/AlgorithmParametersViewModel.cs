@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
 using Autofac;
 using AutoMapper;
+using DynamicData;
 using GeneticAlgorithm.Infrastructure;
 using GeneticAlgorithm.Infrastructure.DependencyInjection;
 using GeneticAlgorithm.Models;
@@ -12,6 +14,7 @@ using GeneticAlgorithm.Models.Enums;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Scheduling.Exceptions;
+using Scheduling.Helpers;
 using Scheduling.Models;
 using Scheduling.Repositories;
 using Scheduling.Views;
@@ -48,6 +51,7 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
                 .DisposeWith(disposables);
         });
         RunGaCommand = ReactiveCommand.CreateFromTask(ExecuteGeneticAlgorithm);
+        RunGaCommand.LogExceptions();
     }
 
     private Task ExecuteGeneticAlgorithm()
@@ -59,11 +63,12 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
         var container = builder.Build();
         var machines = _selectedDataRepository.GetMachines();
         var ma = _mapper.Map<Machine[]>(machines);
-        var workers = _selectedDataRepository.GetWorkers();
+        var workers = _selectedDataRepository.GetWorkers().ToList();
         var mw = _mapper.Map<Person[]>(workers);
         for (var i = 0; i < mw.Length; i++)
         {
             mw[i].Id = i;
+            mw[i].PreferredMachineIds = workers[i].PreferredMachines.Select(x => machines.IndexOf(x)).ToList();
         }
 
         var result = container.Resolve<Algorithm>().Run(ma,mw);
@@ -73,9 +78,11 @@ public class AlgorithmParametersViewModel : ViewModelBase, IActivatableViewModel
         if (algorithmResult == null)
             throw new EmptyResultException();
 
+        var context = new ResultsViewModel(algorithmResult);
+
         var window = new ResultsWindow()
         {
-            DataContext = new ResultsViewModel(algorithmResult)
+            DataContext = context
         };
         window.Show();
 

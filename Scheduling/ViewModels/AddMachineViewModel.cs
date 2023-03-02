@@ -44,16 +44,8 @@ public class AddMachineViewModel : ViewModelBase, IActivatableViewModel
 
     private async Task AddMachine()
     {
-        try
-        {
-            var machineWrite = _mapper.Map<MachineWrite>(Machine);
-            await _machinesRepository.AddMachine(machineWrite);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
+        var machineWrite = _mapper.Map<MachineWrite>(Machine);
+        await _machinesRepository.AddMachine(machineWrite);
     }
 
     async void ActivationHandler(CompositeDisposable disposables)
