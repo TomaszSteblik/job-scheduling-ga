@@ -1,4 +1,4 @@
-namespace GeneticAlgorithm.Models;
+namespace SchedulingAlgorithmModels.Models;
 
 public class Person
 {

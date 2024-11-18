@@ -5,7 +5,8 @@ using System.Text.Json;
 using Autofac;
 using GeneticAlgorithm.Infrastructure;
 using GeneticAlgorithm.Infrastructure.DependencyInjection;
-using GeneticAlgorithm.Models;
+using Sat;
+using SchedulingAlgorithmModels.Models;
 using Serilog;
 using static ConsoleRunner.DataReaderCsvHelper;
 
@@ -31,9 +32,23 @@ internal static class Program
         var machines = GetMachinesFromCsv(parameters.DataPathMachines);
         var people = GetPeopleFromCsv(parameters.DataPathPersonel);
         builder.RegisterModule(new GeneticAlgorithmModule());
+        
         Container = builder.Build();
 
-        var z = Container.Resolve<Algorithm>();
-        z.Run(machines, people);
+        
+
+         var z = Container.Resolve<Algorithm>();
+         var resultGa = z.Run(machines, people);
+         
+         var sat = new SchedulingSatSolver();
+         var resultSat = sat.Run(people, machines);
+         resultSat.RecalculateFitness();
+         
+         Log.Information("Resulting fitness SAT: {fitness} {valid}", resultSat.Fitness, resultSat.IsValid(machines));
+         resultGa.Chromosome.RecalculateFitness();
+         Log.Information("Resulting fitness GA : {fitness}", resultGa.Chromosome.Fitness);
+         
+         Log.Information("Resulting fitness WORST : {fitness}", resultGa.Worst.Fitness);
+
     }
 }

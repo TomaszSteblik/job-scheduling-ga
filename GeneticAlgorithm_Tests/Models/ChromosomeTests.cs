@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using GeneticAlgorithm.Models;
+using SchedulingAlgorithmModels.Models;
 using Xunit;
 
 namespace GeneticAlgorithm_Tests.Models;

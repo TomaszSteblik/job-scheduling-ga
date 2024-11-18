@@ -1,6 +1,6 @@
 using System.Globalization;
 using GeneticAlgorithm.Abstraction;
-using GeneticAlgorithm.Models;
+using SchedulingAlgorithmModels.Models;
 using Serilog;
 
 namespace GeneticAlgorithm.Infrastructure;
@@ -30,10 +30,14 @@ public class Algorithm
         //initialiaze
         _population.InitializePopulation(machines, people, _parameters.PopulationSize);
 
+        var worst = _population.GetAll().MaxBy(x => x.Fitness);
+
         for (int i = 0; i < _parameters.EpochsCount; i++)
         {
             //calculate fitness
             _population.RecalculateAll();
+            var temp = _population.GetAll().MaxBy(x => x.Fitness);
+            worst = temp.Fitness > worst.Fitness ? temp : worst;
             //selection
             var selected = _selection.Select(_population, _parameters.ChildrenCount * _parameters.ParentsPerChild);
             //crossover
@@ -50,6 +54,6 @@ public class Algorithm
         var result = _population.GetAll().MinBy(x => x.Fitness) ?? 
                      throw new InvalidOperationException("Empty population");
         //return best 
-        return new Result(result, _parameters, people, _population.GetMachines());
+        return new Result(result, _parameters, people, _population.GetMachines(), worst);
     }
 }

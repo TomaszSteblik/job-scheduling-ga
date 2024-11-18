@@ -1,6 +1,6 @@
 using GeneticAlgorithm.Abstraction;
 using GeneticAlgorithm.Exceptions;
-using GeneticAlgorithm.Models;
+using SchedulingAlgorithmModels.Models;
 using Serilog;
 
 namespace GeneticAlgorithm.Infrastructure.Operators.Crossover;

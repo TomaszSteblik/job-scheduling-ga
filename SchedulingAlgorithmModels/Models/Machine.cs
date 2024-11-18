@@ -1,6 +1,6 @@
 using CsvHelper.Configuration.Attributes;
 
-namespace GeneticAlgorithm.Models;
+namespace SchedulingAlgorithmModels.Models;
 
 public class Machine
 {

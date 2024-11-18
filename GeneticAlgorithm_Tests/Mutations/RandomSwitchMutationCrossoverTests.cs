@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GeneticAlgorithm.Infrastructure.Operators.Mutation;
 using GeneticAlgorithm.Models;
+using SchedulingAlgorithmModels.Models;
 using Xunit;
 using Xunit.Abstractions;
 

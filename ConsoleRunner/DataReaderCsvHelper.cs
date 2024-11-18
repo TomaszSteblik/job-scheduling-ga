@@ -1,7 +1,7 @@
 using System.Data;
 using System.Globalization;
 using CsvHelper;
-using GeneticAlgorithm.Models;
+using SchedulingAlgorithmModels.Models;
 
 namespace ConsoleRunner;
 

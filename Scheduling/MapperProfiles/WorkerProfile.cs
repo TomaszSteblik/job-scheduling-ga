@@ -3,8 +3,8 @@ using AutoMapper;
 using Data.Dtos.Read;
 using Data.Dtos.Update;
 using Data.Dtos.Write;
-using GeneticAlgorithm.Models;
 using Scheduling.Models;
+using SchedulingAlgorithmModels.Models;
 
 namespace Scheduling.MapperProfiles;
 

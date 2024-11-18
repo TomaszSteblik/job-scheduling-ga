@@ -1,4 +1,4 @@
-using GeneticAlgorithm.Models;
+using SchedulingAlgorithmModels.Models;
 
 namespace GeneticAlgorithm.Abstraction;
 

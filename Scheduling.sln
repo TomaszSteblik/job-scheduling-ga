@@ -12,6 +12,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduling_Tests", "Schedul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{ADADD8F1-1C91-4C11-837C-40BC5AEE8C9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sat", "Sat\Sat.csproj", "{19B3406F-854F-4A39-8052-C813A88D7C32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchedulingAlgorithmModels", "SchedulingAlgorithmModels\SchedulingAlgorithmModels.csproj", "{15B647F7-B0DD-4D4C-AB82-814081B15D66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +46,13 @@ Global
 		{ADADD8F1-1C91-4C11-837C-40BC5AEE8C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADADD8F1-1C91-4C11-837C-40BC5AEE8C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADADD8F1-1C91-4C11-837C-40BC5AEE8C9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19B3406F-854F-4A39-8052-C813A88D7C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19B3406F-854F-4A39-8052-C813A88D7C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19B3406F-854F-4A39-8052-C813A88D7C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19B3406F-854F-4A39-8052-C813A88D7C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15B647F7-B0DD-4D4C-AB82-814081B15D66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15B647F7-B0DD-4D4C-AB82-814081B15D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15B647F7-B0DD-4D4C-AB82-814081B15D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15B647F7-B0DD-4D4C-AB82-814081B15D66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

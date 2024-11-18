@@ -1,5 +1,6 @@
 using GeneticAlgorithm.Abstraction;
 using GeneticAlgorithm.Exceptions;
+using SchedulingAlgorithmModels.Models;
 
 namespace GeneticAlgorithm.Models;
 

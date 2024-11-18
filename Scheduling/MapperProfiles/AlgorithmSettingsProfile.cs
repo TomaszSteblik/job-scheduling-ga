@@ -1,6 +1,6 @@
 using AutoMapper;
-using GeneticAlgorithm.Models;
 using Scheduling.Models;
+using SchedulingAlgorithmModels.Models;
 
 namespace Scheduling.MapperProfiles;
 

@@ -1,6 +1,6 @@
-using GeneticAlgorithm.Models.Enums;
+using SchedulingAlgorithmModels.Models.Enums;
 
-namespace GeneticAlgorithm.Models;
+namespace SchedulingAlgorithmModels.Models;
 
 public class Parameters
 {

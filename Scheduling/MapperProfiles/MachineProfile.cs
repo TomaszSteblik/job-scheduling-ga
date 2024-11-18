@@ -10,7 +10,7 @@ public class MachineProfile : Profile
 {
     public MachineProfile()
     {
-        CreateMap<Machine, GeneticAlgorithm.Models.Machine>().ReverseMap();
+        CreateMap<Machine, SchedulingAlgorithmModels.Models.Machine>().ReverseMap();
         CreateMap<Machine, MachineRead>().ReverseMap();
         CreateMap<Machine, MachineWrite>().ReverseMap();
         CreateMap<Machine, MachineUpdate>().ReverseMap();

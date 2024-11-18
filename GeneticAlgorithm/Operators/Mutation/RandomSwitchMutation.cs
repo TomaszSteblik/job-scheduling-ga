@@ -1,5 +1,5 @@
 using GeneticAlgorithm.Abstraction;
-using GeneticAlgorithm.Models;
+using SchedulingAlgorithmModels.Models;
 using Serilog;
 
 namespace GeneticAlgorithm.Infrastructure.Operators.Mutation;

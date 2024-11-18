@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using GeneticAlgorithm.Models;
 using Scheduling.Models;
 using Scheduling.Helpers;
-using Machine = GeneticAlgorithm.Models.Machine;
+using SchedulingAlgorithmModels.Models;
+using Machine = SchedulingAlgorithmModels.Models.Machine;
 
 namespace Scheduling.MapperProfiles;
 

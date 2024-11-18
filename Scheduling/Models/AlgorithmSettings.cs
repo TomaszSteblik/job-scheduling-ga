@@ -1,4 +1,4 @@
-using GeneticAlgorithm.Models.Enums;
+using SchedulingAlgorithmModels.Models.Enums;
 
 namespace Scheduling.Models;
 

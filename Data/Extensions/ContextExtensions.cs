@@ -11,7 +11,8 @@ internal static class ContextExtensions
             Directory.CreateDirectory(dbFilePath);
 
         var dataSource = Path.Combine(dbFilePath, "ScheduleDB.db");
-
+        ///Users/tsteblik/.config/Scheduling/ScheduleDB.db
+        ///Users/tsteblik/Library/Application Support/Scheduling/ScheduleDB.db
         optionsBuilder.UseSqlite($"Data Source={dataSource};");
     }
 

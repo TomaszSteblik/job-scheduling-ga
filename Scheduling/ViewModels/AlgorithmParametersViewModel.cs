@@ -9,8 +9,6 @@ using AutoMapper;
 using DynamicData;
 using GeneticAlgorithm.Infrastructure;
 using GeneticAlgorithm.Infrastructure.DependencyInjection;
-using GeneticAlgorithm.Models;
-using GeneticAlgorithm.Models.Enums;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using Scheduling.Exceptions;
@@ -19,7 +17,9 @@ using Scheduling.Models;
 using Scheduling.Repositories;
 using Scheduling.Views;
 using Scheduling.Views.Windows;
-using Machine = GeneticAlgorithm.Models.Machine;
+using SchedulingAlgorithmModels.Models;
+using SchedulingAlgorithmModels.Models.Enums;
+using Machine = SchedulingAlgorithmModels.Models.Machine;
 
 namespace Scheduling.ViewModels;
 

@@ -2,7 +2,7 @@ using System.Data;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("GeneticAlgorithm_Tests")]
-namespace GeneticAlgorithm.Models;
+namespace SchedulingAlgorithmModels.Models;
 
 public class Chromosome
 {
@@ -21,7 +21,7 @@ public class Chromosome
         _positionsCount = daysCount * machinesCount;
     }
 
-    internal void RecalculateFitness()
+    public void RecalculateFitness()
     {
         Fitness = 0;
         RecalculateFitnessByDaysWorking();
