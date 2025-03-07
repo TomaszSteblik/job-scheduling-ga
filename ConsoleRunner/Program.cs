@@ -5,6 +5,7 @@ using System.Text.Json;
 using Autofac;
 using GeneticAlgorithm.Infrastructure;
 using GeneticAlgorithm.Infrastructure.DependencyInjection;
+using QLearning;
 using Sat;
 using SchedulingAlgorithmModels.Models;
 using Serilog;
@@ -37,18 +38,42 @@ internal static class Program
 
         
 
-         var z = Container.Resolve<Algorithm>();
-         var resultGa = z.Run(machines, people);
+         // var z = Container.Resolve<Algorithm>();
+         // var resultGa = z.Run(machines, people);
+         //
+         // var sat = new SchedulingSatSolver();
+         // var resultSat = sat.Run(people, machines);
+         // resultSat.RecalculateFitness();
+         //
+         // Log.Information("Resulting fitness SAT: {fitness} {valid}", resultSat.Fitness, resultSat.IsValid(machines));
+         // resultGa.Chromosome.RecalculateFitness();
+         // Log.Information("Resulting fitness GA : {fitness}", resultGa.Chromosome.Fitness);
+         //
+         // Log.Information("Resulting fitness WORST : {fitness}", resultGa.Worst.Fitness);
+         var c = new QNetworkTrainer(machines, people);
+         var b = new DeepQLearning();
+         //b.model.load("/Users/tsteblik/RiderProjects/job-scheduling-ga/QLearning/MODEL1.MODEL");
+         c.TrainQNetwork(b,100);
+         //b.model.save("/Users/tsteblik/RiderProjects/job-scheduling-ga/QLearning/MODEL1.MODEL");
+         var z = c.GenerateSolution(b);
+         z.RecalculateFitness();
+         Log.Information("Resulting fitness Deep RL : {fitness} and {valid}", z.Fitness, z.IsValid(machines));
          
-         var sat = new SchedulingSatSolver();
-         var resultSat = sat.Run(people, machines);
-         resultSat.RecalculateFitness();
          
-         Log.Information("Resulting fitness SAT: {fitness} {valid}", resultSat.Fitness, resultSat.IsValid(machines));
-         resultGa.Chromosome.RecalculateFitness();
-         Log.Information("Resulting fitness GA : {fitness}", resultGa.Chromosome.Fitness);
-         
-         Log.Information("Resulting fitness WORST : {fitness}", resultGa.Worst.Fitness);
+         // var q = new QLearning.SimpleQLearning(machines, people);
+         //  q.TrainAgent(100);
+         // var r = q.Run();
+         // r.RecalculateFitness();
+         // Log.Information("Resulting fitness RL : {fitness} and {valid}", r.Fitness, r.IsValid(machines));
+         // r = q.Run();
+         // r.RecalculateFitness();
+         // Log.Information("Resulting fitness RL : {fitness} and {valid}", r.Fitness, r.IsValid(machines));
+         // r = q.Run();
+         // r.RecalculateFitness();
+         // Log.Information("Resulting fitness RL : {fitness} and {valid}", r.Fitness, r.IsValid(machines));
+         // r = q.Run();
+         // r.RecalculateFitness();
+         // Log.Information("Resulting fitness RL : {fitness} and {valid}", r.Fitness, r.IsValid(machines));
 
     }
 }

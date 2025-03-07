@@ -4,28 +4,8 @@
 	<s:String x:Key="/Default/CodeInspection/PencilsConfiguration/FiltersState/=CodeStyle/@EntryIndexedValue">Off</s:String>
 	<s:String x:Key="/Default/CodeInspection/PencilsConfiguration/FiltersState/=NamingFilter/@EntryIndexedValue">Off</s:String>
 	<s:String x:Key="/Default/CodeInspection/PencilsConfiguration/FiltersState/=SpellingFilter/@EntryIndexedValue">Off</s:String>
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">/Users/tsteblik/Library/Caches/JetBrains/Rider2024.1/resharper-host/temp/Rider/vAny/CoverageData/_Scheduling.-590260270/Snapshot/snapshot.utdcvr</s:String>
 	
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0fbeec58_002Dacfa_002D4ad1_002Dbff8_002De3aedb8131fe/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;Or&gt;
-    &lt;ProjectFile&gt;074FD090-EE62-4327-9AA9-A2D081CCA76E/d:Crossovers/f:CrossPointCrossoverTests.cs&lt;/ProjectFile&gt;
-    &lt;TestAncestor&gt;
-      &lt;TestId&gt;xUnit::074FD090-EE62-4327-9AA9-A2D081CCA76E::net6.0::GeneticAlgorithm_Tests.Mutations.RandomSwitchMutationCrossoverTests.Mutate_ChromosomeCorrectFitnessCorrected_ChromosomeValueChanged&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::074FD090-EE62-4327-9AA9-A2D081CCA76E::net6.0::GeneticAlgorithm_Tests.Mutations.RandomSwitchMutationCrossoverTests.Mutate_ChromosomeCorrectFitnessWorsen_ChromosomeValueNotChanged&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::074FD090-EE62-4327-9AA9-A2D081CCA76E::net6.0::GeneticAlgorithm_Tests.Mutations.RandomSwitchMutationCrossoverTests.Mutate_ChromosomeIncorrect_ChromosomeValueNotChanged&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::074FD090-EE62-4327-9AA9-A2D081CCA76E::net6.0::GeneticAlgorithm_Tests.Models.ChromosomeTests.AnalyzePreferredDays_CorrectlyPlaced2Positions_Returns2&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::074FD090-EE62-4327-9AA9-A2D081CCA76E::net6.0::GeneticAlgorithm_Tests.Models.ChromosomeTests.AnalyzePreferredDays_PeopleHaveNoPreferredDays_Returns0&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::074FD090-EE62-4327-9AA9-A2D081CCA76E::net6.0::GeneticAlgorithm_Tests.Models.ChromosomeTests&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::074FD090-EE62-4327-9AA9-A2D081CCA76E::net6.0::GeneticAlgorithm_Tests.Mutations.RandomSwitchMutationCrossoverTests&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::FA0DC17B-4BD6-4621-87D9-2C11C26AB88C::net6.0::Scheduling_Tests.HelpersTests.ReflectionHelperTests.GenerateTemporaryAssembly_WithNullName_ThrowsException&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::FA0DC17B-4BD6-4621-87D9-2C11C26AB88C::net6.0::Scheduling_Tests.HelpersTests.ReflectionHelperTests.GenerateTemporaryAssembly_WithName_ReturnsAssemblyBuilderWithName&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::FA0DC17B-4BD6-4621-87D9-2C11C26AB88C::net6.0::Scheduling_Tests.HelpersTests.ReflectionHelperTests.GenerateTemporaryType_WithNullName_ThrowsException&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::FA0DC17B-4BD6-4621-87D9-2C11C26AB88C::net6.0::Scheduling_Tests.HelpersTests.ReflectionHelperTests.GenerateTemporaryType_WithPropNames_ReturnsTypeWithProps&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::FA0DC17B-4BD6-4621-87D9-2C11C26AB88C::net6.0::Scheduling_Tests.HelpersTests.ReflectionHelperTests.GenerateTemporaryType_WithEmptyPropNames_ReturnsTypeWithoutProps&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::FA0DC17B-4BD6-4621-87D9-2C11C26AB88C::net6.0::Scheduling_Tests.HelpersTests.ReflectionHelperTests.GenerateTypeList_ExistingTypeWithAsymmetricValuesAndParams_ThrowsException&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::FA0DC17B-4BD6-4621-87D9-2C11C26AB88C::net6.0::Scheduling_Tests.HelpersTests.ReflectionHelperTests.GenerateTypeList_ExistingTypeWithSymmetricValuesAndParams_ReturnsIEnumerable&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::FA0DC17B-4BD6-4621-87D9-2C11C26AB88C::net6.0::Scheduling_Tests.HelpersTests.ReflectionHelperTests.GenerateTypeList_NonExistingType_ThrowsException&lt;/TestId&gt;
-      &lt;TestId&gt;xUnit::FA0DC17B-4BD6-4621-87D9-2C11C26AB88C::net6.0::Scheduling_Tests.HelpersTests.ReflectionHelperTests&lt;/TestId&gt;
-    &lt;/TestAncestor&gt;
-  &lt;/Or&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+	
+	</wpf:ResourceDictionary>

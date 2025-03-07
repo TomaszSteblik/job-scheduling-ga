@@ -8,7 +8,7 @@ public class Chromosome
 {
     public Person[][] Value { get; set; }
     public double Fitness { get; private set; }
-    private readonly int _positionsCount;
+    public readonly int _positionsCount;
 
     public Chromosome(int daysCount, int machinesCount)
     {
@@ -27,6 +27,20 @@ public class Chromosome
         RecalculateFitnessByDaysWorking();
         RecalculateFitnessByPreferredMachine();
         RecalculateFitnessByPreferredDays();
+        //RecalculateFitnessByEmpySlot();
+        //Fitness += AnalyzeMultipleMachines() * 10;
+    }
+
+    void RecalculateFitnessByEmpySlot()
+    {
+        for (int i = 0; i < Value.Length; i++)
+        {
+            for (int j = 0; j < Value[i].Length; j++)
+            {
+                if (Value[i][j] is null)
+                    Fitness += 4;
+            }
+        }
     }
 
     private void RecalculateFitnessByPreferredDays()
@@ -45,7 +59,7 @@ public class Chromosome
         {
             for (var j = 0; j < Value[i].Length; j++)
             {
-                var preferredDays = Value[i][j].PreferredDays;
+                var preferredDays = Value[i][j]?.PreferredDays;
                 if (preferredDays is null) continue;
 
                 if (preferredDays.Contains(i))
@@ -71,7 +85,7 @@ public class Chromosome
         {
             for (var j = 0; j < Value[i].Length; j++)
             {
-                var preferredMachineIds = Value[i][j].PreferredMachineIds;
+                var preferredMachineIds = Value[i][j]?.PreferredMachineIds;
                 if (preferredMachineIds is null) continue;
                 if (preferredMachineIds.Contains(j))
                     result++;
@@ -83,7 +97,9 @@ public class Chromosome
     private void RecalculateFitnessByDaysWorking()
     {
         var workers = Value.SelectMany(x => x).Select(x => x).ToList();
-        var dic = workers.Select(x => new { Person = x, Count = workers.Count(z => z.Id == x.Id) });
+        var dic = workers
+            .Where(x=> x is not null)
+            .Select(x => new { Person = x, Count = workers.Where(x=> x is not null).Count(z => z.Id == x.Id) });
         var distinctBy = dic.DistinctBy(x => x.Person.Id);
         foreach (var worker in distinctBy)
         {
@@ -100,11 +116,12 @@ public class Chromosome
         var fitness = 0;
         foreach (var day in Value)
         {
-            var count = day.DistinctBy(x => x.Id).Count();
+            var count = day.DistinctBy(x => x?.Id).Count();
             if (count != day.Length)
                 fitness += 1;
         }
 
+        //Console.WriteLine($"Multiple machines: {fitness}");
         return fitness;
     }
 
@@ -120,7 +137,10 @@ public class Chromosome
                     throw new DataException(
                         $"Worker doesn't have any qualifications. day: {day}, machine: {machineNumber}");
                 if (!qualifications.Contains(machines[machineNumber].RequiredQualification))
+                {
                     fitness++;
+                    Console.WriteLine($"WRONG POSTION: day: {day}, machine: {machineNumber}");
+                }
             }
         }
 

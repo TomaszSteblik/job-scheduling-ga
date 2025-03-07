@@ -8,26 +8,26 @@ public class SchedulingSatSolver
     public Chromosome Run(Person[] people, Machine[] machines)
     {
 
-        int numNurses = people.Length;
+        int numworkers = people.Length;
         int numShifts = machines.Length;
         int numDays = 20;
 
-        Person[] allNurses = people;
+        Person[] allWorkers = people;
         int[] allDays = Enumerable.Range(0, numDays).ToArray();
         Machine[] allShifts = machines;
         
 
         // Creates the model.
         CpModel model = new CpModel();
-        model.Model.Variables.Capacity = numNurses * numDays * numShifts;
+        model.Model.Variables.Capacity = numworkers * numDays * numShifts;
 
         // Creates shift variables.
-        // shifts[(n, d, s)]: nurse 'n' works shift 's' on day 'd'.
+        // shifts[(n, d, s)]: worker 'n' works shift 's' on day 'd'.
         Dictionary<(int, int, int), BoolVar> shifts =
-            new Dictionary<(int, int, int), BoolVar>(numNurses * numDays * numShifts);
-        for (var i = 0; i < allNurses.Length; i++)
+            new Dictionary<(int, int, int), BoolVar>(numworkers * numDays * numShifts);
+        for (var i = 0; i < allWorkers.Length; i++)
         {
-            var n = allNurses[i];
+            var n = allWorkers[i];
             for (var j = 0; j < allDays.Length; j++)
             {
                 var d = allDays[j];
@@ -39,7 +39,7 @@ public class SchedulingSatSolver
             }
         }
 
-        // Each shift is assigned to exactly one nurse in the schedule period.
+        // Each shift is assigned to exactly one worker in the schedule period.
         List<ILiteral> literals = new List<ILiteral>();
         for (var i = 0; i < allDays.Length; i++)
         {
@@ -47,9 +47,9 @@ public class SchedulingSatSolver
             for (var j = 0; j < allShifts.Length; j++)
             {
                 var s = allShifts[j];
-                for (var k = 0; k < allNurses.Length; k++)
+                for (var k = 0; k < allWorkers.Length; k++)
                 {
-                    var n = allNurses[k];
+                    var n = allWorkers[k];
                     literals.Add(shifts[(k, d, j)]);
                 }
 
@@ -58,10 +58,10 @@ public class SchedulingSatSolver
             }
         }
 
-        // Each nurse works at most one shift per day.
-        for (var i = 0; i < allNurses.Length; i++)
+        // Each worker works at most one shift per day.
+        for (var i = 0; i < allWorkers.Length; i++)
         {
-            var n = allNurses[i];
+            var n = allWorkers[i];
             for (var j = 0; j < allDays.Length; j++)
             {
                 var d = allDays[j];
@@ -76,9 +76,9 @@ public class SchedulingSatSolver
             }
         }
 
-        for (var i = 0; i < allNurses.Length; i++)
+        for (var i = 0; i < allWorkers.Length; i++)
         {
-            var n = allNurses[i];
+            var n = allWorkers[i];
             for (var j = 0; j < allDays.Length; j++)
             {
                 var d = allDays[j];
@@ -95,9 +95,9 @@ public class SchedulingSatSolver
         }
         
         //Add constraint for preferred days count
-        for (var i = 0; i < allNurses.Length; i++)
+        for (var i = 0; i < allWorkers.Length; i++)
         {
-            var n = allNurses[i];
+            var n = allWorkers[i];
             List<IntVar> preferredDaysWorked = new List<IntVar>();
             foreach (var d in n.PreferredDays)
             {
@@ -113,9 +113,9 @@ public class SchedulingSatSolver
         Dictionary<(int, int, int), IntVar> dayPenalties = new Dictionary<(int, int, int), IntVar>();
         Dictionary<(int, int, int), IntVar> machinePenalties = new Dictionary<(int, int, int), IntVar>();
 
-        for (var i = 0; i < allNurses.Length; i++)
+        for (var i = 0; i < allWorkers.Length; i++)
         {
-            var n = allNurses[i];
+            var n = allWorkers[i];
             for (var j = 0; j < allDays.Length; j++)
             {
                 var d = allDays[j];
@@ -140,8 +140,8 @@ public class SchedulingSatSolver
         }
 
         // Objective: Minimize penalties
-        IntVar totalDayPenalty = model.NewIntVar(0, numNurses * numDays * numShifts, "totalDayPenalty");
-        IntVar totalMachinePenalty = model.NewIntVar(0, numNurses * numDays * numShifts, "totalMachinePenalty");
+        IntVar totalDayPenalty = model.NewIntVar(0, numworkers * numDays * numShifts, "totalDayPenalty");
+        IntVar totalMachinePenalty = model.NewIntVar(0, numworkers * numDays * numShifts, "totalMachinePenalty");
 
         model.Add(totalDayPenalty == LinearExpr.Sum(dayPenalties.Values));
         model.Add(totalMachinePenalty == LinearExpr.Sum(machinePenalties.Values));
@@ -154,7 +154,7 @@ public class SchedulingSatSolver
 
         // Display the first five solutions.
         const int solutionLimit = 20;
-        SolutionPrinter printer = new SolutionPrinter(allNurses, allDays, allShifts, shifts, solutionLimit);
+        SolutionPrinter printer = new SolutionPrinter(allWorkers, allDays, allShifts, shifts, solutionLimit);
 
         // Solve
         CpSolverStatus status = solver.Solve(model);
@@ -173,14 +173,14 @@ public class SchedulingSatSolver
             Console.WriteLine($"Day {d}");
             for (var k = 0; k < allShifts.Length; k++)
             {
-                for (var i = 0; i < allNurses.Length; i++)
+                for (var i = 0; i < allWorkers.Length; i++)
                 {
-                    var n = allNurses[i];
+                    var n = allWorkers[i];
                     if (solver.BooleanValue(shifts[(n.Id, d, k)]))
                     {
                         result.Value[d][k] = n;
                         Console.WriteLine(
-                            $"  Nurse {n.Id} {n.Name} {n.Surname} works on machine {allShifts[k].Name}");
+                            $"  worker {n.Id} {n.Name} {n.Surname} works on machine {allShifts[k].Name}");
                     }
                 }
             }

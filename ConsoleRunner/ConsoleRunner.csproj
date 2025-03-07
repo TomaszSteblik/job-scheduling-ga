@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\GeneticAlgorithm\GeneticAlgorithm.csproj" />
+      <ProjectReference Include="..\QLearning\QLearning.csproj" />
       <ProjectReference Include="..\Sat\Sat.csproj" />
     </ItemGroup>
 
