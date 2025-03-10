@@ -139,7 +139,7 @@ public class Chromosome
                 if (!qualifications.Contains(machines[machineNumber].RequiredQualification))
                 {
                     fitness++;
-                    Console.WriteLine($"WRONG POSTION: day: {day}, machine: {machineNumber}");
+                    //Console.WriteLine($"WRONG POSTION: day: {day}, machine: {machineNumber}");
                 }
             }
         }

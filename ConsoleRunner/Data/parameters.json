@@ -9,6 +9,6 @@
   "Elimination": "Elitism",
   "Mutation": "Random",
   "Crossover": "CrossPointMixed",
-  "DataPathMachines": "Data/machines2.csv",
-  "DataPathPersonel": "Data/personel2.csv"
+  "DataPathMachines": "Data/machines1.csv",
+  "DataPathPersonel": "Data/personel1.csv"
 }

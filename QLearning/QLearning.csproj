@@ -19,4 +19,9 @@
       <PackageReference Include="TorchSharp-cpu" Version="0.105.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="MODEL3.model" />
+      <None Remove="MODEL2.model" />
+    </ItemGroup>
+
 </Project>

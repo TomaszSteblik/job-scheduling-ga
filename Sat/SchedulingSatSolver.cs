@@ -158,19 +158,19 @@ public class SchedulingSatSolver
 
         // Solve
         CpSolverStatus status = solver.Solve(model);
-        Console.WriteLine($"Solve status: {status}");
-
-        Console.WriteLine("Statistics");
-        Console.WriteLine($"  conflicts: {solver.NumConflicts()}");
-        Console.WriteLine($"  branches : {solver.NumBranches()}");
-        Console.WriteLine($"  wall time: {solver.WallTime()}s");
+        // Console.WriteLine($"Solve status: {status}");
+        //
+        // Console.WriteLine("Statistics");
+        // Console.WriteLine($"  conflicts: {solver.NumConflicts()}");
+        // Console.WriteLine($"  branches : {solver.NumBranches()}");
+        // Console.WriteLine($"  wall time: {solver.WallTime()}s");
 
         var result = new Chromosome(allDays.Length, allShifts.Length);
         
         for (var j = 0; j < allDays.Length; j++)
         {
             var d = allDays[j];
-            Console.WriteLine($"Day {d}");
+            //Console.WriteLine($"Day {d}");
             for (var k = 0; k < allShifts.Length; k++)
             {
                 for (var i = 0; i < allWorkers.Length; i++)
@@ -179,8 +179,8 @@ public class SchedulingSatSolver
                     if (solver.BooleanValue(shifts[(n.Id, d, k)]))
                     {
                         result.Value[d][k] = n;
-                        Console.WriteLine(
-                            $"  worker {n.Id} {n.Name} {n.Surname} works on machine {allShifts[k].Name}");
+                        // Console.WriteLine(
+                        //     $"  worker {n.Id} {n.Name} {n.Surname} works on machine {allShifts[k].Name}");
                     }
                 }
             }
